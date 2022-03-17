@@ -12,13 +12,13 @@ import { Link } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <ListItem button to='/dashboard' component={Link}>
+    <ListItem>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button to='/profile' component={Link}>
+    <ListItem>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
@@ -35,13 +35,13 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListItem button to='/team' component={Link}>
+    <ListItem>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Team" />
     </ListItem>
-    <ListItem button to='/player-data' component={Link}>
+    <ListItem>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
@@ -51,7 +51,7 @@ export const secondaryListItems = (
 );
 
 export const highschoolAdminListItems = (
-  <ListItem button to='/hs-link-submissions' component={Link}>
+  <ListItem>
       <ListItemIcon>
         <FilePresentIcon />
       </ListItemIcon>
