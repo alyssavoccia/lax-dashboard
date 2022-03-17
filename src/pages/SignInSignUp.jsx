@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
+import SignIn from '../components/SignIn';
 import SignUp from '../components/SignUp';
 
 function SignInSignUp() {
@@ -18,6 +19,7 @@ function SignInSignUp() {
         }}
       >
         <Grid container spacing={5}>
+          <SignIn />
           <SignUp />
         </Grid>            
       </Box>

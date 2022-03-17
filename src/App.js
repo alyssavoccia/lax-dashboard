@@ -9,7 +9,7 @@ import SignInSignUp from './pages/SignInSignUp';
 
 function App() {
   const auth = getAuth();
-
+  console.log(auth);
   return (
     <>
       <Box sx={{ display: 'flex' }}>
