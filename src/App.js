@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
 import { useAuthStatus } from './hooks/useAuthStatus';
 
 import Box from '@mui/material/Box';

@@ -8,31 +8,6 @@ import PeopleIcon from '@mui/icons-material/People'
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
 
-import { Link } from 'react-router-dom';
-
-export const mainListItems = (
-  <div>
-    <ListItem>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
-    <ListItem>
-      <ListItemIcon>
-        <PersonIcon />
-      </ListItemIcon>
-      <ListItemText primary="Profile" />
-    </ListItem>
-    {/* <ListItem button to='/' onClick={() => auth.signOut()} component={Link}>
-      <ListItemIcon>
-        <LogoutIcon />
-      </ListItemIcon>
-      <ListItemText primary="Logout" />
-    </ListItem> */}
-  </div>
-);
-
 export const secondaryListItems = (
   <div>
     <ListItem>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { getAuth } from 'firebase/auth';
 
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -13,6 +14,15 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout'
+import PeopleIcon from '@mui/icons-material/People'
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import FilePresentIcon from '@mui/icons-material/FilePresent';
 
 import { mainListItems } from './nav-list-items';
 
@@ -86,6 +96,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 function Navbar() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const auth = getAuth();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -112,6 +123,7 @@ function Navbar() {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography variant="h6" noWrap component="div">Lax Dashboard</Typography>
         </Toolbar>
       </AppBar>
@@ -121,8 +133,30 @@ function Navbar() {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
+
         <Divider />
-        <List>{mainListItems}</List>
+        {/* Main List Items */}
+        <List>
+          <ListItem>
+            <ListItemIcon>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <PersonIcon />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </ListItem>
+          <ListItem component='a' href='/sign-in-sign-up' onClick={() => auth.signOut()}>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
+        </List>
+
         <Divider />
       </Drawer>
     </Box>
