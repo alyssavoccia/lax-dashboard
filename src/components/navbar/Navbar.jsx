@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -23,8 +24,6 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import PeopleIcon from '@mui/icons-material/People'
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
-
-import { mainListItems } from './nav-list-items';
 
 const drawerWidth = 240;
 
@@ -137,19 +136,19 @@ function Navbar() {
         <Divider />
         {/* Main List Items */}
         <List>
-          <ListItem>
+          <ListItem component={Link} to='/'>
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
           </ListItem>
-          <ListItem>
+          <ListItem component={Link} to='/profile'>
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-          <ListItem component='a' href='/sign-in-sign-up' onClick={() => auth.signOut()}>
+          <ListItem component={Link} to='/sign-in-sign-up' onClick={() => auth.signOut()}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>

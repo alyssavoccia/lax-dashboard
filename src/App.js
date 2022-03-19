@@ -1,28 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useAuthStatus } from './hooks/useAuthStatus';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 
-import Navbar from "./components/navbar/Navbar";
+import Navbar from './components/navbar/Navbar';
 import PrivateRoute from './components/PrivateRoute';
-import Dashboard from "./pages/Dashboard";
 import SignInSignUp from './pages/SignInSignUp';
+import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
 
 function App() {
-    const { loggedIn } = useAuthStatus();
+    const location = useLocation();
 
   return (
     <>
       <Box sx={{ display: 'flex' }}>
-        {loggedIn ? <Navbar /> : <></>}
-        <Router>
-          <Routes>
-            <Route path='/' element={<PrivateRoute />}>
-              <Route path='/' element={<Dashboard />} />
-            </Route>
-            <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
-          </Routes>
-        </Router>
+        {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar />}
+        <Routes>
+          <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
+          <Route path='/' element={<PrivateRoute />}>
+            <Route path='/' element={<Dashboard />} />
+          </Route>
+          <Route path='/profile' element={<Profile />} />
+        </Routes>
       </Box>
     </>
   );
