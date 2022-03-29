@@ -1,6 +1,9 @@
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Title from '../components/Title';
 
 function Profile() {
   return (
@@ -19,7 +22,11 @@ function Profile() {
     <Toolbar />
 
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <h1>Profile Page</h1>
+      <Grid container spacing={3}>
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 100, justifyContent: 'center', alignItems: 'flex-start' }}>
+          <Title>Profile</Title>
+        </Paper>
+      </Grid>
     </Container>
 
   </Box>

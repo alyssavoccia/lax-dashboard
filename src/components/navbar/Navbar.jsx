@@ -136,19 +136,19 @@ function Navbar() {
         <Divider />
         {/* Main List Items */}
         <List>
-          <ListItem component={Link} to='/'>
+          <ListItem component={Link} to='/' style={{color: 'black'}}>
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
           </ListItem>
-          <ListItem component={Link} to='/profile'>
+          <ListItem component={Link} to='/profile' style={{color: 'black'}}>
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-          <ListItem component={Link} to='/sign-in-sign-up' onClick={() => auth.signOut()}>
+          <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => auth.signOut()}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
