@@ -53,8 +53,20 @@ function SignUp() {
       delete formDataCopy.password;
       delete formDataCopy.confirmPassword;
 
+      const userData = {
+        agility: null,
+        broad: null,
+        displayName,
+        grad: null,
+        id: user.uid,
+        position: null,
+        three: null,
+        wb: null
+      };
+
       await setDoc(doc(db, 'users', user.uid), formDataCopy);
       await setDoc(doc(db, team, user.uid), formDataCopy);
+      await setDoc(doc(db, team, user.uid, 'data', user.uid), userData);
 
       navigate('/');
     } catch (error) {

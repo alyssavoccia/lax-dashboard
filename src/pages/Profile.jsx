@@ -10,10 +10,14 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Title from '../components/Title';
+import Stack from '@mui/material/Stack';
+import Chip from '@mui/material/Chip';
 
 function Profile() {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const position = null;
+  const grad = null;
 
   useEffect(() => {
     const auth = getAuth();
@@ -52,8 +56,18 @@ function Profile() {
 
       <Container maxWidth="lg" sx={{ my: 5, mx: 4 }}>
         <Grid container spacing={3}>
-          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 100, justifyContent: 'center', alignItems: 'flex-start' }}>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 100, justifyContent: 'center', alignItems: 'flex-start', width: '100%' }}>
             <Title>{currentUser.displayName}</Title>
+
+            <Stack direction="row" spacing={2}>
+              {currentUser.isAdmin 
+              ? <Chip label="Admin" /> 
+              : <>
+                  <Chip label={position ? position : 'POS'} />
+                  <Chip label={grad ? grad : 'GRAD'} />
+                </>
+              }
+            </Stack>
           </Paper>
         </Grid>
       </Container>
