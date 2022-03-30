@@ -12,12 +12,12 @@ import Paper from '@mui/material/Paper';
 import Title from '../components/Title';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
+import ProfileDataCardGrid from '../components/ProfileDataCardGrid';
 
 function Profile() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const position = null;
-  const grad = null;
 
   useEffect(() => {
     const auth = getAuth();
@@ -28,13 +28,31 @@ function Profile() {
         const userDoc = await getDoc(userRef);
         
         setCurrentUser(userDoc.data());
-        setLoading(false);
+        // setLoading(false);
       } catch (error) {
         console.log(error);
       }
     }
+
+    const fetchUserData = async () => {
+      if (!currentUser.isAdmin) {
+        try {
+          const userDataRef = doc(db, currentUser.team, auth.currentUser.uid, 'data', auth.currentUser.uid);
+          const userDataDoc = await getDoc(userDataRef);
+
+          setUserData(userDataDoc.data());
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
+      } else {
+        setLoading(false);
+      }
+    }
+
     fetchCurrentUser();
-  }, []);
+    currentUser && fetchUserData();
+  }, [currentUser]);
   
   if (loading) {
     return <Spinner />
@@ -52,26 +70,34 @@ function Profile() {
         overflow: 'auto',
       }}
       >
-      <Toolbar />
+        <Toolbar />
 
-      <Container maxWidth="lg" sx={{ my: 5, mx: 4 }}>
-        <Grid container spacing={3}>
-          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 100, justifyContent: 'center', alignItems: 'flex-start', width: '100%' }}>
-            <Title>{currentUser.displayName}</Title>
+        <Container maxWidth="lg" sx={{ my: 5, mx: 4 }}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 100, justifyContent: 'center', alignItems: 'flex-start' }}>
+                <Title>{currentUser.displayName}</Title>
 
-            <Stack direction="row" spacing={2}>
-              {currentUser.isAdmin 
-              ? <Chip label="Admin" /> 
-              : <>
-                  <Chip label={position ? position : 'POS'} />
-                  <Chip label={grad ? grad : 'GRAD'} />
-                </>
-              }
-            </Stack>
-          </Paper>
-        </Grid>
-      </Container>
+                <Stack direction="row" spacing={2}>
+                  {currentUser.isAdmin 
+                  ? <Chip label="Admin" /> 
+                  : <>
+                      <Chip label={userData.position ? userData.position : 'POS'} />
+                      <Chip label={userData.grad ? userData.grad : 'GRAD'} />
+                    </>
+                  }
+                </Stack>
+              </Paper>
+            </Grid>
+            
+            {/* PLAYER DATA CARDS */}
+            {currentUser.isAdmin
+              ? <></>
+              : <ProfileDataCardGrid data={userData} />
+            }
 
+          </Grid>
+        </Container>
       </Box>
     )
   }
