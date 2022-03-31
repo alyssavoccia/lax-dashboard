@@ -9,7 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 
 function App() {
-    const location = useLocation();
+  const location = useLocation();
 
   return (
     <>

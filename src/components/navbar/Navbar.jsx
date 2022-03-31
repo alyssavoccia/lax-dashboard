@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import Spinner from '../Spinner';
 
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -94,8 +95,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function Navbar() {
   const theme = useTheme();
-  const [open, setOpen] = useState(false);
   const auth = getAuth();
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
