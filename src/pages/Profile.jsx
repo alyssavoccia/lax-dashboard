@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase.config';
+import { useSelector } from 'react-redux';
 
 import Spinner from '../components/Spinner';
 import Box from '@mui/material/Box';
@@ -15,24 +16,14 @@ import Chip from '@mui/material/Chip';
 import ProfileDataCardGrid from '../components/ProfileDataCardGrid';
 
 function Profile() {
-  const [currentUser, setCurrentUser] = useState(null);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  console.log(currentUser);
 
   useEffect(() => {
     const auth = getAuth();
-    
-    const fetchCurrentUser = async () => {
-      try {
-        const userRef = doc(db, 'users', auth.currentUser.uid);
-        const userDoc = await getDoc(userRef);
-        
-        setCurrentUser(userDoc.data());
-        // setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    }
 
     const fetchUserData = async () => {
       if (!currentUser.isAdmin) {
@@ -50,7 +41,6 @@ function Profile() {
       }
     }
 
-    fetchCurrentUser();
     currentUser && fetchUserData();
   }, [currentUser]);
   
