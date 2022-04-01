@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { getAuth } from 'firebase/auth';
 import { Link } from 'react-router-dom';
-import Spinner from '../Spinner';
 
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -95,6 +95,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function Navbar() {
   const theme = useTheme();
+  const currentUser = useSelector((state) => state.user.currentUser);
   const auth = getAuth();
   const [open, setOpen] = useState(false);
 
@@ -157,7 +158,27 @@ function Navbar() {
           </ListItem>
         </List>
 
-        <Divider />
+        {currentUser.isAdmin?
+        <>
+          <Divider />
+          <List>
+            <ListItem>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Team" />
+            </ListItem>
+            <ListItem component={Link} to='/player-data' style={{color: 'black'}}>
+              <ListItemIcon>
+                <AssignmentIcon />
+              </ListItemIcon>
+              <ListItemText primary="Player Data" />
+            </ListItem>
+          </List>
+        </>
+        : <></>
+        }
+        
       </Drawer>
     </Box>
   );

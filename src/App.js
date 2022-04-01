@@ -3,23 +3,24 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { getAuth } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from './firebase.config';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Box from '@mui/material/Box';
 import { useAuthStatus } from './hooks/useAuthStatus';
 import { setCurrentUser } from './redux/user/userActions';
 import Navbar from './components/navbar/Navbar';
 import PrivateRoute from './components/PrivateRoute';
+import AdminRoute from './components/AdminRoute';
 import SignInSignUp from './pages/SignInSignUp';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import PlayerData from './pages/PlayerData';
 import Spinner from './components/Spinner';
 
 function App() {
   const location = useLocation();
   const { loggedIn } = useAuthStatus();
   const [loading, setLoading] = useState(true);
-  const user = useSelector((state) => state);
   const dispatch = useDispatch();
 
   bindActionCreators(setCurrentUser, dispatch);
@@ -34,7 +35,6 @@ function App() {
           const userDoc = await getDoc(userRef);
           
           setCurrentUser(userDoc.data());
-          console.log(user.user)
           setLoading(false);
         } catch (error) {
           console.log(error);
@@ -43,7 +43,7 @@ function App() {
 
       fetchCurrentUser();
     }
-  }, [loggedIn, user]);
+  }, [loggedIn]);
 
   if (loading) {
     return <Spinner />
@@ -60,6 +60,9 @@ function App() {
           </Route>
           <Route path='/profile' element={<PrivateRoute />}>
             <Route path='/profile' element={<Profile />} />
+          </Route>
+          <Route path='/player-data' element={<AdminRoute />}>
+            <Route path='/player-data' element={<PlayerData />} />
           </Route>
         </Routes>
       </Box>
