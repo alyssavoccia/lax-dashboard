@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { getAuth } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from './firebase.config';
+import { auth, createUserProfileDocument } from './firebase.config';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Box from '@mui/material/Box';
-import { useAuthStatus } from './hooks/useAuthStatus';
 import { setCurrentUser } from './redux/user/userActions';
 import Navbar from './components/navbar/Navbar';
 import PrivateRoute from './components/PrivateRoute';
@@ -19,31 +16,28 @@ import Spinner from './components/Spinner';
 
 function App() {
   const location = useLocation();
-  const { loggedIn } = useAuthStatus();
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  bindActionCreators(setCurrentUser, dispatch);
+  const setUser = bindActionCreators(setCurrentUser, dispatch);
 
   useEffect(() => {
-    const auth = getAuth();
+    auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
 
-    if (loggedIn) {
-      const fetchCurrentUser = async () => {
-        try {
-          const userRef = doc(db, 'users', auth.currentUser.uid);
-          const userDoc = await getDoc(userRef);
-          
-          setCurrentUser(userDoc.data());
-          setLoading(false);
-        } catch (error) {
-          console.log(error);
-        }
+        if (userRef) {
+          userRef.onSnapshot(snapShot => {
+            setUser(snapShot.data());
+          })
+        } 
+        setLoading(false)
+      } else {
+        setUser(userAuth);
+        setLoading(false);
       }
-
-      fetchCurrentUser();
-    }
-  }, [loggedIn]);
+    })
+  }, [setUser]);
 
   if (loading) {
     return <Spinner />

@@ -18,9 +18,9 @@ import ProfileDataCardGrid from '../components/ProfileDataCardGrid';
 function Profile() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector((state) => state.user.user);
 
-  console.log(currentUser);
+  const auth = getAuth();
 
   useEffect(() => {
     const auth = getAuth();
@@ -62,7 +62,7 @@ function Profile() {
       >
         <Toolbar />
 
-        <Container maxWidth="lg" sx={{ my: 5, mx: 4 }}>
+        <Container maxWidth="lg" sx={{ my: 4 }}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 100, justifyContent: 'center', alignItems: 'flex-start' }}>

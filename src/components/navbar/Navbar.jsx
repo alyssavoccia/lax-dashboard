@@ -2,7 +2,13 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getAuth } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import storage from 'redux-persist/lib/storage';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { removeCurrentUser } from '../../redux/user/userActions';
+import { useAuthStatus } from '../../hooks/useAuthStatus';
 
+import Spinner from '../Spinner';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -95,9 +101,15 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function Navbar() {
   const theme = useTheme();
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const { loading } = useAuthStatus();
+  const currentUser = useSelector((state) => state.user.user);
   const auth = getAuth();
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  console.log(currentUser);
+
+  const removeUser = bindActionCreators(removeCurrentUser, dispatch);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -106,6 +118,10 @@ function Navbar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  if (!currentUser) {
+    return <Spinner />
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -150,7 +166,11 @@ function Navbar() {
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-          <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => auth.signOut()}>
+          <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => {
+            storage.removeItem('persist:root');
+            removeUser();
+            auth.signOut()
+          }}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
@@ -158,7 +178,7 @@ function Navbar() {
           </ListItem>
         </List>
 
-        {currentUser.isAdmin?
+        {currentUser.isAdmin ?
         <>
           <Divider />
           <List>

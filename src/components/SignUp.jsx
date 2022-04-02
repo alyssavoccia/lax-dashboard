@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
-import { db } from '../firebase.config';
+import 'firebase/compat/auth';
+import { db, auth, createUserProfileDocument } from '../firebase.config';
 
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -24,7 +23,7 @@ function SignUp() {
 
   const navigate = useNavigate();
 
-  const {displayName, email, password, confirmPassword, team, isAdmin} = formData;
+  const {displayName, email, password, confirmPassword, team} = formData;
 
   const handleChange = (e) => {
     setFormData((prevState) => ({
@@ -36,37 +35,24 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+    }
+
+    // Check if user's team exists
+    const teamRef = db.collection(team);
+    const teamSnapshot = await teamRef.get();
+
+    if (teamSnapshot.size === 0) {
+      alert('Team does not exist');
+      return;
+    }
+
+    // Try to create a new user
     try {
-      const auth = getAuth();
+      const {user} = await auth.createUserWithEmailAndPassword(email, password);
 
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-      const user = userCredential.user;
-
-      updateProfile(auth.currentUser, {
-        displayName,
-        team,
-        isAdmin
-      });
-
-      const formDataCopy = {...formData};
-      delete formDataCopy.password;
-      delete formDataCopy.confirmPassword;
-
-      const userData = {
-        agility: null,
-        broad: null,
-        displayName,
-        grad: null,
-        id: user.uid,
-        position: null,
-        three: null,
-        wb: null
-      };
-
-      await setDoc(doc(db, 'users', user.uid), formDataCopy);
-      await setDoc(doc(db, team, user.uid), formDataCopy);
-      await setDoc(doc(db, team, user.uid, 'data', user.uid), userData);
+      await createUserProfileDocument(user, displayName, team);      
 
       navigate('/');
     } catch (error) {

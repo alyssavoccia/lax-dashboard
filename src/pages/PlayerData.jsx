@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
 import { Container } from '@mui/material';
 import { Toolbar } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import Title from '../components/Title';
+import Grid from '@mui/material/Grid';
 
 function PlayerData() {
   return (

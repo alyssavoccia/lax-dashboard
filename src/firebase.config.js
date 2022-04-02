@@ -1,5 +1,7 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJKBY6fl_vhGOsFwebH1VEDEyf3j34eho",
@@ -11,5 +13,66 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
-export const db = getFirestore();
+firebase.initializeApp(firebaseConfig);
+
+export const createUserProfileDocument = async (userAuth, displayName, team, grad = null, position = null) => {
+  if (!userAuth) {
+    alert('No login');
+    return;
+  }
+
+  const userRef = db.doc(`users/${userAuth.uid}`);
+
+  let teamSnapshot;
+
+  if (team) {
+    const teamRef = db.collection(team);
+    teamSnapshot = await teamRef.get();
+  }
+
+  const teamUserRef = db.doc(`${team}/${userAuth.uid}`);
+  const snapShot = await userRef.get();
+
+  if (!snapShot.exists && teamSnapshot !== undefined) {
+    if (teamSnapshot.size !== 0) {
+      const { email, uid } = userAuth;
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          isAdmin: false,
+          team
+        });
+        await teamUserRef.set({
+          displayName,
+          id: uid,
+          isAdmin: false
+        });
+        db.collection(team).doc(userAuth.uid).collection('data').doc(userAuth.uid).set({
+          displayName,
+          id: uid,
+          agility: null,
+          broad: null,
+          grad: grad,
+          position: position,
+          three: null,
+          wb: null
+        });
+        if (team === 'highschool') {
+          db.collection(team).doc(userAuth.uid).collection('links').doc(userAuth.uid).set({
+            agilityLink: null,
+            broadLink: null,
+            threeLink: null,
+            wbLink: null
+          });
+        }
+      } catch (error) {
+        console.log('Error creating user: ', error.message);
+      }
+    }
+  }
+  return userRef;
+}
+
+export const auth = firebase.auth();
+export const db = firebase.firestore();

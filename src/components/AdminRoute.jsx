@@ -5,7 +5,7 @@ import Spinner from './Spinner';
 
 const AdminRoute = () => {
   const { loggedIn, loading } = useAuthStatus();
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector((state) => state.user.user);
 
   if (loading) {
     return <Spinner />
