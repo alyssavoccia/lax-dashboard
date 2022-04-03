@@ -46,7 +46,8 @@ export const createUserProfileDocument = async (userAuth, displayName, team, gra
         await teamUserRef.set({
           displayName,
           id: uid,
-          isAdmin: false
+          isAdmin: false,
+          team
         });
         db.collection(team).doc(userAuth.uid).collection('data').doc(userAuth.uid).set({
           displayName,
