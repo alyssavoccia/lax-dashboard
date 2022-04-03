@@ -3,17 +3,19 @@ import { useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
+import Title from '../components/Title';
 import DashboardPlayerSearch from '../components/DashboardPlayerSearch';
+import DashboardGrid from '../components/DashboardGrid';
 
 function Dashboard() {
-  const [selectedPlayer, setSelectedPlayer] = useState({});
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
   const currentUser = useSelector((state) => state.user.user);
 
   const handlePlayerChange = (e, value) => {
-    setSelectedPlayer({
-      chosenPlayer: value
-    });
+    setSelectedPlayer(value);
   };
+
+  console.log(selectedPlayer)
 
   return (
     <Box
@@ -30,18 +32,24 @@ function Dashboard() {
     >
       <Toolbar />
 
-      {currentUser.isAdmin ?
-        <Container maxWidth="lg" sx={{mt: 4, mb: 2}}>
+      {/* If current user is admin, show player search */}
+      {currentUser.isAdmin 
+      ? <Container maxWidth="lg" sx={{mt: 4, mb: 2}}>
           <DashboardPlayerSearch onChange={handlePlayerChange} />
         </Container>
         
         : <></>
       }
 
+      {/* DASHBOARD GRID ITEMS */}
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <h1>Lax Dashboard</h1>
+        { !currentUser.isAdmin
+          ? <DashboardGrid data={currentUser} />
+          : selectedPlayer === undefined || selectedPlayer === '' || selectedPlayer === null
+          ? <Title>Please choose a player to view their dashboard.</Title>
+          : <DashboardGrid data={selectedPlayer} />
+        }
       </Container>
-
     </Box>
   )
 }
