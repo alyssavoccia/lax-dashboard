@@ -20,8 +20,6 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const currentUser = useSelector((state) => state.user.user);
 
-  const auth = getAuth();
-
   useEffect(() => {
     const auth = getAuth();
 

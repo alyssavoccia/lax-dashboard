@@ -43,7 +43,6 @@ function PlayerData() {
         }
 
         if (index === array.length - 1) {
-          console.log(users)
           getUserData();
         }
       });
@@ -55,8 +54,6 @@ function PlayerData() {
   if (loading) {
     return <Spinner />
   }
-
-  console.log(playerData);
 
   return (
     <Box
