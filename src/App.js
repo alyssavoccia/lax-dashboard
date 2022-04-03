@@ -11,6 +11,7 @@ import AdminRoute from './components/AdminRoute';
 import SignInSignUp from './pages/SignInSignUp';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
+import Team from './pages/Team';
 import PlayerData from './pages/PlayerData';
 import Spinner from './components/Spinner';
 
@@ -54,6 +55,9 @@ function App() {
           </Route>
           <Route path='/profile' element={<PrivateRoute />}>
             <Route path='/profile' element={<Profile />} />
+          </Route>
+          <Route path='/team' element={<AdminRoute />}>
+            <Route path='/team' element={<Team />} />
           </Route>
           <Route path='/player-data' element={<AdminRoute />}>
             <Route path='/player-data' element={<PlayerData />} />

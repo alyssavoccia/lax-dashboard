@@ -6,7 +6,6 @@ import storage from 'redux-persist/lib/storage';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { removeCurrentUser } from '../../redux/user/userActions';
-import { useAuthStatus } from '../../hooks/useAuthStatus';
 
 import Spinner from '../Spinner';
 import { styled, useTheme } from '@mui/material/styles';
@@ -101,13 +100,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function Navbar() {
   const theme = useTheme();
-  const { loading } = useAuthStatus();
   const currentUser = useSelector((state) => state.user.user);
   const auth = getAuth();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-
-  console.log(currentUser);
 
   const removeUser = bindActionCreators(removeCurrentUser, dispatch);
 
@@ -182,7 +178,7 @@ function Navbar() {
         <>
           <Divider />
           <List>
-            <ListItem>
+            <ListItem component={Link} to='/team' style={{color: 'black'}}>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
