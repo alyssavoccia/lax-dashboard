@@ -15,8 +15,6 @@ function Dashboard() {
     setSelectedPlayer(value);
   };
 
-  console.log(selectedPlayer)
-
   return (
     <Box
       component="main"
@@ -54,4 +52,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Dashboard;

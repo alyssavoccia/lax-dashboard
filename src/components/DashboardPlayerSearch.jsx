@@ -9,13 +9,12 @@ function DashboardPlayerSearch({ onChange }) {
   const currentUser = useSelector((state) => state.user.user);
   const players = [];
 
-  useEffect(() => {
-    const getTeam = async () => {
-      const snapshot = await db.collection(currentUser.team).get();
-      snapshot.docs.map(doc => doc.data().isAdmin ? '' : players.push(doc.data().displayName));
-    }
-    getTeam();
-  }, [currentUser.team]);
+  const getTeam = async () => {
+    const snapshot = await db.collection(currentUser.team).get();
+    snapshot.docs.map(doc => doc.data().isAdmin ? '' : players.push(doc.data().displayName));
+  }
+  
+  getTeam();
 
   return (
     <Autocomplete
