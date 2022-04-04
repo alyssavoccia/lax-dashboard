@@ -1,7 +1,8 @@
 import Title from '../Title';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer } from 'recharts';
 
-function PerformanceRelativeToPeers() {
+function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilityScores, currentPlayerData }) {
+  // console.log(wbScores, threeScores, broadScores, agilityScores, currentPlayerData);
   const data = [
     {
       name: 'WB Test',
