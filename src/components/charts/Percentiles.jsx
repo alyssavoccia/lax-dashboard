@@ -48,14 +48,13 @@ function Percentiles({ title, data, currentPlayerData }) {
     }
   }
 
-  if (currentPlayerPercentile < 1) {
+  if (currentPlayerPercentile < 100) {
     teamPercentile = 100 - currentPlayerPercentile;
   } else {
     currentPlayerPercentile = currentPlayerPercentile - 100;
     teamPercentile = 100 - currentPlayerPercentile;
   }
   
-
   const chartData = [
     { name: 'Player', value: currentPlayerPercentile },
     { name: 'Team', value: teamPercentile },

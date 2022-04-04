@@ -3,22 +3,32 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Res
 
 function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilityScores, currentPlayerData }) {
   // console.log(wbScores, threeScores, broadScores, agilityScores, currentPlayerData);
+
+  const getMean = (array) => {
+    return array.reduce((a, b) => a + b, 0) / array.length;
+  }
+
+  const getStandardDeviation = (array) => {
+    const mean = getMean(array);
+    return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b, 0) / array.length);
+  }
+
   const data = [
     {
-      name: 'WB Test',
-      Player: 2.5
+      name: "50's WB",
+      player: ((currentPlayerData.wb - getMean(wbScores)) / getStandardDeviation(wbScores) * -1)
     },
     {
       name: "300's",
-      Player: 2.5
+      player: ((currentPlayerData.three - getMean(threeScores)) / getStandardDeviation(threeScores) * -1)
     },
     {
       name: 'Broad',
-      Player: -2.5
+      player: ((currentPlayerData.broad - getMean(broadScores)) / getStandardDeviation(broadScores) * -1)
     },
     {
       name: '5-10-5',
-      Player: .5
+      player: ((currentPlayerData.agility - getMean(agilityScores)) / getStandardDeviation(agilityScores) * -1)
     }
   ];
 
@@ -32,7 +42,7 @@ function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilit
           margin={{
             top: 0,
             right: 0,
-            left: -40,
+            left: 0,
             bottom: 0,
           }}
         >
@@ -41,7 +51,7 @@ function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilit
           <YAxis />
           <Tooltip />
           <ReferenceLine y={0} stroke="#000" />
-          <Bar dataKey="Player" fill="#1976D2" stackId="stack" />
+          <Bar dataKey="player" fill="#1976D2" stackId="stack" />
         </BarChart>
       </ResponsiveContainer>
     </>
