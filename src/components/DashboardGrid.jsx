@@ -78,7 +78,7 @@ function DashboardGrid({ data }) {
       <Grid item xs={12} md={6}>
         <Paper
           sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300 }}>
-          <StrengthsAssessment />
+          <StrengthsAssessment wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} currentPlayerData={currentPlayerData} />
         </Paper>
       </Grid>
 

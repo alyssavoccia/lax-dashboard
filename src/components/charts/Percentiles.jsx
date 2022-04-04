@@ -3,7 +3,6 @@ import Title from '../Title';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 
 function Percentiles({ title, data, currentPlayerData }) {
-  console.log(data, currentPlayerData)
   let currentPlayerPercentile;
   let teamPercentile;
   let attrTested = false;
@@ -49,7 +48,13 @@ function Percentiles({ title, data, currentPlayerData }) {
     }
   }
 
-  teamPercentile = 100 - currentPlayerPercentile;
+  if (currentPlayerPercentile < 1) {
+    teamPercentile = 100 - currentPlayerPercentile;
+  } else {
+    currentPlayerPercentile = currentPlayerPercentile - 100;
+    teamPercentile = 100 - currentPlayerPercentile;
+  }
+  
 
   const chartData = [
     { name: 'Player', value: currentPlayerPercentile },
