@@ -2,8 +2,6 @@ import Title from '../Title';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer } from 'recharts';
 
 function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilityScores, currentPlayerData }) {
-  // console.log(wbScores, threeScores, broadScores, agilityScores, currentPlayerData);
-
   const getMean = (array) => {
     return array.reduce((a, b) => a + b, 0) / array.length;
   }
@@ -16,19 +14,19 @@ function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilit
   const data = [
     {
       name: "50's WB",
-      player: ((currentPlayerData.wb - getMean(wbScores)) / getStandardDeviation(wbScores) * -1)
+      player: currentPlayerData.wb === null ? 0 : (currentPlayerData.wb - getMean(wbScores)) / getStandardDeviation(wbScores) * -1
     },
     {
       name: "300's",
-      player: ((currentPlayerData.three - getMean(threeScores)) / getStandardDeviation(threeScores) * -1)
+      player: currentPlayerData.three === null ? 0 : (currentPlayerData.three - getMean(threeScores)) / getStandardDeviation(threeScores) * -1
     },
     {
       name: 'Broad',
-      player: ((currentPlayerData.broad - getMean(broadScores)) / getStandardDeviation(broadScores) * -1)
+      player: currentPlayerData.broad === null ? 0 : (currentPlayerData.broad - getMean(broadScores)) / getStandardDeviation(broadScores) * -1
     },
     {
       name: '5-10-5',
-      player: ((currentPlayerData.agility - getMean(agilityScores)) / getStandardDeviation(agilityScores) * -1)
+      player: currentPlayerData.agility === null ? 0 : (currentPlayerData.agility - getMean(agilityScores)) / getStandardDeviation(agilityScores) * -1
     }
   ];
 
