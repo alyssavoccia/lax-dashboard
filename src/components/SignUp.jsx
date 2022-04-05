@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import 'firebase/compat/auth';
 import { db, auth, createUserProfileDocument } from '../firebase.config';
 
+import SignUpHS from './SignUpHS';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -137,15 +138,16 @@ function SignUp() {
           value={team}
           onChange={handleChange}
         />
-        <Box display='flex' justifyContent='space-between'>
+        <Box display='flex' sx={{flexDirection: 'column'}}>
           <Button
             onClick={handleSubmit}
             type="submit"
-            sx={{pl: 15, pr: 15, mb: 1}}
+            sx={{mb: 1}}
             variant="contained"
           >
             Sign Up
           </Button>
+          <SignUpHS />
         </Box>
       </Box>
     </Grid>

@@ -8,6 +8,7 @@ import DashboardPlayerSearch from '../components/DashboardPlayerSearch';
 import DashboardGrid from '../components/DashboardGrid';
 
 function Dashboard() {
+  const [loading, setLoading] = useState(true);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const currentUser = useSelector((state) => state.user.user);
 
