@@ -4,7 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
 function ProfileDataCard({dataTitle, data}) {
-  console.log(data)
   return (
     <Box
     sx={{
