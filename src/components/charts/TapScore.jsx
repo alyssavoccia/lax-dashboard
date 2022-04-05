@@ -20,7 +20,6 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
       let agilityMean = 0;
 
       const getDataMeans = () => {
-        console.log('here')
         wbMean = wbScores.reduce((a, b) => a + b, 0);
         threeMean = threeScores.reduce((a, b) => a + b, 0);
         broadMean = broadScores.reduce((a, b) => a + b, 0);
@@ -30,7 +29,6 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
       const getPlayerTapScores = () => {
         const playerTapScores = [];
         getDataMeans();
-        console.log(allPlayersData)
         allPlayersData.forEach((person, index) => {
           let wbPercentile = Math.floor(person.wb / wbMean * 100);
           let threePercentile = Math.floor(person.three / threeMean * 100);
@@ -71,11 +69,9 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
           }
           
           if (index === allPlayersData.length - 1) {
-            console.log('here')
             playerTapScores.sort((a, b) => a.tapScore < b.tapScore ? 1 : -1);
             setTapScores(playerTapScores);
             setLoading(false);
-            console.log(tapScores);
           }
         });
       };
@@ -114,7 +110,7 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
     }
 
     fetchAllData();
-  }, []);
+  }, [agilityScores, broadScores, currentPlayerData.id, currentUser.team, threeScores, wbScores]);
 
     return (
       <>
@@ -132,7 +128,6 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
                 <XAxis type="number"/>
                 <YAxis type="category" dataKey="user" />
                 <Bar dataKey='tapScore' fill="#1976D2">
-                  {console.log(tapScores)}
                   { tapScores.map((entry, index) => (
                       <Cell key={entry.user} fill={entry.selectedUser ? '#1976D2' : '#A9A9A9'} />
                     ))
