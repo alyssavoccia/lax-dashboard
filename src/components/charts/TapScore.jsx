@@ -6,108 +6,115 @@ import Title from '../Title';
 import { BarChart, Bar, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agilityScores }) {
-  // const [loading, setLoading] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [allPlayersData, setAllPlayersData] = useState([]);
-  const [wbMean, setWbMean] = useState(0);
-  const [threeMean, setThreeMean] = useState(0);
-  const [broadMean, setBroadMean] = useState(0);
-  const [agilityMean, setAgilityMean] = useState(0);
   const [tapScores, setTapScores] = useState([]);
   const currentUser = useSelector((state) => state.user.user);
 
   useEffect(() => {
-    const users = [];
+    const fetchAllData = async () => {
+      const users = [];
+      const allPlayersData = [];
+      let wbMean = 0;
+      let threeMean = 0;
+      let broadMean = 0;
+      let agilityMean = 0;
 
-    const getDataMeans = () => {
-      setWbMean(wbScores.reduce((a, b) => a + b, 0));
-      setThreeMean(threeScores.reduce((a, b) => a + b, 0));
-      setBroadMean(broadScores.reduce((a, b) => a + b, 0));
-      setAgilityMean(agilityScores.reduce((a, b) => a + b, 0));
-    };
+      const getDataMeans = () => {
+        console.log('here')
+        wbMean = wbScores.reduce((a, b) => a + b, 0);
+        threeMean = threeScores.reduce((a, b) => a + b, 0);
+        broadMean = broadScores.reduce((a, b) => a + b, 0);
+        agilityMean = agilityScores.reduce((a, b) => a + b, 0);
+      };
 
-    const getPlayerTapScores = () => {
-      const playerTapScores = [];
-      getDataMeans();
-      allPlayersData.forEach((person, index) => {
-        let wbPercentile = Math.floor(person.wb / wbMean * 100);
-        let threePercentile = Math.floor(person.three / threeMean * 100);
-        let broadPercentile = Math.floor(person.broad / broadMean * 100);
-        let agilityPercentile = Math.floor(person.agility / agilityMean * 100);
+      const getPlayerTapScores = () => {
+        const playerTapScores = [];
+        getDataMeans();
+        console.log(allPlayersData)
+        allPlayersData.forEach((person, index) => {
+          let wbPercentile = Math.floor(person.wb / wbMean * 100);
+          let threePercentile = Math.floor(person.three / threeMean * 100);
+          let broadPercentile = Math.floor(person.broad / broadMean * 100);
+          let agilityPercentile = Math.floor(person.agility / agilityMean * 100);
+  
+          if (wbPercentile > 100) {
+            wbPercentile = wbPercentile - 100;
+          }
+          if (threePercentile > 100) {
+            threePercentile = wbPercentile - 100;
+          }
+          if (broadPercentile > 100) {
+            broadPercentile = wbPercentile - 100;
+          }
+          if (agilityPercentile > 100) {
+            agilityPercentile = wbPercentile - 100;
+          }
+  
+          if (isNaN(wbPercentile)) {
+            wbPercentile = 0;
+          }
+          if (isNaN(threePercentile)) {
+            threePercentile = 0;
+          }
+          if (isNaN(broadPercentile)) {
+            broadPercentile = 0;
+          }
+          if (isNaN(agilityPercentile)) {
+            agilityPercentile = 0;
+          }
+  
+          const tapScore = wbPercentile + threePercentile + broadPercentile + agilityPercentile;
+          if (person.id === currentPlayerData.id) {
+            playerTapScores.push({user: person.id, tapScore: tapScore, selectedUser: true});
+          } else {
+            playerTapScores.push({user: person.id, tapScore: tapScore});
+          }
+          
+          if (index === allPlayersData.length - 1) {
+            console.log('here')
+            playerTapScores.sort((a, b) => a.tapScore < b.tapScore ? 1 : -1);
+            setTapScores(playerTapScores);
+            setLoading(false);
+            console.log(tapScores);
+          }
+        });
+      };
 
-        if (wbPercentile > 100) {
-          wbPercentile = wbPercentile - 100;
-        }
-        if (threePercentile > 100) {
-          threePercentile = wbPercentile - 100;
-        }
-        if (broadPercentile > 100) {
-          broadPercentile = wbPercentile - 100;
-        }
-        if (agilityPercentile > 100) {
-          agilityPercentile = wbPercentile - 100;
-        }
+      const getUserData = async () => {
+        users.forEach(async (person, index) => {
+          const docRef = doc(db, currentUser.team, person.id, 'data', person.id);
+          const docSnap = await getDoc(docRef);
+          const userDataObj = docSnap.data();
+          if (userDataObj) {
+            allPlayersData.push(userDataObj);
+          }
+  
+          if (index === users.length - 1) {
+            getPlayerTapScores();
+          }
+        });
+      }
 
-        if (isNaN(wbPercentile)) {
-          wbPercentile = 0;
-        }
-        if (isNaN(threePercentile)) {
-          threePercentile = 0;
-        }
-        if (isNaN(broadPercentile)) {
-          broadPercentile = 0;
-        }
-        if (isNaN(agilityPercentile)) {
-          agilityPercentile = 0;
-        }
 
-        const tapScore = wbPercentile + threePercentile + broadPercentile + agilityPercentile;
-        if (person.id === currentPlayerData.id) {
-          playerTapScores.push({user: person.id, tapScore: tapScore, selectedUser: true});
-        } else {
-          playerTapScores.push({user: person.id, tapScore: tapScore});
-        }
-        
-        if (index === allPlayersData.length - 1) {
-          playerTapScores.sort((a, b) => a.tapScore < b.tapScore ? 1 : -1);
-          setTapScores(playerTapScores);
-          setLoading(false);
-          console.log(tapScores);
-        }
-      });
+      // Get all users in the team
+      try {
+        const snapshot = await db.collection(currentUser.team).get();
+        snapshot.docs.forEach((doc, index, array) => {
+          if (!doc.data().isAdmin) {
+            users.push(doc.data());
+          }
+  
+          if (index === array.length - 1) {
+            getUserData();
+          }
+        });
+      } catch (error) {
+        console.log('error:', error);
+      }
     }
 
-    const getUserData = async () => {
-      users.forEach(async (person, index) => {
-        console.log(person)
-        const docRef = doc(db, currentUser.team, person.id, 'data', person.id);
-        const docSnap = await getDoc(docRef);
-        const userDataObj = docSnap.data();
-        if (userDataObj) {
-          setAllPlayersData(prevData => [...prevData, userDataObj]);
-        }
-
-        if (index === users.length - 1) {
-          getPlayerTapScores();
-        }
-      });
-    }
-
-    const getAllTeamUsers = async () => {
-      const snapshot = await db.collection(currentUser.team).get();
-      snapshot.docs.forEach((doc, index, array) => {
-        if (!doc.data().isAdmin) {
-          users.push(doc.data());
-        }
-
-        if (index === array.length - 1) {
-          getUserData();
-        }
-      });
-    }
-
-    getAllTeamUsers();
-  }, [currentUser.team, currentPlayerData.displayName, wbScores, threeScores, broadScores, agilityScores, wbMean, threeMean, broadMean, agilityMean]);
+    fetchAllData();
+  }, []);
 
     return (
       <>
@@ -125,6 +132,7 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
                 <XAxis type="number"/>
                 <YAxis type="category" dataKey="user" />
                 <Bar dataKey='tapScore' fill="#1976D2">
+                  {console.log(tapScores)}
                   { tapScores.map((entry, index) => (
                       <Cell key={entry.user} fill={entry.selectedUser ? '#1976D2' : '#A9A9A9'} />
                     ))

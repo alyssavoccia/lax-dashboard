@@ -31,7 +31,7 @@ function Dashboard() {
       <Toolbar />
 
       {/* If current user is admin, show player search */}
-      {currentUser.isAdmin 
+      {currentUser && currentUser.isAdmin 
       ? <Container maxWidth="lg" sx={{mt: 4, mb: 2}}>
           <DashboardPlayerSearch onChange={handlePlayerChange} />
         </Container>
