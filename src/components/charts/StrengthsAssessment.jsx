@@ -2,22 +2,55 @@ import Title from '../Title';
 import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 
 function StrengthsAssessment({ wbScores, threeScores, broadScores, currentPlayerData }) {
+  const wbTotal = wbScores.reduce((a, b) => a + b, 0);
+  const threeTotal = threeScores.reduce((a, b) => a + b, 0);
+  const broadTotal = broadScores.reduce((a, b) => a + b, 0);
   
+  let currentWbPercentile = Math.floor(currentPlayerData.wb / (wbTotal / wbScores.length) * 100);
+  let currentThreePercentile = Math.floor(currentPlayerData.three / (threeTotal / threeScores.length) * 100);
+  let currentBroadPercentile = Math.floor(currentPlayerData.broad / (broadTotal / broadScores.length) * 100);
+
+  let teamWbPercentile, teamThreePercentile, teamBroadPercentile;
+
+  if (currentWbPercentile < 100) {
+    teamWbPercentile = 100 - currentWbPercentile;
+  } else {
+    currentWbPercentile -= 100;
+    teamWbPercentile = 100 - currentWbPercentile;
+  }
+
+  if (currentThreePercentile < 100) {
+    teamThreePercentile = 100 - currentThreePercentile;
+  } else {
+    currentThreePercentile -= 100;
+    teamThreePercentile = 100 - currentThreePercentile;
+  }
+
+  if (currentBroadPercentile < 100) {
+    teamBroadPercentile = 100 - currentBroadPercentile;
+  } else {
+    currentBroadPercentile -= 100;
+    teamBroadPercentile = 100 - currentBroadPercentile;
+  }
+
   const data = [
     {
-      subject: "50's Wall Ball",
-      A: currentPlayerData.wb ? currentPlayerData.wb : 0,
-      B: wbScores.reduce((a, b) => a + b, 0) / wbScores.length,
+      test: "50's Wall Ball",
+      A: currentPlayerData.wb ? currentWbPercentile : 0,
+      B: teamWbPercentile,
+      fullMark: 100
     },
     {
-      subject: "300's",
-      A: currentPlayerData.three ? currentPlayerData.three : 0,
-      B: threeScores.reduce((a, b) => a + b, 0) / threeScores.length,
+      test: "300's",
+      A: currentPlayerData.three ? currentThreePercentile : 0,
+      B: teamThreePercentile,
+      fullMark: 100
     },
     {
-      subject: "Broad Jump",
-      A: currentPlayerData.broad ? currentPlayerData.broad : 0,
-      B: broadScores.reduce((a, b) => a + b, 0) / broadScores.length,
+      test: "Broad Jump",
+      A: currentPlayerData.broad ? currentBroadPercentile : 0,
+      B: teamBroadPercentile,
+      fullMark: 100
     },
   ];
 
@@ -25,11 +58,11 @@ function StrengthsAssessment({ wbScores, threeScores, broadScores, currentPlayer
     <>
       <Title>Strengths Assessment</Title>
       <ResponsiveContainer width="100%" height="100%">
-        <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
+        <RadarChart cx="50%" cy="50%" outerRadius='90%' data={data}>
           <PolarGrid />
-          <PolarAngleAxis dataKey="subject" />
-          <Radar name="Player" dataKey="A" stroke="#1976D2" fill="#1976D2" fillOpacity={0.6} />
-          <Radar name="Average" dataKey="B" stroke="#757575" fill="#757575" fillOpacity={0.3} />
+          <PolarAngleAxis dataKey="test" />
+          <Radar name="Player" dataKey="A" stroke="#1976D2" fill="#1976D2" fillOpacity={0.5} />
+          <Radar name="Average" dataKey="B" stroke="#515151" fill="#515151" fillOpacity={0.2} />
           <Legend />
         </RadarChart>
       </ResponsiveContainer>
