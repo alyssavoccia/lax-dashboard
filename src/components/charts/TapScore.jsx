@@ -20,33 +20,33 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
       let agilityMean = 0;
 
       const getDataMeans = () => {
-        wbMean = wbScores.reduce((a, b) => a + b, 0);
-        threeMean = threeScores.reduce((a, b) => a + b, 0);
-        broadMean = broadScores.reduce((a, b) => a + b, 0);
-        agilityMean = agilityScores.reduce((a, b) => a + b, 0);
+        wbMean = wbScores.reduce((a, b) => a + b, 0) / wbScores.length;
+        threeMean = threeScores.reduce((a, b) => a + b, 0) / threeScores.length;
+        broadMean = broadScores.reduce((a, b) => a + b, 0) / broadScores.length;
+        agilityMean = agilityScores.reduce((a, b) => a + b, 0) / agilityScores.length;
       };
 
       const getPlayerTapScores = () => {
         const playerTapScores = [];
-        getDataMeans();
         allPlayersData.forEach((person, index) => {
           let wbPercentile = Math.floor(person.wb / wbMean * 100);
           let threePercentile = Math.floor(person.three / threeMean * 100);
           let broadPercentile = Math.floor(person.broad / broadMean * 100);
           let agilityPercentile = Math.floor(person.agility / agilityMean * 100);
-  
+
           if (wbPercentile > 100) {
-            wbPercentile = wbPercentile - 100;
+            wbPercentile -= 100;
           }
           if (threePercentile > 100) {
-            threePercentile = wbPercentile - 100;
+            threePercentile -= 100;
           }
           if (broadPercentile > 100) {
-            broadPercentile = wbPercentile - 100;
+            broadPercentile -= 100;
           }
           if (agilityPercentile > 100) {
-            agilityPercentile = wbPercentile - 100;
+            agilityPercentile -= 100;
           }
+          
   
           if (isNaN(wbPercentile)) {
             wbPercentile = 0;
@@ -60,8 +60,9 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
           if (isNaN(agilityPercentile)) {
             agilityPercentile = 0;
           }
-  
+
           const tapScore = wbPercentile + threePercentile + broadPercentile + agilityPercentile;
+
           if (person.id === currentPlayerData.id) {
             playerTapScores.push({user: person.id, tapScore: tapScore, selectedUser: true});
           } else {
@@ -101,6 +102,7 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
           }
   
           if (index === array.length - 1) {
+            getDataMeans();
             getUserData();
           }
         });
