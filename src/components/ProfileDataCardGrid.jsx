@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid';
 import ProfileDataCard from './ProfileDataCard';
 
 function ProfileDataCardGrid(userData) {
-  const {agility, broad, three, wb} = userData;
+  const {agility, broad, three, wb} = userData.data;
 
   return (
     <>
@@ -10,7 +10,7 @@ function ProfileDataCardGrid(userData) {
       <Grid item xs={12} sm={6}>
         <ProfileDataCard 
           dataTitle="50's Wall Ball" 
-          data={wb}
+          data={wb ? wb : 0}
         />
       </Grid>
       <Grid item xs={12} sm={6}>
