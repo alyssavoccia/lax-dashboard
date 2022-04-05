@@ -56,8 +56,8 @@ function Percentiles({ title, data, currentPlayerData }) {
   }
   
   const chartData = [
-    { name: 'Player', value: currentPlayerPercentile },
-    { name: 'Team', value: teamPercentile },
+    { name: `${currentPlayerData.displayName}'s Percentile`, value: currentPlayerPercentile },
+    { name: '', value: teamPercentile },
   ];
   
   const COLORS = ['#1976D2', '#515151'];
@@ -90,9 +90,11 @@ function Percentiles({ title, data, currentPlayerData }) {
                   outerRadius={80}
                   dataKey="value"
                 >
-                  {chartData.map((entry, index) => (
+                  {/* {chartData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
+                  ))} */}
+                    <Cell key={`cell-1`} fill={COLORS[0 % COLORS.length]} />
+                    <Cell key={`cell-2`} fill={COLORS[1 % COLORS.length]} />
                 </Pie>
                 <Legend />
             </PieChart>

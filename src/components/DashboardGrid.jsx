@@ -18,6 +18,7 @@ function DashboardGrid({ data }) {
   const [broadScores, setBroadScores] = useState([]);
   const [agilityScores, setAgilityScores] = useState([]);
   const currentUser = useSelector((state) => state.user.user);
+  
 
   useEffect(() => {
     const users = [];
@@ -115,7 +116,7 @@ function DashboardGrid({ data }) {
       {/* TAP SCORE */}
       <Grid item xs={12} md={6}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-          <TapScore />
+          <TapScore currentPlayerData={currentPlayerData} wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} agilityScores={agilityScores} />
         </Paper>
       </Grid>
 
