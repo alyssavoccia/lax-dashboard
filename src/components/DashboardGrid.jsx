@@ -69,28 +69,28 @@ function DashboardGrid({ data }) {
     <Grid container spacing={3}>
       {/* PERFORMANCE RELATIVE TO PEERS */}
       <Grid item xs={12} md={6}>
-        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300 }}>
+        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300, textAlign: 'center' }}>
           <PerformanceRelativeToPeers wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} agilityScores={agilityScores} currentPlayerData={currentPlayerData} />
         </Paper>
       </Grid>
 
       {/* STRENGTHS ASSESSMENT */}
       <Grid item xs={12} md={6}>
-        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300 }}>
+        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300, textAlign: 'center' }}>
           <StrengthsAssessment wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} currentPlayerData={currentPlayerData} />
         </Paper>
       </Grid>
 
       {/* PERCENTILE / 50'S WALL BALL */}
       <Grid item xs={12} md={6}>
-        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300 }}>
+        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300, textAlign: 'center' }}>
           <Percentiles title="50's Wall Ball" data={wbScores} currentPlayerData={currentPlayerData} />
         </Paper>
       </Grid>
 
       {/* PERCENTILE / 300's */}
       <Grid item xs={12} md={6}>
-        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300 }}>
+        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300, textAlign: 'center' }}>
           <Percentiles title="300's" data={threeScores} currentPlayerData={currentPlayerData} />
         </Paper>
       </Grid>
@@ -104,21 +104,21 @@ function DashboardGrid({ data }) {
 
       {/* PERCENTILE / 5-10-5 */}
       <Grid item xs={12} md={6}>
-        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300 }}>
+        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300, textAlign: 'center' }}>
           <Percentiles title="5-10-5" data={agilityScores} currentPlayerData={currentPlayerData} />
         </Paper>
       </Grid>
 
       {/* TAP SCORE */}
       <Grid item xs={12} md={6}>
-        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
           <TapScore currentPlayerData={currentPlayerData} wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} agilityScores={agilityScores} />
         </Paper>
       </Grid>
 
       {/* STRENGTHS & WEAKNESSES */}
       <Grid item xs={12} md={6}>
-        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', textAlign: 'center' }}>
           <Title>Strengths / Areas for Improvement</Title>
         </Paper>
       </Grid>

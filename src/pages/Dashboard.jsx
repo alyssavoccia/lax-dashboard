@@ -6,15 +6,19 @@ import Container from '@mui/material/Container';
 import Title from '../components/Title';
 import DashboardPlayerSearch from '../components/DashboardPlayerSearch';
 import DashboardGrid from '../components/DashboardGrid';
+import Spinner from '../components/Spinner';
 
 function Dashboard() {
-  const [loading, setLoading] = useState(true);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const currentUser = useSelector((state) => state.user.user);
 
   const handlePlayerChange = (e, value) => {
     setSelectedPlayer(value);
   };
+
+  if (!currentUser) {
+    return <Spinner />
+  }
 
   return (
     <Box

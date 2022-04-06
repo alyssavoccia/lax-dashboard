@@ -8,7 +8,9 @@ function ProfileDataCard({dataTitle, data}) {
     <Box
     sx={{
       display: 'flex',
-      flexWrap: 'wrap',
+      flex: '50%',
+      justifyContent: 'center',
+      mt: 2,
       '& > :not(style)': {
         m: 1,
         width: 350,
@@ -16,14 +18,14 @@ function ProfileDataCard({dataTitle, data}) {
       },
     }}
     >
-      <Paper>
+      <Paper elevation={0} sx={{textAlign: 'center'}}>
         <CardContent>
           <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
             {dataTitle}
           </Typography>
           <Typography variant="h5" component="div">
             {data ? data : 'N/A'}
-        </Typography>
+          </Typography>
         </CardContent>
       </Paper>
     </Box>
