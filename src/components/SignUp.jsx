@@ -138,16 +138,16 @@ function SignUp() {
           value={team}
           onChange={handleChange}
         />
-        <Box display='flex' sx={{flexDirection: 'column'}}>
+        <Box sx={{display: 'flex', gap: '10px'}}>
           <Button
             onClick={handleSubmit}
             type="submit"
-            sx={{mb: 1}}
+            sx={{mb: 1, flex: '50%'}}
             variant="contained"
           >
             Sign Up
           </Button>
-          <SignUpHS />
+          <SignUpHS sx={{flex: '50%'}} />
         </Box>
       </Box>
     </Grid>
