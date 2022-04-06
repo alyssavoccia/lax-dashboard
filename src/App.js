@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Box from '@mui/material/Box';
 import { setCurrentUser } from './redux/user/userActions';
-import Navbar from './components/navbar/Navbar';
+import Spinner from './components/Spinner';
+import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
 import SignInSignUp from './pages/SignInSignUp';
@@ -13,7 +14,7 @@ import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Team from './pages/Team';
 import PlayerData from './pages/PlayerData';
-import Spinner from './components/Spinner';
+import HsLinkSubmissions from './pages/HsLinkSubmissions';
 
 function App() {
   const location = useLocation();
@@ -61,6 +62,9 @@ function App() {
           </Route>
           <Route path='/player-data' element={<AdminRoute />}>
             <Route path='/player-data' element={<PlayerData />} />
+          </Route>
+          <Route path='/hs-link-submissions' element={<AdminRoute />}>
+            <Route path='/hs-link-submissions' element={<HsLinkSubmissions />} />
           </Route>
         </Routes>
       </Box>

@@ -5,9 +5,8 @@ import { Link } from 'react-router-dom';
 import storage from 'redux-persist/lib/storage';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { removeCurrentUser } from '../../redux/user/userActions';
-
-import Spinner from '../Spinner';
+import { removeCurrentUser } from '../redux/user/userActions';
+import Spinner from './Spinner';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -194,7 +193,18 @@ function Navbar() {
         </>
         : <></>
         }
-        
+
+        {currentUser.isAdmin && currentUser.team === 'highschool'
+          ? <>
+              <ListItem component={Link} to='hs-link-submissions' style={{color: 'black'}}>
+                <ListItemIcon>
+                  <FilePresentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Player Submissions" />
+              </ListItem>
+            </>
+          : <></>
+        }
       </Drawer>
     </Box>
   );

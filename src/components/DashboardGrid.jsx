@@ -97,7 +97,7 @@ function DashboardGrid({ data }) {
       
       {/* PERCENTILE / BROAD JUMP */}
       <Grid item xs={12} md={6}>
-        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300 }}>
+        <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 300, textAlign: 'center' }}>
           <Percentiles title="Broad Jump" data={broadScores} currentPlayerData={currentPlayerData} />
         </Paper>
       </Grid>
