@@ -63,15 +63,15 @@ function Profile() {
         <Container maxWidth="lg" sx={{ my: 4 }}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 100, justifyContent: 'center', alignItems: 'flex-start' }}>
+              <Paper elevation={0} sx={{ p: 2, display: 'flex', flexDirection: 'column', height: 100, justifyContent: 'center', alignItems: 'flex-start' }}>
                 <Title>{currentUser.displayName}</Title>
 
                 <Stack direction="row" spacing={2}>
                   {currentUser.isAdmin 
-                  ? <Chip label="Admin" /> 
+                  ? <Chip label="Admin" sx={{borderRadius: '5px'}} /> 
                   : <>
-                      <Chip label={userData.position ? userData.position : 'POS'} />
-                      <Chip label={userData.grad ? userData.grad : 'GRAD'} />
+                      <Chip label={userData.position ? userData.position : 'POS'} sx={{borderRadius: '5px'}} />
+                      <Chip label={userData.grad ? userData.grad : 'GRAD'} sx={{borderRadius: '5px'}} />
                     </>
                   }
                 </Stack>
