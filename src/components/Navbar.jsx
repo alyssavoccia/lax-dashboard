@@ -173,37 +173,35 @@ function Navbar() {
           </ListItem>
         </List>
 
-        {currentUser.isAdmin ?
-        <>
-          <Divider />
-          <List>
-            <ListItem component={Link} to='/team' style={{color: 'black'}}>
-              <ListItemIcon>
-                <PeopleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Team" />
-            </ListItem>
-            <ListItem component={Link} to='/player-data' style={{color: 'black'}}>
-              <ListItemIcon>
-                <AssignmentIcon />
-              </ListItemIcon>
-              <ListItemText primary="Player Data" />
-            </ListItem>
-          </List>
-        </>
-        : <></>
+        {currentUser.isAdmin &&
+          <>
+            <Divider />
+            <List>
+              <ListItem component={Link} to='/team' style={{color: 'black'}}>
+                <ListItemIcon>
+                  <PeopleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Team" />
+              </ListItem>
+              <ListItem component={Link} to='/player-data' style={{color: 'black'}}>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary="Player Data" />
+              </ListItem>
+            </List>
+          </>
         }
 
-        {currentUser.isAdmin && currentUser.team === 'highschool'
-          ? <>
-              <ListItem component={Link} to='hs-link-submissions' style={{color: 'black'}}>
-                <ListItemIcon>
-                  <FilePresentIcon />
-                </ListItemIcon>
-                <ListItemText primary="Player Submissions" />
-              </ListItem>
-            </>
-          : <></>
+        {currentUser.isAdmin && currentUser.team === 'highschool' &&
+          <>
+            <ListItem component={Link} to='hs-link-submissions' style={{color: 'black'}}>
+              <ListItemIcon>
+                <FilePresentIcon />
+              </ListItemIcon>
+              <ListItemText primary="Player Submissions" />
+            </ListItem>
+          </>
         }
       </Drawer>
     </Box>

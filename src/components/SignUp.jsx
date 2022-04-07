@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'firebase/compat/auth';
 import { db, auth, createUserProfileDocument } from '../firebase.config';
-
-import SignUpHS from './SignUpHS';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -11,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import Typography from '@mui/material/Typography';
+import SignUpHS from './SignUpHS';
 
 function SignUp() {
   const [formData, setFormData] = useState({
