@@ -13,6 +13,7 @@ import Title from '../components/Title';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import ProfileDataCardGrid from '../components/ProfileDataCardGrid';
+import HsProfileLinkGrid from '../components/HsProfileLinkGrid';
 
 function Profile() {
   const [userData, setUserData] = useState(null);
@@ -64,7 +65,7 @@ function Profile() {
       <Toolbar />
 
       <Container maxWidth="lg" sx={{ my: 5, display: 'flex', justifyItems: 'center' }}>
-        <Grid spacing={3} sx={{width: '100%'}}>
+        <Grid sx={{width: '100%'}}>
           <Paper elevation={0} sx={{ p: 2, width: '100%', display: 'flex', flexDirection: 'column' }}>
             <Grid item xs={12}>
               <Title>{currentUser.displayName}</Title>
@@ -79,11 +80,10 @@ function Profile() {
                 }
               </Stack>
             </Grid>
+
             {/* PLAYER DATA CARDS */}
-            {currentUser.isAdmin
-              ? <></>
-              : <ProfileDataCardGrid data={userData} />
-            }
+            {!currentUser.isAdmin &&  <ProfileDataCardGrid data={userData} />}
+            {(!currentUser.isAdmin && currentUser.team === 'highschool') && <HsProfileLinkGrid />}
           </Paper>
         </Grid>
       </Container>
