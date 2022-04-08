@@ -131,7 +131,7 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
                 <YAxis type="category" dataKey="user" />
                 <Bar dataKey='tapScore' fill="#1976D2">
                   { tapScores.map((entry, index) => (
-                      <Cell key={entry.user} fill={entry.selectedUser ? '#1976D2' : '#515151'} />
+                      <Cell key={entry.user} fill={entry.selectedUser ? '#1976D2' : '#A9A9A9'} />
                     ))
                   }
                 </Bar>
