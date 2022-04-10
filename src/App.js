@@ -15,6 +15,7 @@ import Profile from './pages/Profile';
 import Team from './pages/Team';
 import PlayerData from './pages/PlayerData';
 import HsLinkSubmissions from './pages/HsLinkSubmissions';
+import SuccessfulPayment from './pages/SuccessfulPayment';
 
 function App() {
   const location = useLocation();
@@ -51,6 +52,7 @@ function App() {
         {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar />}
         <Routes>
           <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
+          <Route path='/successful-payment' element={<SuccessfulPayment />} />
           <Route path='/' element={<PrivateRoute />}>
             <Route path='/' element={<Dashboard />} />
           </Route>

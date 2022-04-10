@@ -17,12 +17,14 @@ function HsProfileLinkGrid() {
 
   useEffect(() => {
     const getUserLinks = async () => {
-      const linkDocRef = doc(db, currentUser.team, currentUser.id, 'links', currentUser.id);
-      const linkDocSnap = await getDoc(linkDocRef);
-      setUserLinkObj(linkDocSnap.data());
+      if (currentUser.isAdmin && currentUser.team === 'highschool') {
+        const linkDocRef = doc(db, currentUser.team, currentUser.id, 'links', currentUser.id);
+        const linkDocSnap = await getDoc(linkDocRef);
+        setUserLinkObj(linkDocSnap.data());
+      }
     }
     getUserLinks();
-  }, [currentUser.id, currentUser.team]);
+  }, [currentUser.id, currentUser.isAdmin, currentUser.team]);
 
   // Handle snackbar close
   const handleClose = () => {

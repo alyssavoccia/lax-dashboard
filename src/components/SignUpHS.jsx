@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import env from 'react-dotenv';
 import { loadStripe } from '@stripe/stripe-js';
-import Box from "@mui/material/Box";
+import { db } from '../firebase.config';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -17,7 +17,6 @@ function SignUpHS() {
   const [stripeError, setStripeError] = useState();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  // const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
     displayName: '',
     email: '',
@@ -28,12 +27,15 @@ function SignUpHS() {
     position: '',
     isAdmin: false,
   });
+  const currentUsers = [];
+
+  db.collection('users').onSnapshot((snapshot) => {
+    snapshot.docs.map((user) => currentUsers.push(user.data().email));
+  });
   
   const {displayName, email, password, confirmPassword, grad, position} = formData;
 
   let formRef = React.createRef();
-
-  
 
   const handleOpen = () => {
     setOpen(true);
@@ -54,9 +56,32 @@ function SignUpHS() {
   };
 
   const handleSubmit = async () => {
+    if (formRef.current.reportValidity() !== null) {
+      if (password !== confirmPassword) {
+        alert('Password DO NOT match.');
+        return;
+      }
+
+      if (password.length < 6) {
+        alert('Password must be AT LEAST 6 characters long.');
+        return;
+      }
+
+      if (currentUsers !== null && currentUsers.length > 0) {
+        if (currentUsers.indexOf(email) >= 0) {
+          alert('That email address has already been used, please use a different one.');
+          return;
+        }
+      }
+    }
+
+    localStorage.setItem("hsUser", JSON.stringify(formData));
+    
     setLoading(true);
 
     const stripe = await stripePromise;
+
+    const successfulPaymentUrl = 'http://localhost:3000/successful-payment';
 
     const { error } = await stripe.redirectToCheckout({
       lineItems: [
@@ -67,8 +92,12 @@ function SignUpHS() {
       ],
       mode: 'payment',
       cancelUrl: window.location.origin,
-      successUrl: window.location.href = 'http://localhost:3000/'
+      successUrl: successfulPaymentUrl
     });
+
+    setLoading(false);
+
+    console.log(error)
 
     if (error) {
       setLoading(false);
@@ -82,31 +111,6 @@ function SignUpHS() {
       [e.target.name]: e.target.value
     }));
   };
-
-  const handleNext = () => {
-    if (formRef.current.reportValidity() && formRef.current.reportValidity() !== null) {
-      if (password !== confirmPassword) {
-        alert('Password DO NOT match.');
-        return;
-      }
-
-      if (password.length < 6) {
-        alert('Password must be AT LEAST 6 characters long.');
-        return;
-      }
-
-      // if (currentUsers !== null && currentUsers.length > 0) {
-      //   if (currentUsers.indexOf(email) >= 0) {
-      //     alert('That email address has already been used, please use a different one.');
-      //     return;
-      //   } else {
-      //     this.setState({
-      //       activeStep: activeStep + 1
-      //     });
-      //   }
-      // }
-    }
-  }
 
   const gradYears = [
     {
@@ -236,7 +240,7 @@ function SignUpHS() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button variant='filled' onClick={handleSubmit}>Checkout & Sign Up</Button>
+          <Button variant='filled' onClick={handleSubmit} disabled={loading}>Checkout & Sign Up</Button>
         </DialogActions>
       </Dialog>
     </div>
