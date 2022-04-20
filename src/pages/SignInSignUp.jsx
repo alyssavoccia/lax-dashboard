@@ -2,6 +2,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import Title from '../components/Title';
 
 import SignIn from '../components/SignIn';
 import SignUp from '../components/SignUp';
@@ -18,6 +19,7 @@ function SignInSignUp() {
           alignItems: 'center',
         }}
       >
+        <Title>Lax Dashboard</Title>
         <Grid container spacing={5}>
           <SignIn />
           <SignUp />

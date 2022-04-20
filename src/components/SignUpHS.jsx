@@ -14,7 +14,6 @@ import MenuItem from '@mui/material/MenuItem';
 const stripePromise = loadStripe(env.PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 function SignUpHS() {
-  const [stripeError, setStripeError] = useState();
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -101,7 +100,7 @@ function SignUpHS() {
 
     if (error) {
       setLoading(false);
-      setStripeError(error);
+      console.log(error);
     }
   };
 
