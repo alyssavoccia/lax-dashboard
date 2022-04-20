@@ -45,7 +45,7 @@ function SignIn() {
 
   return (
     <Grid item xs={12} md={6}>
-      <Avatar sx={{ m: '15px auto', bgcolor: 'secondary.main' }}>
+      <Avatar sx={{ m: '15px auto', bgcolor: '#222' }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
