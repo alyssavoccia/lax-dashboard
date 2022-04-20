@@ -26,11 +26,6 @@ function HsProfileLinkGrid() {
     getUserLinks();
   }, [currentUser.id, currentUser.isAdmin, currentUser.team]);
 
-  // Handle snackbar close
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleSubmit = (e) => {
     // Get the input id to know which value is being updated in firebase
     const inputId = e.target.parentElement.parentElement.childNodes[0].childNodes[0].id;
@@ -49,9 +44,15 @@ function HsProfileLinkGrid() {
     const docRef = doc(db, currentUser.team, currentUser.id, 'links', currentUser.id);
     updateDoc(docRef, updatedValue);
 
+
     setOpen(true);
     input.value = '';
   }
+
+    // Handle snackbar close
+    const handleClose = () => {
+      setOpen(false);
+    };
   
 
   return (
@@ -73,8 +74,8 @@ function HsProfileLinkGrid() {
       </Grid>
 
       <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>Link successfully submitted!</Alert>
-      </Snackbar>
+        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>Link submitted successfully!</Alert>
+      </Snackbar>      
     </Grid>
   )
 }

@@ -10,12 +10,17 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import MenuItem from '@mui/material/MenuItem';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const stripePromise = loadStripe(env.PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 function SignUpHS() {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [snackOpen, setSnackOpen] = useState(false);
+  const [severity, setSeverity] = useState('');
+  const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     displayName: '',
     email: '',
@@ -57,18 +62,24 @@ function SignUpHS() {
   const handleSubmit = async () => {
     if (formRef.current.reportValidity() !== null) {
       if (password !== confirmPassword) {
-        alert('Password DO NOT match.');
+        setSeverity('error');
+        setMessage('Passwords DO NOT match.');
+        setSnackOpen(true);
         return;
       }
 
       if (password.length < 6) {
-        alert('Password must be AT LEAST 6 characters long.');
+        setSeverity('error');
+        setMessage('Password must be AT LEAST 6 characters long.');
+        setSnackOpen(true);
         return;
       }
 
       if (currentUsers !== null && currentUsers.length > 0) {
         if (currentUsers.indexOf(email) >= 0) {
-          alert('That email address has already been used, please use a different one.');
+          setSeverity('error');
+          setMessage('The email address has already been used, please use a different one.');
+          setSnackOpen(true);
           return;
         }
       }
@@ -144,6 +155,10 @@ function SignUpHS() {
       label: 'D'
     }
   ];
+
+  const handleSnackClose = () => {
+    setSnackOpen(false);
+  };
 
   return (
     <div>
@@ -242,6 +257,10 @@ function SignUpHS() {
           <Button variant='filled' onClick={handleSubmit} disabled={loading}>Checkout & Sign Up</Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={snackOpen} autoHideDuration={3000} onClose={handleSnackClose}>
+        <Alert onClose={handleSnackClose} severity={severity} sx={{ width: '100%' }}>{message}</Alert>
+      </Snackbar>      
     </div>
   )
 }
