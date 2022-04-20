@@ -69,12 +69,6 @@ function HsLinkSubmissions() {
     })
   }
 
-  console.log(usersData);
-
-  // if (loading) {
-  //   return <Spinner />
-  // }
-
   return (
     <Box
       component="main"

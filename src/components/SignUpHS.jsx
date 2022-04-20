@@ -107,11 +107,11 @@ function SignUpHS() {
 
     setLoading(false);
 
-    console.log(error)
-
     if (error) {
+      setSeverity('error');
+      setMessage('Error signing up. Please try again.');
+      setSnackOpen(true);
       setLoading(false);
-      console.log(error);
     }
   };
 

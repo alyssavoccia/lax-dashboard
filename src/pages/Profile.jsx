@@ -12,12 +12,15 @@ import Paper from '@mui/material/Paper';
 import Title from '../components/Title';
 import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import ProfileDataCardGrid from '../components/ProfileDataCardGrid';
 import HsProfileLinkGrid from '../components/HsProfileLinkGrid';
 
 function Profile() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
   const currentUser = useSelector((state) => state.user.user);
 
   useEffect(() => {
@@ -32,7 +35,7 @@ function Profile() {
           setUserData(userDataDoc.data());
           setLoading(false);
         } catch (error) {
-          console.log(error);
+          setOpen(true);
         }
       } else {
         setLoading(false);
@@ -41,6 +44,10 @@ function Profile() {
 
     currentUser && fetchUserData();
   }, [currentUser]);
+
+  const handleClose = () => {
+    setOpen(false);
+  }
   
   if (loading) {
     return <Spinner />
@@ -87,6 +94,10 @@ function Profile() {
           </Paper>
         </Grid>
       </Container>
+
+      <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity='error' sx={{ width: '100%' }}>Error fetching data. Please try again.</Alert>
+      </Snackbar>   
     </Box>
   )
 }
