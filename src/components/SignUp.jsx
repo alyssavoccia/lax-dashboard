@@ -9,9 +9,14 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import SignUpHS from './SignUpHS';
 
 function SignUp() {
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState('');
+  const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     displayName: '',
     email: '',
@@ -36,7 +41,16 @@ function SignUp() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      setSeverity('error');
+      setMessage('Passwords DO NOT match.');
+      setOpen(true);
+    }
+
+    if (password.length < 6) {
+      setSeverity('error');
+      setMessage('Password must be AT LEAST 6 characters long.');
+      setOpen(true);
+      return;
     }
 
     // Check if user's team exists
@@ -44,7 +58,9 @@ function SignUp() {
     const teamSnapshot = await teamRef.get();
 
     if (teamSnapshot.size === 0) {
-      alert('Team does not exist');
+      setSeverity('error');
+      setMessage('Team DOES NOT exist.');
+      setOpen(true);
       return;
     }
 
@@ -56,8 +72,14 @@ function SignUp() {
 
       navigate('/');
     } catch (error) {
-      console.log('Error: ', error);
+      setSeverity('error');
+      setMessage('Error signing up. Please try again.');
+      setOpen(true);
     }
+  }
+
+  const handleClose = () => {
+    setOpen(false);
   }
 
   return (
@@ -149,6 +171,10 @@ function SignUp() {
           <SignUpHS sx={{flex: '50%'}} />
         </Box>
       </Box>
+
+      <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>{message}</Alert>
+      </Snackbar>   
     </Grid>
   )
 }

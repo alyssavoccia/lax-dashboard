@@ -9,8 +9,11 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 function SignIn() {
+  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -39,8 +42,12 @@ function SignIn() {
         navigate('/');
       }
     } catch (error) {
-      console.log('Error: ', error);
+      setOpen(true);
     }
+  }
+
+  const handleClose = () => {
+    setOpen(false);
   }
 
   return (
@@ -91,6 +98,10 @@ function SignIn() {
           </Grid>
         </Grid>
       </Box>
+
+      <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity='error' sx={{ width: '100%' }}>Invalid login credentials. Please try again.</Alert>
+      </Snackbar>   
     </Grid>
   )
 }
