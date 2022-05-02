@@ -44,13 +44,6 @@ function App() {
   }, [setUser]);
 
   const defaultTheme = createTheme();
-  // const maniaxTheme = createTheme({
-  //   palette: {
-  //     primary: {
-  //       main: '#e8196a'
-  //     }
-  //   }
-  // });
 
   if (loading) {
     return <Spinner />

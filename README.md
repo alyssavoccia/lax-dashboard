@@ -1,70 +1,24 @@
-# Getting Started with Create React App
+# Lax Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Lax Dashboard is a project that I am currently still developing. It is a dashboard project that I created using React, Material UI, and Firebase. The app requires authentication to use and it allows teams to be able to track certain metrics among their team. Admins have access to views everyones dashboard, a team page to quickly see player info, and a table that allows them to update data to Firebase. Players are able to view their dashboard and a profile page that shows their individual scores in each category.
 
-## Available Scripts
+**College/Club Teams:** Admins will be manually added and then given a team code that will allow their players to sign up through the sign up feature.
 
-In the project directory, you can run:
+High school sign up is a new feature that was implemented. This allows high school students to sign up for an account. Upon sign up, high school users will be able to go to their profile page where there are inputs for links to videos of their various tests. These inputs allow players to submit a new link every 90 days. The input will update upon submission and will display a countdown showing how much time is remaining. The countdown is in days until there is under a day left, in which the format changes to hours and minutes remaining. Upon validation, a high school admin will input their scores. This allows high school students to see how they match up with kids across the country.
 
-### `npm start`
+## Testing
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You can view a demo of the project [here](http://laxdashboard.rf.gd/)!
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+###### College/Club Team Views
+> **Admin:** *username:* heatadmin@gmail.com *password:* test123  
+> **Player:** *username:* heatadmin@gmail.com *password:* test123
 
-### `npm test`
+###### High School Views
+> **Admin:** *username:* hsadmin@gmail.com *password:* test123  
+> **Player:** *username:* hstest@gmail.com *password:* test123  
+> Feel free to try out the sign up feature as well!       
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Still currently under development
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is currently still being developed, with new features and updates being added.
