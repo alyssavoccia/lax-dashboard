@@ -14,7 +14,14 @@ function Team() {
   const [loading, setLoading] = useState(true);
   const [playerData, setPlayerData] = useState([]);
   const currentUser = useSelector((state) => state.user.user);
-  const capitalTeam = currentUser.team[0].toUpperCase() + currentUser.team.slice(1);
+  let capitalTeam;
+
+  if (currentUser.team.includes('club')) {
+    const teamName = currentUser.team.replace('club', '');
+    capitalTeam = teamName[0].toUpperCase() + teamName.slice(1);
+  } else {
+    capitalTeam = currentUser.team[0].toUpperCase() + currentUser.team.slice(1);
+  }
 
   useEffect(() => {
     const users = [];
