@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { auth, createUserProfileDocument } from './firebase.config';
-import { useDispatch } from 'react-redux';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, createUserProfileDocument, db } from './firebase.config';
+import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentUser } from './redux/user/userActions';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { setCurrentTeam } from './redux/team/teamActions';
+import { setCurrentData } from './redux/data/dataActions';
 import Spinner from './components/Spinner';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
@@ -21,11 +24,47 @@ import SuccessfulPayment from './pages/SuccessfulPayment';
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
+  const currentUser = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   const setUser = bindActionCreators(setCurrentUser, dispatch);
+  const setTeam = bindActionCreators(setCurrentTeam, dispatch);
+  const setData = bindActionCreators(setCurrentData, dispatch);
 
   useEffect(() => {
+    const users = [];
+    const usersData = [];
+
+    const getUserData = async () => {
+      for (const person of users) {
+        const docRef = doc(db, currentUser.team, person.id, 'data', person.id);
+        const docSnap = await getDoc(docRef);
+        const userDataObj = docSnap.data();
+        if (userDataObj) {
+          usersData.push({...person, ...userDataObj});
+        }
+
+        if (usersData.length === users.length) {
+          setData(usersData);
+          setLoading(false);
+        }
+      };
+    }
+
+    const getAllTeamUsers = async () => {
+      const snapshot = await db.collection(currentUser.team).get();
+      snapshot.docs.forEach((doc, index, array) => {
+        if (!doc.data().isAdmin) {
+          users.push(doc.data());
+        }
+
+        if (index === array.length - 1) {
+          setTeam(users);
+          getUserData();
+        }
+      });
+    }
+    
     auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -33,15 +72,16 @@ function App() {
         if (userRef) {
           userRef.onSnapshot(snapShot => {
             setUser(snapShot.data());
-          })
+            getAllTeamUsers();
+          });
         } 
-        setLoading(false)
       } else {
         setUser(userAuth);
         setLoading(false);
       }
     })
-  }, [setUser]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const defaultTheme = createTheme();
 
