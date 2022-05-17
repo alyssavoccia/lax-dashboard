@@ -72,8 +72,11 @@ function App() {
         if (userRef) {
           userRef.onSnapshot(snapShot => {
             setUser(snapShot.data());
-            getAllTeamUsers();
           });
+
+          if (currentUser) {
+            getAllTeamUsers();
+          }
         } 
       } else {
         setUser(userAuth);

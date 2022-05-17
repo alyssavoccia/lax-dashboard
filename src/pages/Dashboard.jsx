@@ -36,21 +36,18 @@ function Dashboard() {
       <Toolbar />
 
       {/* If current user is admin, show player search */}
-      {currentUser && currentUser.isAdmin ? (
+      {currentUser && currentUser.isAdmin && (
         <Container maxWidth="lg" sx={{ mt: 4, mb: 2 }}>
           <DashboardPlayerSearch onChange={handlePlayerChange} />
         </Container>
-      ) : (
-        <></>
       )}
 
       {/* DASHBOARD GRID ITEMS */}
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         {!currentUser.isAdmin ? (
           <DashboardGrid data={currentUser} />
-        ) : selectedPlayer === undefined ||
-          selectedPlayer === "" ||
-          selectedPlayer === null ? (
+        ) : selectedPlayer === undefined || selectedPlayer === "" || selectedPlayer === null 
+          ? (
           <Title>Please choose a player to view their dashboard.</Title>
         ) : (
           <DashboardGrid data={selectedPlayer} />

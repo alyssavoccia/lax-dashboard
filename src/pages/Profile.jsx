@@ -1,7 +1,4 @@
 import { useEffect, useState } from 'react';
-import { getAuth } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase.config';
 import { useSelector } from 'react-redux';
 import Spinner from '../components/Spinner';
 import Box from '@mui/material/Box';
@@ -22,28 +19,21 @@ function Profile() {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const currentUser = useSelector((state) => state.user.user);
+  const currentData = useSelector((state) => state.data.data);
 
   useEffect(() => {
-    const auth = getAuth();
-
     const fetchUserData = async () => {
       if (!currentUser.isAdmin) {
-        try {
-          const userDataRef = doc(db, currentUser.team, auth.currentUser.uid, 'data', auth.currentUser.uid);
-          const userDataDoc = await getDoc(userDataRef);
-
-          setUserData(userDataDoc.data());
-          setLoading(false);
-        } catch (error) {
-          setOpen(true);
-        }
+       const result = currentData.filter(person => person.displayName === currentUser.displayName);
+       setUserData(result[0]);
+        setLoading(false);
       } else {
         setLoading(false);
       }
     }
 
     currentUser && fetchUserData();
-  }, [currentUser]);
+  }, [currentData, currentUser]);
 
   const handleClose = () => {
     setOpen(false);
@@ -70,7 +60,6 @@ function Profile() {
     }}
     >
       <Toolbar />
-
       <Container maxWidth="lg" sx={{ my: 5, display: 'flex', justifyItems: 'center' }}>
         <Grid sx={{width: '100%'}}>
           <Paper elevation={0} sx={{ p: 2, width: '100%', display: 'flex', flexDirection: 'column' }}>
