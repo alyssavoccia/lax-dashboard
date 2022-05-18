@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase.config';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Title from '../components/Title';
@@ -17,49 +15,26 @@ function DashboardGrid({ data }) {
   const [threeScores, setThreeScores] = useState([]);
   const [broadScores, setBroadScores] = useState([]);
   const [agilityScores, setAgilityScores] = useState([]);
-  const currentUser = useSelector((state) => state.user.user);
+  const currentTeam = useSelector((state) => state.team.team);
+  const currentData = useSelector((state) => state.data.data);
   
 
   useEffect(() => {
-    const users = [];
+    currentData.forEach(async (person, index) => {
+        person.wb !== null && setWbScores(prevScores => [...prevScores, person.wb]);
+        person.three !== null && setThreeScores(prevScores => [...prevScores, person.three]);
+        person.broad !== null && setBroadScores(prevScores => [...prevScores, person.broad]);
+        person.agility !== null && setAgilityScores(prevScores => [...prevScores, person.agility]);
 
-    const getUserData = async () => {
-      users.forEach(async (person, index) => {
-        const docRef = doc(db, currentUser.team, person.id, 'data', person.id);
-        const docSnap = await getDoc(docRef);
-        const userDataObj = docSnap.data();
-        if (userDataObj) {
-          userDataObj.wb !== null && setWbScores(prevScores => [...prevScores, userDataObj.wb]);
-          userDataObj.three !== null && setThreeScores(prevScores => [...prevScores, userDataObj.three]);
-          userDataObj.broad !== null && setBroadScores(prevScores => [...prevScores, userDataObj.broad]);
-          userDataObj.agility !== null && setAgilityScores(prevScores => [...prevScores, userDataObj.agility]);
-        }
+      if (data === person.displayName || data.displayName === person.displayName) {
+        setCurrentPlayerData({...person});
+      }
 
-        if (data === person.displayName || data.displayName === person.displayName) {
-          setCurrentPlayerData({...userDataObj});
-        }
-
-        if (index === users.length - 1) {
-          setLoading(false);
-        }
-      });
-    }
-
-    const getAllTeamUsers = async () => {
-      const snapshot = await db.collection(currentUser.team).get();
-      snapshot.docs.forEach((doc, index, array) => {
-        if (!doc.data().isAdmin) {
-          users.push(doc.data());
-        }
-
-        if (index === array.length - 1) {
-          getUserData();
-        }
-      });
-    }
-
-    getAllTeamUsers();
-  }, [currentUser.team, data]);
+      if (index === currentTeam.length - 1) {
+        setLoading(false);
+      }
+    });
+  }, [currentData, currentTeam.length, data]);
 
   if (loading) {
     return <Title>Loading Data...</Title>
