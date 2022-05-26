@@ -27,6 +27,7 @@ function HsProfileLinkGrid() {
     };
 
     // Update on firebase
+    console.log(currentUser)
     const docRef = doc(db, currentUser.team, currentUser.id, 'links', currentUser.id);
     updateDoc(docRef, updatedValue);
 

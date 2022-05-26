@@ -1,9 +1,11 @@
 import { auth, createUserProfileDocument } from '../firebase.config';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 function SuccessfulPayment() {
+  const navigate = useNavigate();
 
   const getHsUser = async () => {
     const { displayName, email, password, grad, position, team} = JSON.parse(localStorage.getItem("hsUser"));
@@ -13,6 +15,8 @@ function SuccessfulPayment() {
     await createUserProfileDocument(user, displayName, team, grad, position);
 
     localStorage.removeItem('hsUser');
+
+    navigate('/');
   }
   
   getHsUser();

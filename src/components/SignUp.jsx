@@ -15,7 +15,7 @@ import SignUpHS from './SignUpHS';
 
 function SignUp() {
   const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState('');
+  const [severity, setSeverity] = useState('error');
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     displayName: '',

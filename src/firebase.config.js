@@ -39,6 +39,7 @@ export const createUserProfileDocument = async (userAuth, displayName, team, gra
         await userRef.set({
           displayName,
           email,
+          id: uid,
           isAdmin: false,
           team
         });

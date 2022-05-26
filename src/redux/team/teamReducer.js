@@ -1,7 +1,3 @@
-// const initial_state = {
-//   team: null
-// };
-
 const teamReducer = (state = null, action) => {
   switch (action.type) {
     case 'set_current_team':

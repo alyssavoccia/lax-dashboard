@@ -5,10 +5,11 @@ import { auth, createUserProfileDocument, db } from './firebase.config';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentUser } from './redux/user/userActions';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import { setCurrentTeam } from './redux/team/teamActions';
 import { setCurrentData } from './redux/data/dataActions';
+import { setCurrentLinks } from './redux/hs-links/hsLinksActions';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import Spinner from './components/Spinner';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
@@ -30,10 +31,30 @@ function App() {
   const setUser = bindActionCreators(setCurrentUser, dispatch);
   const setTeam = bindActionCreators(setCurrentTeam, dispatch);
   const setData = bindActionCreators(setCurrentData, dispatch);
+  const setLinks = bindActionCreators(setCurrentLinks, dispatch);
 
   useEffect(() => {
     const users = [];
     const usersData = [];
+
+    const getHsLinks = async () => {
+      const hsUsers = [];
+      const hsLinks = [];
+      for (const person of users) {
+        hsUsers.push(person.displayName)
+        const docRef = doc(db, currentUser.team, person.id, 'links', person.id);
+        const docSnap = await getDoc(docRef);
+        const userDataObj = docSnap.data();
+        if (userDataObj.agilityLink || userDataObj.broadLink || userDataObj.threeLink || userDataObj.wbLink) {
+          hsLinks.push({...person, ...userDataObj});
+        }
+
+        if (hsUsers.length === users.length) {
+          setLinks(hsLinks);
+          setLoading(false);
+        }
+      }
+    }
 
     const getUserData = async () => {
       for (const person of users) {
@@ -46,7 +67,12 @@ function App() {
 
         if (usersData.length === users.length) {
           setData(usersData);
-          setLoading(false);
+
+          if (currentUser.isAdmin && currentUser.team === 'highschool') {
+            getHsLinks();
+          } else {
+            setLoading(false);
+          }
         }
       };
     }

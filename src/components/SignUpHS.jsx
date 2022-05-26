@@ -19,7 +19,7 @@ function SignUpHS() {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
-  const [severity, setSeverity] = useState('');
+  const [severity, setSeverity] = useState('error');
   const [message, setMessage] = useState('');
   const [formData, setFormData] = useState({
     displayName: '',
