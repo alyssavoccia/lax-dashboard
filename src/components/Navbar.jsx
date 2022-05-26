@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getAuth } from 'firebase/auth';
 import { Link } from 'react-router-dom';
@@ -99,12 +99,20 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function Navbar() {
   const theme = useTheme();
-  const currentUser = useSelector((state) => state.user.user);
   const auth = getAuth();
+  const currentUser = useSelector((state) => state.user.user);
   const [open, setOpen] = useState(false);
+  const [loggedOut, setLoggedOut] = useState(false);
   const dispatch = useDispatch();
-
   const removeUser = bindActionCreators(removeCurrentUser, dispatch);
+
+  useEffect(() => {
+    if (loggedOut) {
+      storage.removeItem('persist:root');
+      removeUser();
+      auth.signOut();
+    }
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -161,11 +169,7 @@ function Navbar() {
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-          <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => {
-            storage.removeItem('persist:root');
-            removeUser();
-            auth.signOut()
-          }}>
+          <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => setLoggedOut(true)}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
