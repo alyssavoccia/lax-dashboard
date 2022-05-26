@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import storage from 'redux-persist/lib/storage';
 import { useDispatch } from 'react-redux';
@@ -29,6 +29,9 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import PeopleIcon from '@mui/icons-material/People'
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
+import { removeCurrentTeam } from '../redux/team/teamActions';
+import { removeCurrentData } from '../redux/data/dataActions';
+import { removeCurrentLinks } from '../redux/hs-links/hsLinksActions';
 
 const drawerWidth = 240;
 
@@ -105,12 +108,13 @@ function Navbar() {
   const [loggedOut, setLoggedOut] = useState(false);
   const dispatch = useDispatch();
   const removeUser = bindActionCreators(removeCurrentUser, dispatch);
+  const removeTeam = bindActionCreators(removeCurrentTeam, dispatch);
+  const removeData = bindActionCreators(removeCurrentData, dispatch);
+  const removeHsLinks = bindActionCreators(removeCurrentLinks, dispatch);
 
   useEffect(() => {
     if (loggedOut) {
-      storage.removeItem('persist:root');
-      removeUser();
-      auth.signOut();
+      signOut(auth);
     }
   }, [auth, loggedOut, removeUser]);
 
@@ -169,7 +173,14 @@ function Navbar() {
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItem>
-          <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => setLoggedOut(true)}>
+          <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => {
+            storage.removeItem('persist:root');
+            removeUser();
+            removeTeam();
+            removeData();
+            removeHsLinks();
+            setLoggedOut(true)
+          }}>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>

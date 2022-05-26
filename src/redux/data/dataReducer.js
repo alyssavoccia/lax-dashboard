@@ -8,6 +8,10 @@ const dataReducer = (state = null, action) => {
       return {
         data: action.payload
       };
+    case 'remove_current_data':
+      return {
+        data: action.payload
+      }
     default:
         return state;
   }

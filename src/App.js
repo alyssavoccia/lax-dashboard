@@ -25,7 +25,8 @@ import SuccessfulPayment from './pages/SuccessfulPayment';
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
-  const currentUser = useSelector((state) => state.user.user);
+  // const currentUser = useSelector((state) => state.user.user);
+  // let currentUser;
   const dispatch = useDispatch();
 
   const setUser = bindActionCreators(setCurrentUser, dispatch);
@@ -37,7 +38,7 @@ function App() {
     const users = [];
     const usersData = [];
 
-    const getHsLinks = async () => {
+    const getHsLinks = async (currentUser) => {
       const hsUsers = [];
       const hsLinks = [];
       for (const person of users) {
@@ -50,13 +51,15 @@ function App() {
         }
 
         if (hsUsers.length === users.length) {
+          console.log('here')
           setLinks(hsLinks);
           setLoading(false);
         }
       }
     }
 
-    const getUserData = async () => {
+    const getUserData = async (currentUser) => {
+      console.log(currentUser)
       for (const person of users) {
         const docRef = doc(db, currentUser.team, person.id, 'data', person.id);
         const docSnap = await getDoc(docRef);
@@ -69,7 +72,7 @@ function App() {
           setData(usersData);
 
           if (currentUser.isAdmin && currentUser.team === 'highschool') {
-            getHsLinks();
+            getHsLinks(currentUser);
           } else {
             setLoading(false);
           }
@@ -77,7 +80,7 @@ function App() {
       };
     }
 
-    const getAllTeamUsers = async () => {
+    const getAllTeamUsers = async (currentUser) => {
       const snapshot = await db.collection(currentUser.team).get();
       snapshot.docs.forEach((doc, index, array) => {
         if (!doc.data().isAdmin) {
@@ -86,26 +89,28 @@ function App() {
 
         if (index === array.length - 1) {
           setTeam(users);
-          getUserData();
+          getUserData(currentUser);
         }
       });
     }
     
     auth.onAuthStateChanged(async userAuth => {
+      console.log(userAuth)
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         if (userRef) {
           userRef.onSnapshot(snapShot => {
             setUser(snapShot.data());
+            getAllTeamUsers(snapShot.data());
           });
 
-          if (currentUser) {
-            getAllTeamUsers();
-          }
+          // if (currentUser) {
+          //   getAllTeamUsers();
+          // }
         } 
       } else {
-        setUser(userAuth);
+        setUser(null);
         setLoading(false);
       }
     })

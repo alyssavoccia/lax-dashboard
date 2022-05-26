@@ -11,7 +11,7 @@ export const removeCurrentTeam = () => {
   return (dispatch) => {
     dispatch({
       type: 'remove_current_team',
-      payload: null
+      payload: []
     })
   }
 };

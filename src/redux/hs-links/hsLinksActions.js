@@ -11,7 +11,7 @@ export const removeCurrentLinks = () => {
   return (dispatch) => {
     dispatch({
       type: 'remove_current_links',
-      payload: null
+      payload: []
     })
   }
 };
