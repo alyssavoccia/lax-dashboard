@@ -6,7 +6,6 @@ import storage from 'redux-persist/lib/storage';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { removeCurrentUser } from '../redux/user/userActions';
-import Spinner from './Spinner';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -103,7 +102,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 function Navbar() {
   const theme = useTheme();
   const auth = getAuth();
-  const currentUser = useSelector((state) => state.user.user);
+  const currentUser = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const [loggedOut, setLoggedOut] = useState(false);
   const dispatch = useDispatch();
@@ -126,9 +125,9 @@ function Navbar() {
     setOpen(false);
   };
 
-  if (!currentUser) {
-    return <Spinner />
-  }
+  // if (!currentUser) {
+  //   return <Spinner />
+  // }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -188,7 +187,7 @@ function Navbar() {
           </ListItem>
         </List>
 
-        {currentUser.isAdmin &&
+        {currentUser.user.isAdmin &&
           <>
             <Divider />
             <List>
@@ -208,7 +207,7 @@ function Navbar() {
           </>
         }
 
-        {currentUser.isAdmin && currentUser.team === 'highschool' &&
+        {currentUser.user.isAdmin && currentUser.user.team === 'highschool' &&
           <>
             <ListItem component={Link} to='hs-link-submissions' style={{color: 'black'}}>
               <ListItemIcon>

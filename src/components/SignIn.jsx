@@ -36,11 +36,13 @@ function SignIn() {
     try {
       const auth = getAuth();
 
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-
-      if (userCredential.user) {
-        navigate('/');
-      }
+      await signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        if (user) {
+          navigate('/');
+        }
+      });
     } catch (error) {
       setOpen(true);
     }

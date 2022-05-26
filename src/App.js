@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, createUserProfileDocument, db } from './firebase.config';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentUser } from './redux/user/userActions';
 import { setCurrentTeam } from './redux/team/teamActions';
@@ -21,13 +21,13 @@ import Team from './pages/Team';
 import PlayerData from './pages/PlayerData';
 import HsLinkSubmissions from './pages/HsLinkSubmissions';
 import SuccessfulPayment from './pages/SuccessfulPayment';
+import { AuthErrorCodes } from 'firebase/auth';
 
 function App() {
-  const location = useLocation();
   const [loading, setLoading] = useState(true);
-  // const currentUser = useSelector((state) => state.user.user);
-  // let currentUser;
+  const location = useLocation();
   const dispatch = useDispatch();
+  const defaultTheme = createTheme();
 
   const setUser = bindActionCreators(setCurrentUser, dispatch);
   const setTeam = bindActionCreators(setCurrentTeam, dispatch);
@@ -94,10 +94,11 @@ function App() {
       });
     }
     
-    auth.onAuthStateChanged(async userAuth => {
-      console.log(userAuth)
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+    auth.onAuthStateChanged(async (auth, user) => {
+      console.log(auth)
+      console.log(user)
+      if (auth) {
+        const userRef = await createUserProfileDocument(auth);
 
         if (userRef) {
           userRef.onSnapshot(snapShot => {
@@ -116,8 +117,6 @@ function App() {
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const defaultTheme = createTheme();
 
   if (loading) {
     return <Spinner />
