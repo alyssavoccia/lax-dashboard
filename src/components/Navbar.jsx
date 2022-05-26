@@ -112,7 +112,7 @@ function Navbar() {
       removeUser();
       auth.signOut();
     }
-  }, []);
+  }, [auth, loggedOut, removeUser]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
