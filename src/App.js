@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, createUserProfileDocument, db } from './firebase.config';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentUser } from './redux/user/userActions';
 import { setCurrentTeam } from './redux/team/teamActions';
@@ -21,13 +22,14 @@ import Team from './pages/Team';
 import PlayerData from './pages/PlayerData';
 import HsLinkSubmissions from './pages/HsLinkSubmissions';
 import SuccessfulPayment from './pages/SuccessfulPayment';
-import { AuthErrorCodes } from 'firebase/auth';
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [usersData, setUsersData] = useState([]);
   const location = useLocation();
   const dispatch = useDispatch();
   const defaultTheme = createTheme();
+  const currentTeam = useSelector((state) => state.team.team);
 
   const setUser = bindActionCreators(setCurrentUser, dispatch);
   const setTeam = bindActionCreators(setCurrentTeam, dispatch);
@@ -36,7 +38,6 @@ function App() {
 
   useEffect(() => {
     const users = [];
-    const usersData = [];
 
     const getHsLinks = async (currentUser) => {
       const hsUsers = [];
@@ -51,7 +52,6 @@ function App() {
         }
 
         if (hsUsers.length === users.length) {
-          console.log('here')
           setLinks(hsLinks);
           setLoading(false);
         }
@@ -59,13 +59,12 @@ function App() {
     }
 
     const getUserData = async (currentUser) => {
-      console.log(currentUser)
       for (const person of users) {
         const docRef = doc(db, currentUser.team, person.id, 'data', person.id);
         const docSnap = await getDoc(docRef);
         const userDataObj = docSnap.data();
         if (userDataObj) {
-          usersData.push({...person, ...userDataObj});
+         setUsersData(prevState => [...prevState, {...person, ...userDataObj}]);
         }
 
         if (usersData.length === users.length) {
@@ -94,21 +93,16 @@ function App() {
       });
     }
     
-    auth.onAuthStateChanged(async (auth, user) => {
-      console.log(auth)
+    onAuthStateChanged(auth, async (user) => {
       console.log(user)
-      if (auth) {
-        const userRef = await createUserProfileDocument(auth);
+      if (user) {
+        const userRef = await createUserProfileDocument(user);
 
         if (userRef) {
           userRef.onSnapshot(snapShot => {
-            setUser(snapShot.data());
+            setUser(snapShot.data())
             getAllTeamUsers(snapShot.data());
           });
-
-          // if (currentUser) {
-          //   getAllTeamUsers();
-          // }
         } 
       } else {
         setUser(null);

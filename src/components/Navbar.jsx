@@ -125,9 +125,9 @@ function Navbar() {
     setOpen(false);
   };
 
-  // if (!currentUser) {
-  //   return <Spinner />
-  // }
+  if (!currentUser.user) {
+    return <h1>Loading...</h1>
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -173,11 +173,11 @@ function Navbar() {
             <ListItemText primary="Profile" />
           </ListItem>
           <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => {
-            storage.removeItem('persist:root');
             removeUser();
             removeTeam();
             removeData();
             removeHsLinks();
+            storage.removeItem('persist:root');
             setLoggedOut(true)
           }}>
             <ListItemIcon>
