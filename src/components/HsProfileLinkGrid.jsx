@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { db } from '../firebase.config';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import Grid from '@mui/material/Grid';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -9,8 +9,22 @@ import Title from './Title';
 import HsProfileLink from './HsProfileLink';
 
 function HsProfileLinkGrid() {
+  const [userLinkObj, setUserLinkObj] = useState({});
   const [open, setOpen] = useState(false);
   const currentUser = useSelector((state) => state.user.user);
+
+  const {wbLink, threeLink, broadLink, agilityLink} = userLinkObj;
+
+  useEffect(() => {
+    const getUserLinks = async () => {
+      if (currentUser.isAdmin && currentUser.team === 'highschool') {
+        const linkDocRef = doc(db, currentUser.team, currentUser.id, 'links', currentUser.id);
+        const linkDocSnap = await getDoc(linkDocRef);
+        setUserLinkObj(linkDocSnap.data());
+      }
+    }
+    getUserLinks();
+  }, [currentUser.id, currentUser.isAdmin, currentUser.team]);
 
   const handleSubmit = (e) => {
     // Get the input id to know which value is being updated in firebase
@@ -27,7 +41,6 @@ function HsProfileLinkGrid() {
     };
 
     // Update on firebase
-    console.log(currentUser)
     const docRef = doc(db, currentUser.team, currentUser.id, 'links', currentUser.id);
     updateDoc(docRef, updatedValue);
 
@@ -48,16 +61,16 @@ function HsProfileLinkGrid() {
         <Title>Upload Links</Title>
       </Grid>
       <Grid item xs={12} sx={{textAlign: 'left', mt: 2}}>
-        <HsProfileLink dataTitle="Wall Ball Link" handleSubmit={handleSubmit} dataId="wbLink" />
+        <HsProfileLink dataTitle="Wall Ball Link" data={wbLink} handleSubmit={handleSubmit} dataId="wbLink" />
       </Grid>
       <Grid item xs={12} sx={{textAlign: 'left', mt: 2}}>
-        <HsProfileLink dataTitle="300's Link" handleSubmit={handleSubmit} dataId="threeLink" />
+        <HsProfileLink dataTitle="300's Link" data={threeLink} handleSubmit={handleSubmit} dataId="threeLink" />
       </Grid>
       <Grid item xs={12} sx={{textAlign: 'left', mt: 2}}>
-        <HsProfileLink dataTitle="Broad Jump Link" handleSubmit={handleSubmit} dataId="broadLink" />
+        <HsProfileLink dataTitle="Broad Jump Link" data={broadLink} handleSubmit={handleSubmit} dataId="broadLink" />
       </Grid>
       <Grid item xs={12} sx={{textAlign: 'left', mt: 2}}>
-        <HsProfileLink dataTitle="5-10-5 Link" handleSubmit={handleSubmit} dataId="agilityLink" />
+        <HsProfileLink dataTitle="5-10-5 Link" data={agilityLink} handleSubmit={handleSubmit} dataId="agilityLink" />
       </Grid>
 
       <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={handleClose}>

@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getAuth, signOut } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import storage from 'redux-persist/lib/storage';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { removeCurrentUser } from '../redux/user/userActions';
+import Spinner from './Spinner';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -28,9 +29,6 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import PeopleIcon from '@mui/icons-material/People'
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
-import { removeCurrentTeam } from '../redux/team/teamActions';
-import { removeCurrentData } from '../redux/data/dataActions';
-import { removeCurrentLinks } from '../redux/hs-links/hsLinksActions';
 
 const drawerWidth = 240;
 
@@ -101,21 +99,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function Navbar() {
   const theme = useTheme();
+  const currentUser = useSelector((state) => state.user.user);
   const auth = getAuth();
-  const currentUser = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
-  const [loggedOut, setLoggedOut] = useState(false);
   const dispatch = useDispatch();
-  const removeUser = bindActionCreators(removeCurrentUser, dispatch);
-  const removeTeam = bindActionCreators(removeCurrentTeam, dispatch);
-  const removeData = bindActionCreators(removeCurrentData, dispatch);
-  const removeHsLinks = bindActionCreators(removeCurrentLinks, dispatch);
 
-  useEffect(() => {
-    if (loggedOut) {
-      signOut(auth);
-    }
-  }, [auth, loggedOut, removeUser]);
+  const removeUser = bindActionCreators(removeCurrentUser, dispatch);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -125,8 +114,8 @@ function Navbar() {
     setOpen(false);
   };
 
-  if (!currentUser.user) {
-    return <h1>Loading...</h1>
+  if (!currentUser) {
+    return <Spinner />
   }
 
   return (
@@ -173,12 +162,9 @@ function Navbar() {
             <ListItemText primary="Profile" />
           </ListItem>
           <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => {
-            removeUser();
-            removeTeam();
-            removeData();
-            removeHsLinks();
             storage.removeItem('persist:root');
-            setLoggedOut(true)
+            removeUser();
+            auth.signOut()
           }}>
             <ListItemIcon>
               <LogoutIcon />
@@ -187,7 +173,7 @@ function Navbar() {
           </ListItem>
         </List>
 
-        {currentUser.user.isAdmin &&
+        {currentUser.isAdmin &&
           <>
             <Divider />
             <List>
@@ -207,7 +193,7 @@ function Navbar() {
           </>
         }
 
-        {currentUser.user.isAdmin && currentUser.user.team === 'highschool' &&
+        {currentUser.isAdmin && currentUser.team === 'highschool' &&
           <>
             <ListItem component={Link} to='hs-link-submissions' style={{color: 'black'}}>
               <ListItemIcon>
