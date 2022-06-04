@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { auth, createUserProfileDocument } from './firebase.config';
+import { db, auth, createUserProfileDocument } from './firebase.config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentUser } from './redux/user/userActions';
+import { setCurrentTeam } from './redux/team/teamActions';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Spinner from './components/Spinner';
@@ -25,12 +26,28 @@ function App() {
   const dispatch = useDispatch();
 
   const setUser = bindActionCreators(setCurrentUser, dispatch);
+  const setTeam = bindActionCreators(setCurrentTeam, dispatch);
 
   useEffect(() => {
 
   }, []);
 
   useEffect(() => {
+    const users = [];
+
+    const getAllTeamMembers = async (currentUser) => {
+      const snapshot = await db.collection(currentUser.team).get();
+      snapshot.docs.forEach((doc, index, array) => {
+        if (!doc.data().isAdmin) {
+          users.push(doc.data());
+        }
+
+        if (index === array.length - 1) {
+          setTeam(users);
+        }
+      });
+    }
+
     onAuthStateChanged(auth, async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -38,15 +55,17 @@ function App() {
         if (userRef) {
           userRef.onSnapshot(snapShot => {
             setUser(snapShot.data());
+            getAllTeamMembers(snapShot.data());
           });
         } 
         setLoading(false);
       } else {
         setUser(userAuth);
+        setTeam(null);
         setLoading(false);
       }
     })
-  }, [setUser]);
+  }, [setTeam, setUser]);
 
   const defaultTheme = createTheme();
 

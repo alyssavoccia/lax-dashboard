@@ -6,12 +6,3 @@ export const setCurrentUser = (user) => {
     });
   }
 };
-
-export const removeCurrentUser = () => {
-  return (dispatch) => {
-    dispatch({
-      type: 'remove_current_user',
-      payload: {}
-    });
-  }
-}

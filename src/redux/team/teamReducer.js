@@ -4,10 +4,6 @@ const teamReducer = (state = null, action) => {
       return {
         team: action.payload
       };
-    case 'remove_current_team':
-      return {
-        team: action.payload
-      };
     default:
         return state;
   }

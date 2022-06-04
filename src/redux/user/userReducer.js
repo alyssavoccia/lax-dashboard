@@ -8,8 +8,6 @@ const userReducer = (state = initial_state, action) => {
       return {
         user: action.payload
       };
-    case 'remove_current_user':
-      return state = action.payload;
     default:
         return state;
   }

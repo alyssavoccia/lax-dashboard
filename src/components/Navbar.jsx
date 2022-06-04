@@ -3,9 +3,6 @@ import { useSelector } from 'react-redux';
 import { getAuth } from 'firebase/auth';
 import { Link } from 'react-router-dom';
 import storage from 'redux-persist/lib/storage';
-import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { removeCurrentUser } from '../redux/user/userActions';
 import Spinner from './Spinner';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -102,9 +99,6 @@ function Navbar() {
   const currentUser = useSelector((state) => state.user.user);
   const auth = getAuth();
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch();
-
-  const removeUser = bindActionCreators(removeCurrentUser, dispatch);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -163,8 +157,7 @@ function Navbar() {
           </ListItem>
           <ListItem component={Link} to='/sign-in-sign-up' style={{color: 'black'}} onClick={() => {
             storage.removeItem('persist:root');
-            removeUser();
-            auth.signOut()
+            auth.signOut();
           }}>
             <ListItemIcon>
               <LogoutIcon />
