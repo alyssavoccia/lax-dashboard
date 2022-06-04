@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { auth, createUserProfileDocument } from './firebase.config';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentUser } from './redux/user/userActions';
@@ -17,7 +18,6 @@ import Team from './pages/Team';
 import PlayerData from './pages/PlayerData';
 import HsLinkSubmissions from './pages/HsLinkSubmissions';
 import SuccessfulPayment from './pages/SuccessfulPayment';
-import { getDataGridUtilityClass } from '@mui/x-data-grid';
 
 function App() {
   const location = useLocation();
@@ -27,42 +27,26 @@ function App() {
   const setUser = bindActionCreators(setCurrentUser, dispatch);
 
   useEffect(() => {
-    const getData = async () => {
-      if (auth) {
-        const userRef = await createUserProfileDocument(auth);
-  
-        if (userRef) {
-          userRef.onSnapshot(snapshot => {
-            setUser(snapshot.data());
-          });
-        }
-        setLoading(false);
-      } else {
-        setUser(auth);
-        setLoading(false);
-      }
-    }
 
-    getData();
   }, []);
 
-  // useEffect(() => {
-  //   auth.onAuthStateChanged(async userAuth => {
-  //     if (userAuth) {
-  //       const userRef = await createUserProfileDocument(userAuth);
+  useEffect(() => {
+    onAuthStateChanged(auth, async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
 
-  //       if (userRef) {
-  //         userRef.onSnapshot(snapShot => {
-  //           setUser(snapShot.data());
-  //         })
-  //       } 
-  //       setLoading(false)
-  //     } else {
-  //       setUser(userAuth);
-  //       setLoading(false);
-  //     }
-  //   })
-  // }, [setUser]);
+        if (userRef) {
+          userRef.onSnapshot(snapShot => {
+            setUser(snapShot.data());
+          });
+        } 
+        setLoading(false);
+      } else {
+        setUser(userAuth);
+        setLoading(false);
+      }
+    })
+  }, [setUser]);
 
   const defaultTheme = createTheme();
 

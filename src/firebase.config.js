@@ -75,5 +75,5 @@ export const createUserProfileDocument = async (userAuth, displayName, team, gra
   return userRef;
 }
 
-export const auth = firebase.auth();
 export const db = firebase.firestore();
+export const auth = firebase.auth();
