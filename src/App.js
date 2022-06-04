@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
 import { db, auth, createUserProfileDocument } from './firebase.config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setCurrentUser } from './redux/user/userActions';
 import { setCurrentTeam } from './redux/team/teamActions';
+import { setCurrentData } from './redux/data/dataActions';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Spinner from './components/Spinner';
@@ -27,13 +29,33 @@ function App() {
 
   const setUser = bindActionCreators(setCurrentUser, dispatch);
   const setTeam = bindActionCreators(setCurrentTeam, dispatch);
-
-  useEffect(() => {
-
-  }, []);
+  const setData = bindActionCreators(setCurrentData, dispatch);
 
   useEffect(() => {
     const users = [];
+    const usersData = [];
+
+    const getAllUsersData = async (currentUser) => {
+      console.log(currentUser)
+      for (const person of users) {
+        const docRef = doc(db, currentUser.team, person.id, 'data', person.id);
+        const docSnap = await getDoc(docRef);
+        const userDataObj = docSnap.data();
+        if (userDataObj) {
+          usersData.push({...person, ...userDataObj});
+        }
+
+        if (usersData.length === users.length) {
+          setData(usersData);
+
+          if (currentUser.isAdmin && currentUser.team === 'highschool') {
+            // getHsLinks(currentUser);
+          } else {
+            setLoading(false);
+          }
+        }
+      };
+    }
 
     const getAllTeamMembers = async (currentUser) => {
       const snapshot = await db.collection(currentUser.team).get();
@@ -44,6 +66,7 @@ function App() {
 
         if (index === array.length - 1) {
           setTeam(users);
+          getAllUsersData(currentUser)
         }
       });
     }
@@ -62,10 +85,11 @@ function App() {
       } else {
         setUser(userAuth);
         setTeam(null);
+        setData(null);
         setLoading(false);
       }
     })
-  }, [setTeam, setUser]);
+  }, [setTeam, setUser, setData]);
 
   const defaultTheme = createTheme();
 

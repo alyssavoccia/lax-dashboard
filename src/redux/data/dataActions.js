@@ -6,12 +6,3 @@ export const setCurrentData = (data) => {
     });
   }
 };
-
-export const removeCurrentData = () => {
-  return (dispatch) => {
-    dispatch({
-      type: 'remove_current_data',
-      payload: []
-    })
-  }
-};
