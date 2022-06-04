@@ -8,7 +8,7 @@ function DashboardPlayerSearch({ onChange }) {
   const currentTeam = useSelector((state) => state.team.team);
   const players = [];
 
-  currentTeam.map(person => !person.isAdmin && players.push(person.displayName));
+  currentTeam && currentTeam.map(person => !person.isAdmin && players.push(person.displayName));
 
   return (
     <Autocomplete

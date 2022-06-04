@@ -21,6 +21,7 @@ import Team from './pages/Team';
 import PlayerData from './pages/PlayerData';
 import HsLinkSubmissions from './pages/HsLinkSubmissions';
 import SuccessfulPayment from './pages/SuccessfulPayment';
+import { setCurrentLinks } from './redux/hs-links/hsLinksActions';
 
 function App() {
   const location = useLocation();
@@ -30,13 +31,33 @@ function App() {
   const setUser = bindActionCreators(setCurrentUser, dispatch);
   const setTeam = bindActionCreators(setCurrentTeam, dispatch);
   const setData = bindActionCreators(setCurrentData, dispatch);
+  const setLinks = bindActionCreators(setCurrentLinks, dispatch);
 
   useEffect(() => {
     const users = [];
     const usersData = [];
 
+    const getHsLinks = async (currentUser) => {
+      const hsUsers = [];
+      const hsLinks = [];
+
+      for (const person of users) {
+        hsUsers.push(person.displayName);
+        const docRef = doc(db, currentUser.team, person.id, 'links', person.id);
+        const docSnap = await getDoc(docRef);
+        const userDataObj = docSnap.data();
+        if (userDataObj.agilityLink || userDataObj.broadLink || userDataObj.threeLink || userDataObj.wbLink) {
+          hsLinks.push({...person, ...userDataObj});
+        }
+
+        if (hsUsers.length === users.length) {
+          setLinks(hsLinks);
+          setLoading(false);
+        }
+      }
+    };
+
     const getAllUsersData = async (currentUser) => {
-      console.log(currentUser)
       for (const person of users) {
         const docRef = doc(db, currentUser.team, person.id, 'data', person.id);
         const docSnap = await getDoc(docRef);
@@ -49,7 +70,7 @@ function App() {
           setData(usersData);
 
           if (currentUser.isAdmin && currentUser.team === 'highschool') {
-            // getHsLinks(currentUser);
+            getHsLinks(currentUser);
           } else {
             setLoading(false);
           }
@@ -80,16 +101,16 @@ function App() {
             setUser(snapShot.data());
             getAllTeamMembers(snapShot.data());
           });
-        } 
-        setLoading(false);
+        }
       } else {
         setUser(userAuth);
         setTeam(null);
         setData(null);
+        setLinks(null);
         setLoading(false);
       }
     })
-  }, [setTeam, setUser, setData]);
+  }, [setUser, setTeam, setData, setLinks]);
 
   const defaultTheme = createTheme();
 

@@ -4,10 +4,6 @@ const hsLinksReducer = (state = null, action) => {
       return {
         hsLinks: action.payload
       };
-    case 'remove_current_links':
-      return {
-        hsLinks: action.payload
-      };
     default:
         return state;
   }
