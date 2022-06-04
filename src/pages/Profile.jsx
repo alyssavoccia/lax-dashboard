@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAuth } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase.config';
 import { useSelector } from 'react-redux';
-import Spinner from '../components/Spinner';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
@@ -19,38 +15,19 @@ import HsProfileLinkGrid from '../components/HsProfileLinkGrid';
 
 function Profile() {
   const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const currentUser = useSelector((state) => state.user.user);
+  const allTeamData = useSelector((state) => state.data.data);
 
   useEffect(() => {
-    const auth = getAuth();
-
-    const fetchUserData = async () => {
-      if (!currentUser.isAdmin) {
-        try {
-          const userDataRef = doc(db, currentUser.team, auth.currentUser.uid, 'data', auth.currentUser.uid);
-          const userDataDoc = await getDoc(userDataRef);
-
-          setUserData(userDataDoc.data());
-          setLoading(false);
-        } catch (error) {
-          setOpen(true);
-        }
-      } else {
-        setLoading(false);
-      }
+    if (!currentUser.isAdmin) {
+      const result = allTeamData.filter(person => person.displayName === currentUser.displayName);
+      setUserData(result[0]);
     }
-
-    currentUser && fetchUserData();
-  }, [currentUser]);
+  }, [currentUser, allTeamData]);
 
   const handleClose = () => {
     setOpen(false);
-  }
-  
-  if (loading) {
-    return <Spinner />
   }
   
   return (
