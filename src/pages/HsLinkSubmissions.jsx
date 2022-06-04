@@ -18,7 +18,7 @@ function HsLinkSubmissions() {
 
     // Update on firebase
     const docRef = doc(db, 'highschool', playerId, 'links', playerId);
-    updateDoc(docRef, {linkId: null});
+    updateDoc(docRef, `{${linkId}: null}`);
   };
 
   if (currentLinks.length > 0) {

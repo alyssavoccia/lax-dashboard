@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Spinner from '../components/Spinner';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
@@ -15,19 +16,31 @@ import HsProfileLinkGrid from '../components/HsProfileLinkGrid';
 
 function Profile() {
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const currentUser = useSelector((state) => state.user.user);
-  const allTeamData = useSelector((state) => state.data.data);
+  const currentData = useSelector((state) => state.data.data);
 
   useEffect(() => {
-    if (!currentUser.isAdmin) {
-      const result = allTeamData.filter(person => person.displayName === currentUser.displayName);
-      setUserData(result[0]);
+    const fetchUserData = async () => {
+      if (!currentUser.isAdmin) {
+       const result = currentData.filter(person => person.displayName === currentUser.displayName);
+       setUserData(result[0]);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
     }
-  }, [currentUser, allTeamData]);
+
+    currentUser && fetchUserData();
+  }, [currentData, currentUser]);
 
   const handleClose = () => {
     setOpen(false);
+  }
+  
+  if (loading) {
+    return <Spinner />
   }
   
   return (
@@ -47,7 +60,6 @@ function Profile() {
     }}
     >
       <Toolbar />
-
       <Container maxWidth="lg" sx={{ my: 5, display: 'flex', justifyItems: 'center' }}>
         <Grid sx={{width: '100%'}}>
           <Paper elevation={0} sx={{ p: 2, width: '100%', display: 'flex', flexDirection: 'column' }}>
