@@ -17,6 +17,7 @@ import Team from './pages/Team';
 import PlayerData from './pages/PlayerData';
 import HsLinkSubmissions from './pages/HsLinkSubmissions';
 import SuccessfulPayment from './pages/SuccessfulPayment';
+import { getDataGridUtilityClass } from '@mui/x-data-grid';
 
 function App() {
   const location = useLocation();
@@ -26,22 +27,42 @@ function App() {
   const setUser = bindActionCreators(setCurrentUser, dispatch);
 
   useEffect(() => {
-    auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
+    const getData = async () => {
+      if (auth) {
+        const userRef = await createUserProfileDocument(auth);
+  
         if (userRef) {
-          userRef.onSnapshot(snapShot => {
-            setUser(snapShot.data());
-          })
-        } 
-        setLoading(false)
+          userRef.onSnapshot(snapshot => {
+            setUser(snapshot.data());
+          });
+        }
+        setLoading(false);
       } else {
-        setUser(userAuth);
+        setUser(auth);
         setLoading(false);
       }
-    })
-  }, [setUser]);
+    }
+
+    getData();
+  }, []);
+
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(async userAuth => {
+  //     if (userAuth) {
+  //       const userRef = await createUserProfileDocument(userAuth);
+
+  //       if (userRef) {
+  //         userRef.onSnapshot(snapShot => {
+  //           setUser(snapShot.data());
+  //         })
+  //       } 
+  //       setLoading(false)
+  //     } else {
+  //       setUser(userAuth);
+  //       setLoading(false);
+  //     }
+  //   })
+  // }, [setUser]);
 
   const defaultTheme = createTheme();
 
