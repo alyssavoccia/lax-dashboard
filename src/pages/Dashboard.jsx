@@ -8,7 +8,7 @@ function Dashboard() {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const currentUser = useSelector((state) => state.user.user);
 
-  const handlePlayerChange = (e, value) => {
+  const handlePlayerChange = e => {
     setSelectedPlayer(e.target.value);
   };
 
@@ -17,7 +17,7 @@ function Dashboard() {
   }
 
   return (
-    <div className='pl-60 bg-gray-50 w-full min-h-screen'>
+    <div className='pl-48 pr-4 w-full min-h-screen'>
       {/* If current user is admin, show player search */}
       <div className='py-5'>
         {currentUser && currentUser.isAdmin &&

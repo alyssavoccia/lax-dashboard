@@ -8,7 +8,6 @@ import { bindActionCreators } from 'redux';
 import { setCurrentUser } from './redux/user/userActions';
 import { setCurrentTeam } from './redux/team/teamActions';
 import { setCurrentData } from './redux/data/dataActions';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Spinner from './components/Spinner';
 import Navbar from './components/Navbar';
@@ -22,8 +21,6 @@ import PlayerData from './pages/PlayerData';
 import HsLinkSubmissions from './pages/HsLinkSubmissions';
 import SuccessfulPayment from './pages/SuccessfulPayment';
 import { setCurrentLinks } from './redux/hs-links/hsLinksActions';
-
-import Navbar2 from './components/Navbar2';
 
 function App() {
   const location = useLocation();
@@ -114,18 +111,15 @@ function App() {
     })
   }, [setUser, setTeam, setData, setLinks]);
 
-  const defaultTheme = createTheme();
-
   if (loading) {
     return <Spinner />
   }
   
   return (
-    <>
+    <div className='h-full bg-gray-50'>
       {/* <Navbar2 /> */}
-      <ThemeProvider theme={defaultTheme}>
         <Box sx={{ display: 'flex' }}>
-          {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar2 />}
+          {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar />}
           <Routes>
             <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
             <Route path='/successful-payment' element={<SuccessfulPayment />} />
@@ -146,8 +140,7 @@ function App() {
             </Route>
           </Routes>
         </Box>
-      </ThemeProvider>
-    </>
+    </div>
   );
 }
 

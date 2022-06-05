@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Spinner from '../components/Spinner';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -44,22 +42,7 @@ function Profile() {
   }
   
   return (
-    <Box
-    component="main"
-    sx={{
-      backgroundColor: (theme) =>
-        theme.palette.mode === 'light'
-          ? theme.palette.grey[100]
-          : theme.palette.grey[900],
-      display: 'flex',
-      flexDirection: 'column',
-      flexGrow: 1,
-      height: '100vh',
-      justifyItems: 'center',
-      overflow: 'auto'
-    }}
-    >
-      <Toolbar />
+    <div className='pl-60'>
       <Container maxWidth="lg" sx={{ my: 5, display: 'flex', justifyItems: 'center' }}>
         <Grid sx={{width: '100%'}}>
           <Paper elevation={0} sx={{ p: 2, width: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -87,7 +70,7 @@ function Profile() {
       <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity='error' sx={{ width: '100%' }}>Error fetching data. Please try again.</Alert>
       </Snackbar>   
-    </Box>
+    </div>
   )
 }
 
