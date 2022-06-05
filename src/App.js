@@ -23,6 +23,8 @@ import HsLinkSubmissions from './pages/HsLinkSubmissions';
 import SuccessfulPayment from './pages/SuccessfulPayment';
 import { setCurrentLinks } from './redux/hs-links/hsLinksActions';
 
+import Navbar2 from './components/Navbar2';
+
 function App() {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
@@ -120,7 +122,8 @@ function App() {
   
   return (
     <>
-      <ThemeProvider theme={defaultTheme}>
+      <Navbar2 />
+      {/* <ThemeProvider theme={defaultTheme}>
         <Box sx={{ display: 'flex' }}>
           {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar />}
           <Routes>
@@ -143,7 +146,7 @@ function App() {
             </Route>
           </Routes>
         </Box>
-      </ThemeProvider>
+      </ThemeProvider> */}
     </>
   );
 }
