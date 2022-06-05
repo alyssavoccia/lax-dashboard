@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faChartArea, faUserLarge, faPeopleGroup, faTable, faLink, faArrowRightToBracket} from '@fortawesome/free-solid-svg-icons'
 
 function Navbar2() {
   const currentUser = useSelector((state) => state.user.user);
@@ -15,11 +17,13 @@ function Navbar2() {
       <ul className="relative px-1">
         <li className="relative">
           <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+            <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faChartArea} />
             <span>Dashboard</span>
           </a>
         </li>
         <li className="relative">
           <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+            <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faUserLarge} />
             <span>Profile</span>
           </a>
         </li>
@@ -27,11 +31,13 @@ function Navbar2() {
           <>
             <li className="relative">
               <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+                <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faPeopleGroup} />
                 <span>Team</span>
               </a>
             </li>
             <li className="relative">
               <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+                <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faTable} />
                 <span>Player Data</span>
               </a>
             </li>
@@ -41,6 +47,7 @@ function Navbar2() {
           <>
             <li className="relative">
               <a className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary">
+                <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faLink} />
                 <span>Player Submissions</span>
               </a>
             </li>
@@ -49,7 +56,10 @@ function Navbar2() {
       </ul>
       <div className="text-center bottom-0 absolute w-full h-10">
         <hr className="mb-2" />
-        <a href="#!" className="text-sm text-gray-700">Sign Out</a>
+        <a href="#!" className="text-sm text-gray-700 flex items-center justify-center">
+          <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faArrowRightToBracket} />
+          <span>Sign Out</span>
+        </a>
       </div>
     </div>
   )
