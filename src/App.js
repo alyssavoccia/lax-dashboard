@@ -122,10 +122,10 @@ function App() {
   
   return (
     <>
-      <Navbar2 />
-      {/* <ThemeProvider theme={defaultTheme}>
+      {/* <Navbar2 /> */}
+      <ThemeProvider theme={defaultTheme}>
         <Box sx={{ display: 'flex' }}>
-          {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar />}
+          {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar2 />}
           <Routes>
             <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
             <Route path='/successful-payment' element={<SuccessfulPayment />} />
@@ -146,7 +146,7 @@ function App() {
             </Route>
           </Routes>
         </Box>
-      </ThemeProvider> */}
+      </ThemeProvider>
     </>
   );
 }

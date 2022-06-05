@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Title from '../components/Title';
 import DashboardPlayerSearch from '../components/DashboardPlayerSearch';
@@ -13,7 +11,7 @@ function Dashboard() {
   const currentUser = useSelector((state) => state.user.user);
 
   const handlePlayerChange = (e, value) => {
-    setSelectedPlayer(value);
+    setSelectedPlayer(e.target.value);
   };
 
   if (!currentUser) {
@@ -21,20 +19,7 @@ function Dashboard() {
   }
 
   return (
-    <Box
-      component="main"
-      sx={{
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-      }}
-    >
-      <Toolbar />
-
+    <div className='pl-60 bg-gray-50 w-full h-full'>
       {/* If current user is admin, show player search */}
       {currentUser && currentUser.isAdmin 
       ? <Container maxWidth="lg" sx={{mt: 4, mb: 2}}>
@@ -53,7 +38,7 @@ function Dashboard() {
           : <DashboardGrid data={selectedPlayer} />
         }
       </Container>
-    </Box>
+    </div>
   )
 }
 
