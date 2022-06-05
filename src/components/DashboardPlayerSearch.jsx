@@ -9,8 +9,8 @@ function DashboardPlayerSearch({ onChange }) {
   currentTeam && currentTeam.map(person => !person.isAdmin && players.push(person.displayName));
 
   return (
-    <div className="flex justify-flex-start">
-      <div className="mb-3 xl:w-96">
+    <div className="flex justify-flex-start mb-4">
+      <div className="xl:w-96">
         <select className="form-select appearance-none
           block
           w-full
@@ -29,7 +29,7 @@ function DashboardPlayerSearch({ onChange }) {
           onChange={onChange}
           id='dashboard-player-search'
         >
-          <option selected>Select Player</option>
+          <option selected value=''>Select Player</option>
           {players.map((player, i) => (
             <option key={i} value={player}>{player}</option>
           ))}

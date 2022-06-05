@@ -7,7 +7,7 @@ function Navbar2() {
   const currentUser = useSelector((state) => state.user.user);
 
   return (
-    <div className="w-50 min-h-full shadow-md bg-slate-50 absolute">
+    <div className="w-50 min-h-screen shadow-md bg-slate-50 absolute">
       <div className="py-4 px-4 mb-2 bg-slate-600">
         <div className="flex items-center">
           <div className="grow ml-3">
@@ -17,7 +17,7 @@ function Navbar2() {
       </div>
       <ul className="relative px-1">
         <li className="relative">
-          <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/'>
+          <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/dashboard'>
             <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faChartArea} />
             <span>Dashboard</span>
           </Link>

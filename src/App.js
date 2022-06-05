@@ -129,8 +129,8 @@ function App() {
           <Routes>
             <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
             <Route path='/successful-payment' element={<SuccessfulPayment />} />
-            <Route path='/' element={<PrivateRoute />}>
-              <Route path='/' element={<Dashboard />} />
+            <Route path='/dashboard' element={<PrivateRoute />}>
+              <Route path='/dashboard' element={<Dashboard />} />
             </Route>
             <Route path='/profile' element={<PrivateRoute />}>
               <Route path='/profile' element={<Profile />} />
