@@ -29,7 +29,7 @@ function Profile() {
   }
   
   return (
-    <div className='lg:container mx-auto pl-48 pr-4 py-4'>
+    <div className='lg:container mx-auto pl-20 pr-4 py-4'>
       <div className="flex justify-center">
         <div className="block rounded-lg shadow-md bg-cyan-500 w-full text-left">
           <div className="text-md text-white font-bold py-3 px-6">Profile Information</div>
@@ -54,7 +54,7 @@ function Profile() {
           <div className="text-md text-white font-bold py-3 px-6">
             Upload Links
           </div>
-          <div className="p-6 bg-white rounded-b">
+          <div className="p-4 bg-white rounded-b">
             <HsProfileLinkGrid />
           </div>
         </div>
