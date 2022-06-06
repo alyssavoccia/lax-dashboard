@@ -1,14 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Spinner from '../components/Spinner';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Title from '../components/Title';
-import Stack from '@mui/material/Stack';
-import Chip from '@mui/material/Chip';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import ProfileDataCardGrid from '../components/ProfileDataCardGrid';
 import HsProfileLinkGrid from '../components/HsProfileLinkGrid';
 
@@ -42,34 +34,24 @@ function Profile() {
   }
   
   return (
-    <div className='pl-60'>
-      <Container maxWidth="lg" sx={{ my: 5, display: 'flex', justifyItems: 'center' }}>
-        <Grid sx={{width: '100%'}}>
-          <Paper elevation={0} sx={{ p: 2, width: '100%', display: 'flex', flexDirection: 'column' }}>
-            <Grid item xs={12}>
-              <Title>{currentUser.displayName}</Title>
+    <div className='lg:container mx-auto pl-48 pr-4 py-4'>
+      <div className="flex justify-center">
+        <div className="block rounded-lg shadow-md bg-indigo-700 w-full text-left">
+          <div className="text-md text-white font-bold py-3 px-6">
+            Profile
+          </div>
+          <div className="p-6 bg-white rounded-b">
+            <h5 className="text-gray-900 text-xl font-medium mb-2">{currentUser.displayName}</h5>
+            <div className="flex space-x-2">
+              <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-slate-600 text-white rounded">{userData.position ? userData.position : 'POS'}</span>
+              <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-slate-600 text-white rounded">{userData.grad ? userData.grad : 'GRAD'}</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-              <Stack direction="row" spacing={2}>
-                {currentUser.isAdmin 
-                ? <Chip label="Admin" sx={{borderRadius: '5px'}} /> 
-                : <>
-                    <Chip label={userData.position ? userData.position : 'POS'} sx={{borderRadius: '5px'}} />
-                    <Chip label={userData.grad ? userData.grad : 'GRAD'} sx={{borderRadius: '5px'}} />
-                  </>
-                }
-              </Stack>
-            </Grid>
-
-            {/* PLAYER DATA CARDS */}
-            {!currentUser.isAdmin &&  <ProfileDataCardGrid data={userData} />}
-            {(!currentUser.isAdmin && currentUser.team === 'highschool') && <HsProfileLinkGrid />}
-          </Paper>
-        </Grid>
-      </Container>
-
-      <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='error' sx={{ width: '100%' }}>Error fetching data. Please try again.</Alert>
-      </Snackbar>   
+      {/* PLAYER DATA CARDS */}
+      {!currentUser.isAdmin &&  <ProfileDataCardGrid data={userData} />}
     </div>
   )
 }

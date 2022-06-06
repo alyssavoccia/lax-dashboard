@@ -5,7 +5,7 @@ function ProfileDataCardGrid(userData) {
   const {agility, broad, three, wb} = userData.data;
 
   return (
-    <Grid item sx={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', textAlign: 'center', mt: 2}}>
+    <div class="flex flex-wrap justify-center gap-4 mt-8 w-full">
       {/* ROW 1 */}
         <ProfileDataCard 
           dataTitle="50's Wall Ball" 
@@ -25,7 +25,7 @@ function ProfileDataCardGrid(userData) {
           dataTitle="Broad Jump" 
           data={broad}
         />
-    </Grid>
+    </div>
   )
 }
 

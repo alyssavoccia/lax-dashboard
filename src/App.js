@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { setCurrentUser } from './redux/user/userActions';
 import { setCurrentTeam } from './redux/team/teamActions';
 import { setCurrentData } from './redux/data/dataActions';
-import Box from '@mui/material/Box';
+import { setCurrentLinks } from './redux/hs-links/hsLinksActions';
 import Spinner from './components/Spinner';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
@@ -20,7 +20,6 @@ import Team from './pages/Team';
 import PlayerData from './pages/PlayerData';
 import HsLinkSubmissions from './pages/HsLinkSubmissions';
 import SuccessfulPayment from './pages/SuccessfulPayment';
-import { setCurrentLinks } from './redux/hs-links/hsLinksActions';
 
 function App() {
   const location = useLocation();
@@ -116,9 +115,8 @@ function App() {
   }
   
   return (
-    <div className='h-full bg-gray-50'>
+    <div className='min-h-screen bg-gray-50'>
       {/* <Navbar2 /> */}
-        <Box sx={{ display: 'flex' }}>
           {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar />}
           <Routes>
             <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
@@ -139,7 +137,6 @@ function App() {
               <Route path='/hs-link-submissions' element={<HsLinkSubmissions />} />
             </Route>
           </Routes>
-        </Box>
     </div>
   );
 }
