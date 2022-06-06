@@ -10,7 +10,7 @@ function Navbar() {
   const auth = getAuth();
 
   return (
-    <div className="w-44 min-h-full shadow-md bg-slate-50 fixed">
+    <div className="w-44 min-h-full shadow-lg bg-slate-100 fixed">
       <div className="py-4 px-4 mb-2 bg-slate-600">
         <div className="flex items-center">
           <div className="grow ml-3">

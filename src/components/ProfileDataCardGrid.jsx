@@ -1,4 +1,3 @@
-import Grid from '@mui/material/Grid';
 import ProfileDataCard from './ProfileDataCard';
 
 function ProfileDataCardGrid(userData) {
