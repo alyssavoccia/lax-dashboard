@@ -59,7 +59,7 @@ function Navbar() {
         }
       </ul>
       <div className="text-center bottom-0 absolute w-full h-10 hover:bg-gray-300 transition duration-300 ease-in-out rounded-br-lg">
-        <hr className="mb-2" />
+        <hr className="mb-2 border-gray-400" />
         <Link to='/sign-in-sign-up' className="text-sm text-gray-700 flex items-center justify-center" onClick={() => {
           storage.removeItem('persist:root');
           auth.signOut();

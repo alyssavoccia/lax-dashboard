@@ -26,13 +26,13 @@ function HsProfileLinkGrid() {
 
   const handleSubmit = (e) => {
     // Get the input id to know which value is being updated in firebase
-    const inputId = e.target.parentElement.parentElement.childNodes[0].childNodes[0].id;
+    const inputId = e.target.parentElement.parentElement.childNodes[0].id;
 
     // Get the link that the user entered
-    const inputValue = e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0].value;
+    const inputValue = e.target.parentElement.parentElement.childNodes[0].value;
 
     // Get the input element
-    const input = e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].childNodes[1].childNodes[0];
+    const input = e.target.parentElement.parentElement.childNodes[0];
 
     const updatedValue = {
       [inputId]: inputValue
