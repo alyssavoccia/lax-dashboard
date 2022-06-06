@@ -10,23 +10,23 @@ function Navbar() {
   const auth = getAuth();
 
   return (
-    <div className="w-44 min-h-full shadow-lg bg-slate-100 fixed">
-      <div className="py-4 px-4 mb-2 bg-slate-600">
+    <div className="w-44 min-h-full shadow-lg bg-gray-200 fixed rounded-br-lg rounded-tr-lg">
+      <div className="py-4 px-4 mb-2 bg-gray-600 rounded-tr-lg">
         <div className="flex items-center">
           <div className="grow ml-3">
-            <p className="text-md font-semibold text-slate-50">Lax Dashboard</p>
+            <p className="text-md font-semibold text-gray-50">Lax Dashboard</p>
           </div>
         </div>
       </div>
       <ul className="relative px-1">
         <li className="relative">
-          <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/dashboard'>
+          <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:bg-gray-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/dashboard'>
             <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faChartArea} />
             <span>Dashboard</span>
           </Link>
         </li>
         <li className="relative">
-          <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/profile'>
+          <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:bg-gray-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/profile'>
             <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faUserLarge} />
             <span>Profile</span>
           </Link>
@@ -34,13 +34,13 @@ function Navbar() {
         {currentUser && currentUser.isAdmin &&
           <>
             <li className="relative">
-              <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/team'>
+              <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:bg-gray-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/team'>
                 <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faPeopleGroup} />
                 <span>Team</span>
               </Link>
             </li>
             <li className="relative">
-              <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/player-data'>
+              <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:bg-gray-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/player-data'>
                 <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faTable} />
                 <span>Player Data</span>
               </Link>
@@ -50,7 +50,7 @@ function Navbar() {
         {currentUser && currentUser.isAdmin && currentUser.team === 'highschool' &&
           <>
             <li className="relative">
-              <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:text-slate-700 hover:bg-slate-200 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/hs-link-submissions'>
+              <Link className="flex items-center text-sm py-4 px-6 h-12 overflow-hidden text-gray-700 whitespace-nowrap rounded hover:bg-gray-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/hs-link-submissions'>
                 <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faLink} />
                 <span>Player Submissions</span>
               </Link>
@@ -58,7 +58,7 @@ function Navbar() {
           </>
         }
       </ul>
-      <div className="text-center bottom-0 absolute w-full h-10 hover:bg-slate-200 transition duration-300 ease-in-out">
+      <div className="text-center bottom-0 absolute w-full h-10 hover:bg-gray-300 transition duration-300 ease-in-out rounded-br-lg">
         <hr className="mb-2" />
         <Link to='/sign-in-sign-up' className="text-sm text-gray-700 flex items-center justify-center" onClick={() => {
           storage.removeItem('persist:root');

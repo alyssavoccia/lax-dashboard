@@ -116,27 +116,26 @@ function App() {
   
   return (
     <div className='min-h-screen bg-gray-50'>
-      {/* <Navbar2 /> */}
-          {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar />}
-          <Routes>
-            <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
-            <Route path='/successful-payment' element={<SuccessfulPayment />} />
-            <Route path='/dashboard' element={<PrivateRoute />}>
-              <Route path='/dashboard' element={<Dashboard />} />
-            </Route>
-            <Route path='/profile' element={<PrivateRoute />}>
-              <Route path='/profile' element={<Profile />} />
-            </Route>
-            <Route path='/team' element={<AdminRoute />}>
-              <Route path='/team' element={<Team />} />
-            </Route>
-            <Route path='/player-data' element={<AdminRoute />}>
-              <Route path='/player-data' element={<PlayerData />} />
-            </Route>
-            <Route path='/hs-link-submissions' element={<AdminRoute />}>
-              <Route path='/hs-link-submissions' element={<HsLinkSubmissions />} />
-            </Route>
-          </Routes>
+      {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar />}
+      <Routes>
+        <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
+        <Route path='/successful-payment' element={<SuccessfulPayment />} />
+        <Route path='/dashboard' element={<PrivateRoute />}>
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Route>
+        <Route path='/profile' element={<PrivateRoute />}>
+          <Route path='/profile' element={<Profile />} />
+        </Route>
+        <Route path='/team' element={<AdminRoute />}>
+          <Route path='/team' element={<Team />} />
+        </Route>
+        <Route path='/player-data' element={<AdminRoute />}>
+          <Route path='/player-data' element={<PlayerData />} />
+        </Route>
+        <Route path='/hs-link-submissions' element={<AdminRoute />}>
+          <Route path='/hs-link-submissions' element={<HsLinkSubmissions />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
