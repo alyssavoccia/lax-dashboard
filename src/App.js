@@ -115,7 +115,7 @@ function App() {
   }
   
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-gray-200'>
       {location.pathname === '/sign-in-sign-up' ? <></> : <Navbar />}
       <Routes>
         <Route path='/sign-in-sign-up' element={<SignInSignUp />} />

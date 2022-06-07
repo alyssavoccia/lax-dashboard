@@ -17,7 +17,7 @@ function Dashboard() {
   }
 
   return (
-    <div className='pl-48 pr-4 w-full min-h-screen'>
+    <div className='pl-20 pr-4 w-full min-h-screen'>
       {/* If current user is admin, show player search */}
       <div className='py-5'>
         {currentUser && currentUser.isAdmin &&

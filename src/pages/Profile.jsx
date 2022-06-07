@@ -31,15 +31,15 @@ function Profile() {
   return (
     <div className='lg:container mx-auto pl-20 pr-4 py-4'>
       <div className="flex justify-center">
-        <div className="block rounded-lg shadow-md bg-cyan-500 w-full text-left">
+        <div className="block rounded-lg shadow-md bg-violet-500 w-full text-left">
           <div className="text-md text-white font-bold py-3 px-6">Profile Information</div>
           <div className="p-6 bg-white rounded-b">
             <h5 className="text-gray-900 text-xl font-medium mb-2">{currentUser.displayName}</h5>
             <div className="flex space-x-2">
-              <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-slate-600 text-white rounded"> 
+              <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-600 text-white rounded"> 
                 {userData.position ? userData.position : 'POS'}
               </span>
-              <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-slate-600 text-white rounded">
+              <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-600 text-white rounded">
                 {userData.grad ? userData.grad : 'GRAD'}
               </span>
             </div>
@@ -50,7 +50,7 @@ function Profile() {
       </div>
       
       {(!currentUser.isAdmin && currentUser.team === 'highschool') && 
-        <div className="block rounded-lg shadow-md bg-cyan-500 w-full text-left mt-8">
+        <div className="block rounded-lg shadow-md bg-violet-500 w-full text-left mt-8">
           <div className="text-md text-white font-bold py-3 px-6">
             Upload Links
           </div>
