@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import Grid from '@mui/material/Grid';
 import TeamPageCard from '../components/TeamPageCard';
 
 function Team() {
@@ -21,27 +20,24 @@ function Team() {
           <h1 className="text-white text-xl leading-tight font-medium">{capitalTeam} Roster</h1>
         </div>
       </div>
-        <Grid container spacing={3} sx={{ textAlign: 'center' }}>
-          {allTeamData ?
+        <div className='flex flex-wrap gap-7 justify-center'>
+          {allTeamData &&
             allTeamData.map((player, i) => {
               return (
-                <Grid item xs={12} md={6} lg={4} key={i}>
-                  <TeamPageCard
-                    key={player.id}
-                    name={player.displayName}
-                    position={player.position}
-                    grad={player.grad}
-                    agility={player.agility}
-                    broad={player.broad}
-                    three={player.three}
-                    wb={player.wb}
-                  />
-                </Grid>
+                <TeamPageCard
+                  key={player.id}
+                  name={player.displayName}
+                  position={player.position}
+                  grad={player.grad}
+                  agility={player.agility}
+                  broad={player.broad}
+                  three={player.three}
+                  wb={player.wb}
+                />
               )
             })
-            : ''
           }
-        </Grid>
+        </div>
     </div>
   )
 }

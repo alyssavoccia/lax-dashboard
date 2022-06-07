@@ -1,7 +1,7 @@
 function TeamPageCard({ name, position, grad, agility, broad, three, wb}) {
   return (
     <div class="flex justify-center">
-      <div class="block rounded-lg shadow-md bg-violet-500 max-w-sm text-center">
+      <div class="block rounded-lg shadow-md bg-violet-500 max-w-sm text-center w-72">
         <div class="py-3 px-6 border-b border-gray-300">
           <p className='text-lg text-white'>{name}</p>
           <p className='text-sm text-violet-200 font-light'>{position ? position : 'POS'} &bull; {grad ? grad : 'GRAD'}</p>

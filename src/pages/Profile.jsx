@@ -33,7 +33,7 @@ function Profile() {
       <div className="flex justify-center">
         <div className="block rounded-lg shadow-md bg-violet-500 w-full text-left">
           <div className="text-md text-white font-bold py-3 px-6">Profile Information</div>
-          <div className="p-6 bg-white rounded-b">
+          <div className="p-6 bg-white rounded-b-lg">
             <h5 className="text-gray-900 text-xl font-medium mb-2">{currentUser.displayName}</h5>
             <div className="flex space-x-2">
               {currentUser.isAdmin
