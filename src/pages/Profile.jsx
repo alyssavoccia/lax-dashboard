@@ -36,12 +36,19 @@ function Profile() {
           <div className="p-6 bg-white rounded-b">
             <h5 className="text-gray-900 text-xl font-medium mb-2">{currentUser.displayName}</h5>
             <div className="flex space-x-2">
-              <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-600 text-white rounded"> 
-                {userData.position ? userData.position : 'POS'}
-              </span>
-              <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-600 text-white rounded">
-                {userData.grad ? userData.grad : 'GRAD'}
-              </span>
+              {currentUser.isAdmin
+                ? <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-600 text-white rounded"> 
+                    Admin
+                  </span>
+                : <>
+                    <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-600 text-white rounded"> 
+                      {userData.position ? userData.position : 'POS'}
+                    </span>
+                    <span className="text-xs inline-block py-1 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-gray-600 text-white rounded">
+                      {userData.grad ? userData.grad : 'GRAD'}
+                    </span>
+                  </>
+              }
             </div>
 
             {!currentUser.isAdmin &&  <ProfileDataCardGrid data={userData} />}

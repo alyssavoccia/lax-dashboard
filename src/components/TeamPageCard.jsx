@@ -1,46 +1,31 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-
 function TeamPageCard({ name, position, grad, agility, broad, three, wb}) {
   return (
-    <Card elevation={0} sx={{ minWidth: 275, mt: 3 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 18 }} gutterBottom>
-          {name}
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {position ? position : 'POS'} &bull; {grad ? grad : 'GRAD'}
-        </Typography>
-
-        <Stack spacing={2} alignItems="center">
-          {/* ROW 1 */}
-          <Stack direction="row" spacing={2}>
-            <Stack>
-              <Typography color="primary" variant="button" display="block" gutterBottom>50's Wall Ball</Typography>
-              <Typography variant="h6">{wb ? wb : 'N/A'}</Typography>
-            </Stack>
-            <Stack>
-              <Typography color="primary" variant="button" display="block" gutterBottom>Broad Jump</Typography>
-              <Typography variant="h6">{broad ? broad : 'N/A'}</Typography>
-            </Stack>
-          </Stack>
-          {/* ROW 2 */}
-          <Stack direction="row" spacing={3}>
-            <Stack>
-              <Typography color="primary" variant="button" display="block" gutterBottom>300's</Typography>
-              <Typography variant="h6">{three ? three : 'N/A'}</Typography>
-            </Stack>
-            <Stack>
-              <Typography color="primary" variant="button" display="block" gutterBottom>5-10-5</Typography>
-              <Typography variant="h6">{agility ? agility : 'N/A'}</Typography>
-            </Stack>
-  
-          </Stack>
-        </Stack>
-      </CardContent>
-    </Card>
+    <div class="flex justify-center">
+      <div class="block rounded-lg shadow-md bg-violet-500 max-w-sm text-center">
+        <div class="py-3 px-6 border-b border-gray-300">
+          <p className='text-lg text-white'>{name}</p>
+          <p className='text-sm text-violet-200 font-light'>{position ? position : 'POS'} &bull; {grad ? grad : 'GRAD'}</p>
+        </div>
+        <div className='grid grid-cols-2 gap-5 p-6 bg-white text-gray-800 rounded-b-lg'>
+          <div className="flex flex-col">
+            <p className='text-violet-500'>50's Wall Ball</p>
+            <p className='text-lg font-bold'>{wb ? wb : 'N/A'}</p>
+          </div>
+          <div className="flex flex-col">
+            <p className='text-violet-500'>Broad Jump</p>
+            <p className='text-lg font-bold'>{broad ? broad : 'N/A'}</p>
+          </div>
+          <div className="flex flex-col">
+            <p className='text-violet-500'>300's</p>
+            <p className='text-lg font-bold'>{three ? three : 'N/A'}</p>
+          </div>
+          <div className="flex flex-col">
+            <p className='text-violet-500'>5-10-5</p>
+            <p className='text-lg font-bold'>{agility ? agility : 'N/A'}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

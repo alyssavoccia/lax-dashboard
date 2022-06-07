@@ -50,21 +50,19 @@ function Navbar() {
         {currentUser && currentUser.isAdmin && currentUser.team === 'highschool' &&
           <>
             <li className="relative">
-              <Link className="flex items-center text-sm py-4 px-5 h-12 overflow-hidden text-gray-50 whitespace-nowrap rounded hover:text-violet-500 hover:bg-violet-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/hs-link-submissions'>
+              <Link className="flex relative items-center text-sm py-4 px-5 h-12 overflow-hidden text-gray-50 whitespace-nowrap rounded hover:text-violet-500 hover:bg-violet-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/hs-link-submissions'>
                 <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faLink} />
-                {/* <span>Player Submissions</span> */}
               </Link>
             </li>
           </>
         }
       </ul>
       <div className="text-center bottom-0 absolute w-full h-10 hover:bg-violet-300 transition duration-300 ease-in-out">
-        <hr className="mb-2 border-violet-400" />
-        <Link to='/sign-in-sign-up' className="text-sm pt-1 pl-2 text-gray-50 flex hover:text-violet-500 items-center justify-center" onClick={() => {
+        <Link to='/sign-in-sign-up' className="text-sm pl-2 h-full text-gray-50 flex hover:text-violet-500 items-center justify-center" onClick={() => {
           storage.removeItem('persist:root');
           auth.signOut();
         }}>
-          <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faArrowRightToBracket} />
+          <FontAwesomeIcon className="w-4 h-4 mr-2" icon={faArrowRightToBracket} />
           {/* <span>Sign Out</span> */}
         </Link>
       </div>
