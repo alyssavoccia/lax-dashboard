@@ -9,13 +9,13 @@ function DashboardPlayerSearch({ onChange }) {
   currentTeam && currentTeam.map(person => !person.isAdmin && players.push(person.displayName));
 
   return (
-    <div className="flex justify-flex-start mb-4">
+    <div className="flex justify-flex-start">
       <div className="xl:w-96">
-        <select className="form-select appearance-none
+        <select className="form-select
           block
           w-full
-          px-3
-          py-1.5
+          px-4
+          py-2
           text-base
           font-normal
           text-gray-700

@@ -21,13 +21,18 @@ function Dashboard() {
       {/* If current user is admin, show player search */}
       <div className='py-5'>
         {currentUser && currentUser.isAdmin &&
-          <DashboardPlayerSearch onChange={handlePlayerChange} /> 
+          <div class="flex items-center p-3 mb-5 rounded-lg shadow-md bg-violet-500 w-full">
+            <DashboardPlayerSearch onChange={handlePlayerChange} />
+            {(selectedPlayer === undefined || selectedPlayer === '' || selectedPlayer === null) &&
+              <p className="text-lg font-bold text-white ml-5">Please choose a player to view their dashboard.</p>
+            }
+          </div>
         }
-        { !currentUser.isAdmin
-          ? <DashboardGrid data={currentUser} />
-          : selectedPlayer === undefined || selectedPlayer === '' || selectedPlayer === null
-          ? <p className="text-lg font-bold text-slate-800">Please choose a player to view their dashboard.</p>
-          : <DashboardGrid data={selectedPlayer} />
+        {selectedPlayer &&
+          <DashboardGrid data={selectedPlayer} />
+        }
+        { !currentUser.isAdmin &&
+          <DashboardGrid data={currentUser} />
         }
       </div>
     </div>
