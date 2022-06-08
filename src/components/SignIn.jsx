@@ -39,7 +39,7 @@ function SignIn() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
       if (userCredential.user) {
-        navigate('/');
+        navigate('/dashboard');
       }
     } catch (error) {
       setOpen(true);
