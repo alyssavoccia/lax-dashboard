@@ -1,37 +1,20 @@
 import { useSelector } from 'react-redux';
-import Box from '@mui/material/Box';
-import { Container } from '@mui/material';
-import { Toolbar } from '@mui/material';
-import Title from '../components/Title';
-import Grid from '@mui/material/Grid';
 import PlayerDataTable from '../components/PlayerDataTable';
 
 function PlayerData() {
   const allTeamData = useSelector((state) => state.data.data);
 
   return (
-    <Box
-      component="main"
-      sx={{
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[100]
-            : theme.palette.grey[900],
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-      }}
-    >
-      <Toolbar />
-      <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Title>Player Data</Title>
-        <Grid container flex>
-          {allTeamData &&
-            <PlayerDataTable rows={allTeamData} />
-          }
-        </Grid>
-      </Container>
-    </Box>
+    <div className='lg:container mx-auto pl-20 pr-4 py-4'>
+      <div className="flex justify-center mb-5">
+        <div className="block p-4 rounded-lg shadow-md bg-violet-500 min-w-full">
+          <h1 className="text-white text-xl leading-tight font-medium">Player Data</h1>
+        </div>
+      </div>
+      {allTeamData &&
+        <PlayerDataTable rows={allTeamData} />
+      }
+    </div>
   )
 }
 
