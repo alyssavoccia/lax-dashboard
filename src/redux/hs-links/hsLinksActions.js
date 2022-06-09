@@ -8,21 +8,19 @@ export const setCurrentLinks = (hsLinks) => {
 };
 
 export const updateCurrentLinks = (hsLinks, playerId, test) => {
-  let updatedHsLinks = hsLinks;
-  for (const person of updatedHsLinks) {
+  for (const person of hsLinks) {
     if (person.id === playerId) {
       person[test] = null;
     }
-    if (person.wbLink === null && person.threeLink === null && person.broadLink === null && person.agilityLink === null) {
-      updatedHsLinks = hsLinks.filter(user => user.id === playerId);
-      console.log(updatedHsLinks)
+    if (!person.wbLink && !person.threeLink && !person.agilityLink && !person.broadLink) {
+      hsLinks = hsLinks.filter(user => user.id !== playerId);
     }
   }
 
   return (dispatch) => {
     dispatch({
       type: 'update_current_links',
-      payload: updatedHsLinks
+      payload: hsLinks
     });
   }
 }
