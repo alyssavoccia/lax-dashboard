@@ -4,8 +4,8 @@ import { db } from '../firebase.config';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import HsSubmissionsPageCard from '../components/HsSubmissionsPageCard';
 import { updateCurrentLinks } from '../redux/hs-links/hsLinksActions';
+import HsSubmissionsPageCard from '../components/HsSubmissionsPageCard';
 
 function HsLinkSubmissions() {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ function HsLinkSubmissions() {
   const [userSubmissions, setUserSubmissions] = useState([]);
 
   useEffect(() => {
+    setUserSubmissions([]);
     if (currentLinks.length > 0) {
       currentLinks.forEach((player, i) => {
         if (player.wbLink || player.threeLink || player.agilityLink || player.broadLink) {
@@ -21,7 +22,7 @@ function HsLinkSubmissions() {
         }
       })
     }
-  }, []);
+  }, [currentLinks]);
   
   const handleDelete = (e) => {
     const linkId = e.target.parentNode.id;
@@ -41,8 +42,8 @@ function HsLinkSubmissions() {
         </div>
       </div>
         <div className='flex flex-wrap gap-7 justify-start'>
-          {currentLinks && currentLinks.length > 0
-            ? currentLinks.map((player, i) => {
+          {userSubmissions && userSubmissions.length > 0
+            ? userSubmissions.map((player, i) => {
               return (
                 <HsSubmissionsPageCard
                   key={i}

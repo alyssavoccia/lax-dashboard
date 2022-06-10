@@ -2,10 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function HsSubmissionsPageCard({ name, playerId, wbLink, threeLink, broadLink, agilityLink, handleDelete }) {
+  console.log(threeLink)
   return (
-    <div className="flex justify-center">
-      <div className="block rounded-lg shadow-md bg-violet-500 max-w-sm text-center w-72">
-        <div className="py-3 px-6 border-b border-gray-300">
+    <div className="flex justify-center self-start">
+      <div className="block shadow-md max-w-sm text-center w-72">
+        <div className="py-3 px-6 border-b border-gray-300 bg-violet-500 rounded-t-lg">
           <p className='text-lg text-white'>{name}</p>
         </div>
         <div className='gap-5 p-6 bg-white text-gray-800 rounded-b-lg'>
@@ -24,7 +25,7 @@ function HsSubmissionsPageCard({ name, playerId, wbLink, threeLink, broadLink, a
             }
             {broadLink &&
               <li id={playerId} className="flex justify-between px-2 py-2 border-b border-gray-200 min-w-full rounded-t-lg">
-                <a href={broadLink} target='_blank' rel="noreferrer">Broad Jump Test Test</a>
+                <a href={broadLink} target='_blank' rel="noreferrer">Broad Jump Test</a>
                 <FontAwesomeIcon className="w-4 h-4 self-center text-red-500 hover:text-red-600 hover:cursor-pointer" icon={faTrash} id='broadLink' onClick={handleDelete} />
               </li>
             }
