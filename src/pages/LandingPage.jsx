@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartArea, faUser, faUserGear } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,25 +22,25 @@ function LandingPage() {
                 <button onClick={() => setShow(!show)} className="block md:hidden lg:hidden text-gray-500 hover:text-gray-700 focus:text-gray-700 fixed focus:outline-none focus:ring-2 focus:ring-gray-500 bg-white md:bg-transparent z-30 top-0 mt-3">
                   <img className="h-8 w-8" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg5.svg" alt="hide" />
                 </button>
-                <ul className="flex text-3xl md:text-base items-center py-8 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white md:bg-transparent  z-20">
+                <ul className="flex text-3xl md:text-base items-center py-6 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white md:bg-transparent  z-20">
                   <li className="text-gray-600 text-lg hover:text-violet-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
                     <a href="#features">Features</a>
                   </li>
                   <li className="text-gray-600 text-lg hover:text-violet-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
-                    <a href="#highschool-players">High School Players</a>
+                    <a href="#in-action">In Action</a>
                   </li>
                   <li className="text-gray-600 text-lg hover:text-violet-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
-                    <a href="#!">Login</a>
+                    <Link to='/sign-in-sign-up'>Login</Link>
                   </li>
                   <li className="text-white text-lg cursor-pointer md:ml-10 pt-10 md:pt-0">
-                    <a href="#!" className="bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-lg">Sign Up</a>
+                    <Link to='sign-in-sign-up' className="bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-lg">Sign Up</Link>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </nav>
-        <div className="w-full mt-28 px-6">
+        <div className="w-full mt-20 px-6">
           <div className="mt-8 relative rounded-lg bg-violet-700 container mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24 sm:pb-32 md:pb-48 xl:pb-56">
               <img className="mr-2 lg:mr-12 mt-2 lg:mt-12 absolute right-0 top-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg2.svg" alt="bg" />
               <img className="ml-2 lg:ml-12 mb-2 lg:mb-12 absolute bottom-0 left-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg3.svg" alt="bg" />
@@ -115,44 +116,181 @@ function LandingPage() {
         </div>
       </section>
 
-      <section id='highschool-players' class="pb-32 text-white text-center lg:text-left">
-        <div class="block rounded-lg shadow-lg bg-violet-600">
-          <div class="flex flex-wrap items-center">
-            <div class="block w-full lg:flex grow-0 shrink-0 basis-auto lg:w-6/12 xl:w-4/12">
-              <img
-                src="https://mdbootstrap.com/img/new/ecommerce/vertical/086.jpg"
-                alt="Trendy Pants and Shoes"
-                class="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg"
-              />
-            </div>
-            <div class="container grow-0 shrink-0 basis-auto w-full lg:w-6/12 xl:w-8/12">
-              <div class="px-6 py-12 md:px-12">
-                <h2 class="text-3xl font-bold mb-4 display-5">High School Players</h2>
-                <p class="mb-12">
-                  Nunc tincidunt vulputate elit. Mauris varius purus malesuada neque iaculis
-                  malesuada. Aenean gravida magna orci, non efficitur est porta id. Donec magna
-                  diam.
-                </p>
+      <section class="pb-20 flex flex-col bg-gray-100 text-gray-700 items-center">
+        <h2 class="text-3xl font-bold mb-12 text-center">Feature Breakdown</h2>
 
-                <div class="grid lg:gap-x-12 md:grid-cols-3">
-                  <div class="mb-12 md:mb-0">
-                    <h2 class="text-3xl font-bold mb-4">1000</h2>
-                    <h5 class="text-lg font-medium tex mb-0">Happy customers</h5>
-                  </div>
-
-                  <div class="mb-12 md:mb-0">
-                    <h2 class="text-3xl font-bold mb-4">70%</h2>
-                    <h5 class="text-lg font-medium mb-0">Growth</h5>
-                  </div>
-
-                  <div class="">
-                    <h2 class="text-3xl font-bold mb-4">49</h2>
-                    <h5 class="text-lg font-medium mb-0">Projects</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="container grid lg:grid-cols-3 gap-6">
+          <div class="mb-12">
+            <p class="font-bold mb-4 text-violet-600">Dashboard</p>
+            <p class="text-gray-500">
+              The Dashboard page shows multiple charts to show how player scores compare
+              to other members on the team. Team admins are able to use a dropdown to view
+              each players dashboard.
+            </p>
           </div>
+
+          <div class="mb-12">
+            <p class="font-bold mb-4 text-violet-600">Profile Page</p>
+            <p class="text-gray-500">
+              For club & college players the profile page displays their individual scores for each test.
+              For highschool players, they will see their current scores. They will also have
+              the ability to submit video links for each test.
+            </p>
+          </div>
+
+          <div class="mb-12">
+            <p class="font-bold mb-4 text-violet-600">Team Page</p>
+            <p class="text-gray-500">
+              The team page allows admins to see all of their players data on individual player cards.
+            </p>
+          </div>
+
+          <div class="col-md-12 mb-12">
+            <p class="font-bold mb-4 text-violet-600">Player Data Page</p>
+            <p class="text-gray-500">
+              The player data page provides a table that team admins are able to easily update. This
+              allows them to easily change player scores after each time they test.
+            </p>
+          </div>
+
+          <div class="mb-12">
+            <p class="font-bold mb-4 text-violet-600">Highschool Link Submisssions Page</p>
+            <p class="text-gray-500">
+              The highschool link submissions page allows highschool admins to see cards for each
+              highschool user that has submitted a test video to be viewed.
+            </p>
+          </div>
+
+          <div class="mb-12">
+            <p class="font-bold mb-4 text-violet-600">Customer Support</p>
+            <p class="text-gray-500">
+              Customer support is extremely important and we provide continuous support for any issue
+              that users are experiencing. 
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="in-action" class="pb-32 flex flex-col items-center bg-gray-100 text-gray-700">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+          See our product <u class="text-violet-600">in action</u>
+        </h2>
+
+        <div class="container grid lg:grid-cols-3 gap-6">
+          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+            style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
+            <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg"
+              class="w-full transition duration-300 ease-linear align-middle" />
+          </div>
+
+          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+            style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
+            <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg"
+              class="w-full transition duration-300 ease-linear align-middle" />
+          </div>
+
+          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+            style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
+            <img src="https://mdbootstrap.com/img/new/standard/city/045.jpg"
+              class="w-full transition duration-300 ease-linear align-middle" />
+          </div>
+
+          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+            style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
+            <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg"
+              class="w-full transition duration-300 ease-linear align-middle" />
+          </div>
+
+          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+            style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
+            <img src="https://mdbootstrap.com/img/new/standard/city/048.jpg"
+              class="w-full transition duration-300 ease-linear align-middle" />
+          </div>
+
+          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+            style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
+            <img src="https://mdbootstrap.com/img/new/standard/city/049.jpg"
+              class="w-full transition duration-300 ease-linear align-middle" />
+          </div>
+        </div>
+      </section>
+
+      <section class="py-20 bg-violet-600 rounded-lg text-center text-gray-800">
+        <div class="max-w-[700px] mx-auto px-3 lg:px-6">
+          <h2 class="text-3xl text-white font-bold mb-12">Contact us</h2>
+          <form>
+            <div class="form-group mb-6">
+              <input type="text" class="form-control block
+                w-full
+                px-3
+                py-1.5
+                text-base
+                font-normal
+                text-white
+                bg-white bg-clip-padding
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none" id="exampleInput7"
+                placeholder="Name" />
+            </div>
+            <div class="form-group mb-6">
+              <input type="email" class="form-control block
+                w-full
+                px-3
+                py-1.5
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none" id="exampleInput8"
+                placeholder="Email address" />
+            </div>
+            <div class="form-group mb-6">
+              <textarea class="
+                form-control
+                block
+                w-full
+                px-3
+                py-1.5
+                text-base
+                font-normal
+                text-gray-700
+                bg-white bg-clip-padding
+                border border-solid border-gray-300
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+              " id="exampleFormControlTextarea13" rows="3" placeholder="Message"></textarea>
+            </div>
+            <button type="submit" class="
+              w-full
+              px-6
+              py-2.5
+              bg-white
+              text-violet-600
+              font-medium
+              text-xs
+              leading-tight
+              uppercase
+              rounded
+              shadow-md
+              hover:bg-gray-100 hover:shadow-lg
+              focus:bg-gray-100 focus:shadow-lg focus:outline-none focus:ring-0
+              active:bg-gray-100 active:shadow-lg
+              transition
+              duration-150
+              ease-in-out">Send</button>
+          </form>
         </div>
       </section>
     </>
