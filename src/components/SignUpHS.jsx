@@ -87,7 +87,7 @@ function SignUpHs({ handleUserChange }) {
       <h1 tabIndex={0} aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800">Highschool Sign Up</h1>
       <p className="text-sm my-4 font-medium leading-none text-gray-500 mb-8">
         Not a Highschool User?
-        <span className="text-violet-600 hover:text-violet-700 cursor-pointer" onClick={handleUserChange}> Sign up here</span>
+        <span className="text-cyan-500 hover:text-cyan-600 cursor-pointer" onClick={handleUserChange}> Sign up here</span>
       </p>
       <div>
         <lable className="text-md font-medium leading-none text-gray-800">Full Name</lable>
@@ -162,7 +162,7 @@ function SignUpHs({ handleUserChange }) {
         </div>
       </div>
       <div className="mt-8">
-        <button className="focus:ring-2 focus:ring-offset-2 focus:ring-violet-700 text-sm font-semibold leading-none text-white focus:outline-none bg-violet-700 border rounded hover:bg-violet-600 py-4 w-full" type="submit" onClick={handleSubmit} disabled={loading}>Checkout & Sign Up</button>
+        <button className="focus:ring-2 focus:ring-offset-2 focus:ring-violet-700 text-sm font-semibold leading-none text-white focus:outline-none bg-cyan-500 border rounded hover:bg-cyan-600 py-4 w-full" type="submit" onClick={handleSubmit} disabled={loading}>Checkout & Sign Up</button>
       </div>
     </>
   )

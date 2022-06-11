@@ -6,7 +6,7 @@ function HsSubmissionsPageCard({ name, playerId, wbLink, threeLink, broadLink, a
   return (
     <div className="flex justify-center self-start">
       <div className="block shadow-md max-w-sm text-center w-72">
-        <div className="py-3 px-6 border-b border-gray-300 bg-violet-500 rounded-t-lg">
+        <div className="py-3 px-6 border-b border-gray-300 bg-cyan-500 rounded-t-lg">
           <p className='text-lg text-white'>{name}</p>
         </div>
         <div className='gap-5 p-6 bg-white text-gray-800 rounded-b-lg'>

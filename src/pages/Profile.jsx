@@ -57,7 +57,7 @@ function Profile() {
       </div>
       
       {(!currentUser.isAdmin && currentUser.team === 'highschool') && 
-        <div className="block rounded-lg shadow-md bg-violet-500 w-full text-left mt-8">
+        <div className="block rounded-lg shadow-md bg-cyan-500 w-full text-left mt-8">
           <div className="text-md text-white font-bold py-3 px-6">
             Upload Links
           </div>

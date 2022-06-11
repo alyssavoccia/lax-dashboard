@@ -37,7 +37,7 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-tl from-violet-700 to-violet-500 w-full py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-tl from-cyan-600 to-cyan-400 w-full py-16 px-4">
       <div className="flex flex-col items-center justify-center">
         <Link to='/'>
           <img className="cursor-pointer w-14 h-14 mb-4" src="https://hotemoji.com/images/dl/5/lacrosse-emoji-by-twitter.png" alt="logo" />
@@ -46,7 +46,7 @@ function Login() {
           <h1 tabIndex={0} aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800">Login to your account</h1>
           <p className="text-sm my-4 font-medium leading-none text-gray-500">
             Dont have account?{" "}
-            <span tabIndex={0} role="link" aria-label="Sign up here" className="text-sm font-medium leading-none underline text-gray-800 cursor-pointer">
+            <span tabIndex={0} role="link" aria-label="Sign up here" className="text-sm font-medium leading-none underline text-cyan-500 hover:text-cyan-600 cursor-pointer">
               <Link to='/sign-up'>Sign up here</Link>
             </span>
           </p>
@@ -61,7 +61,7 @@ function Login() {
             </div>
           </div>
           <div className="mt-8">
-            <button className="focus:ring-2 focus:ring-offset-2 focus:ring-violet-700 text-sm font-semibold leading-none text-white focus:outline-none bg-violet-700 border rounded hover:bg-violet-600 py-4 w-full" type="submit" onClick={handleSubmit}>Login</button>
+            <button className="focus:ring-2 focus:ring-offset-2 focus:ring-cyan-700 text-sm font-semibold leading-none text-white focus:outline-none bg-cyan-500 border rounded hover:bg-cyan-600 py-4 w-full" type="submit" onClick={handleSubmit}>Login</button>
           </div>
         </div>
       </div>

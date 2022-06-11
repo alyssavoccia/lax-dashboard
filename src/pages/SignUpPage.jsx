@@ -11,7 +11,7 @@ function SignUpPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-tl from-violet-700 to-violet-500 w-full py-16 px-4">
+    <div className="min-h-screen bg-gradient-to-tl from-cyan-600 to-cyan-400 w-full py-16 px-4">
       <div className="flex flex-col items-center justify-center">
         <Link to='/'>
           <img className="cursor-pointer w-14 h-14 mb-4" src="https://hotemoji.com/images/dl/5/lacrosse-emoji-by-twitter.png" alt="logo" />

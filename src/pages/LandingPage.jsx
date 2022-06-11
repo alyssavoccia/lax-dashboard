@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartArea, faUser, faUserGear } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo.png';
+import preview from '../assets/preview.png';
+import dashboard from '../assets/dashboard.png';
+import profile from '../assets/profile.png';
+import team from '../assets/team.png';
+import playerData from '../assets/playerData.png';
+import hsLinkSubmissions from '../assets/hsLinkSubmissions.png';
+import hsProfile from '../assets/hsProfile.png';
 
 function LandingPage() {
   const [show, setShow] = useState(false);
@@ -10,14 +17,14 @@ function LandingPage() {
   return (
     <>
       <section className="bg-gray-100 overflow-y-hidden">
-        <nav className="w-full bg-gray-100 fixed z-10">
+        <nav className="w-full bg-gray-100 mt-6">
           <div className="container mx-auto px-6 flex items-center justify-between">
             <div className="flex items-center" aria-label="Home" role="img">
               <img className="cursor-pointer w-8" src={logo} alt="logo" />
-              <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800">Lax Dashboard</p>
+              <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-slate-700">Lax Dashboard</p>
             </div>
             <div>
-              <button onClick={() => setShow(!show)} className="sm:block md:hidden lg:hidden text-gray-500 hover:text-gray-700 focus:text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">
+              <button onClick={() => setShow(!show)} className="sm:block md:hidden lg:hidden text-slate-500 hover:text-slate-700 focus:text-slate-700 focus:outline-none focus:ring-2 focus:ring-gray-500">
                 <img className="h-8 w-8" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg4.svg" alt="show" />
               </button>
               <div id="menu" className={`md:block lg:block ${show ? '' : 'hidden'}`}>
@@ -25,38 +32,38 @@ function LandingPage() {
                   <img className="h-8 w-8" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg5.svg" alt="hide" />
                 </button>
                 <ul className="flex text-3xl md:text-base items-center py-6 md:flex flex-col md:flex-row justify-center fixed md:relative top-0 bottom-0 left-0 right-0 bg-white md:bg-transparent  z-20">
-                  <li className="text-gray-600 text-lg hover:text-violet-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                  <li className="text-gray-600 text-lg hover:text-cyan-500 cursor-pointer md:ml-10 pt-10 md:pt-0">
                     <a href="#features">Features</a>
                   </li>
-                  <li className="text-gray-600 text-lg hover:text-violet-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                  <li className="text-gray-600 text-lg hover:text-cyan-500 cursor-pointer md:ml-10 pt-10 md:pt-0">
                     <a href="#in-action">In Action</a>
                   </li>
-                  <li className="text-gray-600 text-lg hover:text-violet-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
+                  <li className="text-gray-600 text-lg hover:text-cyan-500 cursor-pointer md:ml-10 pt-10 md:pt-0">
                     <Link to='/login'>Login</Link>
                   </li>
                   <li className="text-white text-lg cursor-pointer md:ml-10 pt-10 md:pt-0">
-                    <Link to='sign-up' className="bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded">Sign Up</Link>
+                    <Link to='sign-up' className="bg-cyan-500 hover:bg-cyan-600 px-4 py-2 rounded">Sign Up</Link>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
         </nav>
-        <div className="w-full mt-20 px-6">
-          <div className="mt-8 relative rounded-lg bg-violet-700 container mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24 sm:pb-32 md:pb-48 xl:pb-56">
+        <div className="w-full mt-4 px-6">
+          <div className="mt-8 relative rounded-lg bg-cyan-500 container mx-auto flex flex-col items-center pt-12 sm:pt-24 pb-24 sm:pb-32 md:pb-48 xl:pb-56">
               <img className="mr-2 lg:mr-12 mt-2 lg:mt-12 absolute right-0 top-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg2.svg" alt="bg" />
               <img className="ml-2 lg:ml-12 mb-2 lg:mb-12 absolute bottom-0 left-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/center_aligned_with_image-svg3.svg" alt="bg" />
               <div className="w-11/12 sm:w-2/3 mb-5 sm:mb-10">
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center text-white font-bold leading-tight">See how you stack up against the competition</h1>
               </div>
               <div className="flex justify-center items-center mb-10 sm:mb-20">
-                <button className="hover:text-white hover:bg-transparent lg:text-xl hover:border-white border bg-white transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-violet-700	focus:ring-white rounded text-violet-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">Sign Up</button>
-                <a className="hover:bg-white hover:text-violet-600 lg:text-xl hover:border-violet-600 ml-3 sm:ml-6 bg-transparent transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-violet-700 focus:ring-white hover:bg-indigo-700-800 rounded border border-white text-white px-4 sm:px-8 py-1 sm:py-3 text-sm" href='#features'>Learn More</a>
+                <button className="hover:text-white hover:bg-transparent lg:text-xl hover:border-white border bg-white transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-cyan-700	focus:ring-white rounded text-cyan-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">Sign Up</button>
+                <a className="hover:bg-white hover:text-cyan-600 lg:text-xl hover:border-cyan-600 ml-3 sm:ml-6 bg-transparent transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-cyan-700 focus:ring-white hover:bg-indigo-700-800 rounded border border-white text-white px-4 sm:px-8 py-1 sm:py-3 text-sm" href='#features'>Learn More</a>
               </div>
           </div>
           <div className="container mx-auto flex justify-center md:-mt-56 -mt-20 sm:-mt-40">
             <div className="relative sm:w-2/3 w-11/12">
-              <img src="https://tuk-cdn.s3.amazonaws.com/assets/components/hero/h_2.png" alt="Sample Page" role="img" />
+              <img src={preview} alt="Example of Dashboard Page" />
             </div>
           </div>
         </div>
@@ -68,7 +75,7 @@ function LandingPage() {
           <div className="mb-12 lg:mb-0">
             <div className="rounded-lg shadow-lg h-full block bg-white">
               <div className="flex justify-center">
-                <div className="p-4 bg-violet-600 rounded-full shadow-lg inline-block -mt-8">
+                <div className="p-4 bg-cyan-500 rounded-full shadow-lg inline-block -mt-8">
                   <FontAwesomeIcon className="w-8 h-8 text-white self-center" icon={faChartArea} />
                 </div>
               </div>
@@ -84,7 +91,7 @@ function LandingPage() {
           <div className="mb-12 lg:mb-0">
             <div className="rounded-lg shadow-lg h-full block bg-white">
               <div className="flex justify-center">
-                <div className="p-4 bg-violet-600 rounded-full shadow-lg inline-block -mt-8">
+                <div className="p-4 bg-cyan-500 rounded-full shadow-lg inline-block -mt-8">
                   <FontAwesomeIcon className="w-8 h-8 text-white self-center" icon={faUser} />
                 </div>
               </div>
@@ -101,7 +108,7 @@ function LandingPage() {
           <div className="">
             <div className="rounded-lg shadow-lg h-full block bg-white">
               <div className="flex justify-center">
-                <div className="p-4 bg-violet-600 rounded-full shadow-lg inline-block -mt-8">
+                <div className="p-4 bg-cyan-500 rounded-full shadow-lg inline-block -mt-8">
                   <FontAwesomeIcon className="w-8 h-8 text-white self-center" icon={faUserGear} />
                 </div>
               </div>
@@ -123,7 +130,7 @@ function LandingPage() {
 
         <div className="container grid lg:grid-cols-3 gap-6">
           <div className="mb-12">
-            <p className="font-bold mb-4 text-violet-600">Dashboard</p>
+            <p className="font-bold mb-4 text-cyan-500">Dashboard</p>
             <p className="text-gray-500">
               The Dashboard page shows multiple charts to show how player scores compare
               to other members on the team. Team admins are able to use a dropdown to view
@@ -132,7 +139,7 @@ function LandingPage() {
           </div>
 
           <div className="mb-12">
-            <p className="font-bold mb-4 text-violet-600">Profile Page</p>
+            <p className="font-bold mb-4 text-cyan-500">Profile Page</p>
             <p className="text-gray-500">
               For club & college players the profile page displays their individual scores for each test.
               For highschool players, they will see their current scores. They will also have
@@ -141,14 +148,14 @@ function LandingPage() {
           </div>
 
           <div className="mb-12">
-            <p className="font-bold mb-4 text-violet-600">Team Page</p>
+            <p className="font-bold mb-4 text-cyan-500">Team Page</p>
             <p className="text-gray-500">
               The team page allows admins to see all of their players data on individual player cards.
             </p>
           </div>
 
           <div className="col-md-12 mb-12">
-            <p className="font-bold mb-4 text-violet-600">Player Data Page</p>
+            <p className="font-bold mb-4 text-cyan-500">Player Data Page</p>
             <p className="text-gray-500">
               The player data page provides a table that team admins are able to easily update. This
               allows them to easily change player scores after each time they test.
@@ -156,7 +163,7 @@ function LandingPage() {
           </div>
 
           <div className="mb-12">
-            <p className="font-bold mb-4 text-violet-600">Highschool Link Submisssions Page</p>
+            <p className="font-bold mb-4 text-cyan-500">Highschool Link Submisssions Page</p>
             <p className="text-gray-500">
               The highschool link submissions page allows highschool admins to see cards for each
               highschool user that has submitted a test video to be viewed.
@@ -164,7 +171,7 @@ function LandingPage() {
           </div>
 
           <div className="mb-12">
-            <p className="font-bold mb-4 text-violet-600">Customer Support</p>
+            <p className="font-bold mb-4 text-cyan-500">Customer Support</p>
             <p className="text-gray-500">
               Customer support is extremely important and we provide continuous support for any issue
               that users are experiencing. 
@@ -175,49 +182,55 @@ function LandingPage() {
 
       <section id="in-action" className="pb-32 flex flex-col items-center bg-gray-100 text-gray-700">
         <h2 className="text-3xl font-bold mb-12 text-center">
-          See our product <u className="text-violet-600">in action</u>
+          See our product <u className="text-cyan-500">in action</u>
         </h2>
 
         <div className="container grid lg:grid-cols-3 gap-6">
           <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
-            <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg"
-              className="w-full transition duration-300 ease-linear align-middle" />
+            <img src={dashboard}
+              className="w-full transition duration-300 ease-linear align-middle"
+              alt="Dashboard page for players" />
           </div>
 
           <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
-            <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg"
-              className="w-full transition duration-300 ease-linear align-middle" />
+            <img src={profile}
+              className="w-full transition duration-300 ease-linear align-middle"
+              alt="Player profile page" />
           </div>
 
           <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
-            <img src="https://mdbootstrap.com/img/new/standard/city/045.jpg"
-              className="w-full transition duration-300 ease-linear align-middle" />
+            <img src={team}
+              className="w-full transition duration-300 ease-linear align-middle"
+              alt="Team page for admins" />
           </div>
 
           <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
-            <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg"
-              className="w-full transition duration-300 ease-linear align-middle" />
+            <img src={playerData}
+              className="w-full transition duration-300 ease-linear align-middle"
+              alt="Player data page for admins" />
           </div>
 
           <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
-            <img src="https://mdbootstrap.com/img/new/standard/city/048.jpg"
-              className="w-full transition duration-300 ease-linear align-middle" />
+            <img src={hsLinkSubmissions}
+              className="w-full transition duration-300 ease-linear align-middle"
+              alt="Admin page to show all highschool link submissions" />
           </div>
 
           <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
-            <img src="https://mdbootstrap.com/img/new/standard/city/049.jpg"
-              className="w-full transition duration-300 ease-linear align-middle" />
+            <img src={hsProfile}
+              className="w-full transition duration-300 ease-linear align-middle"
+              alt="High school profile that shows upload links" />
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-violet-600 rounded-lg text-center text-gray-800">
+      <section className="py-20 bg-cyan-500 rounded-lg text-center text-gray-800">
         <div className="max-w-[700px] mx-auto px-3 lg:px-6">
           <h2 className="text-3xl text-white font-bold mb-12">Contact us</h2>
           <form>
@@ -279,7 +292,7 @@ function LandingPage() {
               px-6
               py-2.5
               bg-white
-              text-violet-600
+              text-cyan-500
               font-medium
               text-xs
               leading-tight
