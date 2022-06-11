@@ -17,10 +17,10 @@ function DashboardGrid({ data }) {
 
   useEffect(() => {
     allTeamData && allTeamData.forEach(async (person, index) => {
-        person.wb !== null && setWbScores(prevScores => [...prevScores, person.wb]);
-        person.three !== null && setThreeScores(prevScores => [...prevScores, person.three]);
-        person.broad !== null && setBroadScores(prevScores => [...prevScores, person.broad]);
-        person.agility !== null && setAgilityScores(prevScores => [...prevScores, person.agility]);
+      person.wb !== null && setWbScores(prevScores => [...prevScores, person.wb]);
+      person.three !== null && setThreeScores(prevScores => [...prevScores, person.three]);
+      person.broad !== null && setBroadScores(prevScores => [...prevScores, person.broad]);
+      person.agility !== null && setAgilityScores(prevScores => [...prevScores, person.agility]);
 
       if (data === person.displayName || data.displayName === person.displayName) {
         setCurrentPlayerData({...person});

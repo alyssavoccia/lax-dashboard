@@ -15,7 +15,7 @@ function Navbar() {
       <div className="py-4 mb-2 bg-slate-600">
         <div className="flex items-center">
           <div className="flex justify-around grow">
-            <p className="text-md font-semibold text-gray-50">LD</p>
+            <img className='w-7' src="https://hotemoji.com/images/dl/5/lacrosse-emoji-by-twitter.png" alt="Lacrosse Stick Logo" />
           </div>
         </div>
       </div>

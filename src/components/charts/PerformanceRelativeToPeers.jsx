@@ -10,22 +10,33 @@ function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilit
     return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b, 0) / array.length);
   }
 
+  const performanceToPeers = (data, array) => {
+    let result;
+    if (data) {
+      result = (data - getMean(array)) / getStandardDeviation(array) * -1
+    }
+
+    if (!isNaN(result)) {
+      return result;
+    }
+  }
+
   const data = [
     {
       name: "50's WB",
-      player: currentPlayerData.wb === null ? 0 : (currentPlayerData.wb - getMean(wbScores)) / getStandardDeviation(wbScores) * -1
+      player: performanceToPeers(currentPlayerData.wb, wbScores)
     },
     {
       name: "300's",
-      player: currentPlayerData.three === null ? 0 : (currentPlayerData.three - getMean(threeScores)) / getStandardDeviation(threeScores) * -1
+      player: performanceToPeers(currentPlayerData.three, threeScores)
     },
     {
       name: 'Broad',
-      player: currentPlayerData.broad === null ? 0 : (currentPlayerData.broad - getMean(broadScores)) / getStandardDeviation(broadScores) * -1
+      player: performanceToPeers(currentPlayerData.broad, broadScores)
     },
     {
       name: '5-10-5',
-      player: currentPlayerData.agility === null ? 0 : (currentPlayerData.agility - getMean(agilityScores)) / getStandardDeviation(agilityScores) * -1
+      player: performanceToPeers(currentPlayerData.agility, agilityScores)
     }
   ];
 
