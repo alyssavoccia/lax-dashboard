@@ -63,7 +63,8 @@ function App() {
         const docSnap = await getDoc(docRef);
         const userDataObj = docSnap.data();
         if (userDataObj) {
-          usersData.push({...person, ...userDataObj});
+          const playerObj = {...person, ...userDataObj};
+          usersData.push(playerObj);
         }
 
         if (usersData.length === users.length) {
