@@ -90,29 +90,29 @@ function SignUpHs({ handleUserChange }) {
         <span className="text-cyan-500 hover:text-cyan-600 cursor-pointer" onClick={handleUserChange}> Sign up here</span>
       </p>
       <div>
-        <lable className="text-md font-medium leading-none text-gray-800">Full Name</lable>
+        <label className="text-md font-medium leading-none text-gray-800">Full Name</label>
         <input aria-label="enter email adress" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='displayName' id="displayName" autoFocus value={displayName} onChange={handleChange} />
       </div>
       <div className="mt-6">
-        <lable className="text-md font-medium leading-none text-gray-800">Email</lable>
+        <label className="text-md font-medium leading-none text-gray-800">Email</label>
         <input aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='email' id="email" autoComplete="email" autoFocus value={email} onChange={handleChange} />
       </div>
       <div className="mt-6  w-full">
-        <lable className="text-md font-medium leading-none text-gray-800">Password</lable>
+        <label className="text-md font-medium leading-none text-gray-800">Password</label>
         <div className="relative flex items-center justify-center">
           <input aria-label="enter Password" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='password' id="password" autoComplete="current-password" value={password} onChange={handleChange} />
         </div>
       </div>
       <div className="mt-6  w-full">
-        <lable className="text-md font-medium leading-none text-gray-800">Confirm Password</lable>
+        <label className="text-md font-medium leading-none text-gray-800">Confirm Password</label>
         <div className="relative flex items-center justify-center">
           <input aria-label="enter Password" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='confirmPassword' id="confirmPassword" value={confirmPassword} onChange={handleChange} />
         </div>
       </div>
       <div className="mt-6  w-full">
-        <lable className="text-md font-medium leading-none text-gray-800">Grad Year</lable>
+        <label className="text-md font-medium leading-none text-gray-800">Grad Year</label>
         <div className="relative flex items-center justify-center">
-          <select class="form-select
+          <select className="form-select
             block
             w-full
             px-3
@@ -136,9 +136,9 @@ function SignUpHs({ handleUserChange }) {
         </div>
       </div>
       <div className="mt-6  w-full">
-        <lable className="text-md font-medium leading-none text-gray-800">Position</lable>
+        <label className="text-md font-medium leading-none text-gray-800">Position</label>
         <div className="relative flex items-center justify-center">
-          <select class="form-select
+          <select className="form-select
             block
             w-full
             px-3
