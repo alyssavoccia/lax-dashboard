@@ -13,7 +13,6 @@ function DashboardGrid({ data }) {
   const [threeScores, setThreeScores] = useState([]);
   const [broadScores, setBroadScores] = useState([]);
   const [agilityScores, setAgilityScores] = useState([]);
-  const currentTeam = useSelector((state) => state.team.team);
   const allTeamData = useSelector((state) => state.data.data);
 
   useEffect(() => {
@@ -31,7 +30,7 @@ function DashboardGrid({ data }) {
         setLoading(false);
       }
     });
-  }, [allTeamData, currentTeam.length, data]);
+  }, [allTeamData, data]);
 
   if (loading) {
     return (

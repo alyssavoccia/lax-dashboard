@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function HsSubmissionsPageCard({ name, playerId, wbLink, threeLink, broadLink, agilityLink, handleDelete }) {
-  console.log(threeLink)
   return (
     <div className="flex justify-center self-start">
       <div className="block shadow-md max-w-sm text-center w-72">

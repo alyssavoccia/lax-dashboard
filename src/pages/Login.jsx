@@ -51,11 +51,11 @@ function Login() {
             </span>
           </p>
           <div>
-            <lable className="text-md font-medium leading-none text-gray-800">Email</lable>
+            <label className="text-md font-medium leading-none text-gray-800">Email</label>
             <input aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='email' autoComplete="email" autoFocus value={email} onChange={handleChange} />
           </div>
           <div className="mt-6  w-full">
-            <lable className="text-md font-medium leading-none text-gray-800">Password</lable>
+            <label className="text-md font-medium leading-none text-gray-800">Password</label>
             <div className="relative flex items-center justify-center">
               <input aria-label="enter Password" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='password' autoComplete="current-password" value={password} onChange={handleChange} />
             </div>

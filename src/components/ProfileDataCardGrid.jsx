@@ -4,7 +4,7 @@ function ProfileDataCardGrid(userData) {
   const {agility, broad, three, wb} = userData.data;
 
   return (
-    <div class="flex flex-wrap justify-center gap-4 mt-8 w-full">
+    <div className="flex flex-wrap justify-center gap-4 mt-8 w-full">
       {/* ROW 1 */}
         <ProfileDataCard 
           dataTitle="50's Wall Ball" 

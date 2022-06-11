@@ -46,7 +46,7 @@ function App() {
         const docRef = doc(db, currentUser.team, person.id, 'links', person.id);
         const docSnap = await getDoc(docRef);
         const userDataObj = docSnap.data();
-        if (userDataObj.agilityLink || userDataObj.broadLink || userDataObj.threeLink || userDataObj.wbLink) {
+        if (userDataObj.agilityLink !== null || userDataObj.broadLink !== null || userDataObj.threeLink !== null || userDataObj.wbLink !== null) {
           hsLinks.push({...person, ...userDataObj});
         }
 

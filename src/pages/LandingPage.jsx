@@ -69,7 +69,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <section id="features" class="pt-12 pb-32 px-8 bg-gray-100 text-gray-700 text-center flex flex-col items-center">
+      <section id="features" className="pt-12 pb-32 px-8 bg-gray-100 text-gray-700 text-center flex flex-col items-center">
         <h2 className="text-3xl font-bold mb-20">What we Offer</h2>
         <div className="container grid lg:gap-x-12 lg:grid-cols-3">
           <div className="mb-12 lg:mb-0">
