@@ -22,13 +22,11 @@ function Navbar() {
         <li className="relative">
           <Link className="flex items-center py-4 px-5 h-12 overflow-hidden text-gray-50 whitespace-nowrap rounded hover:text-violet-500 hover:bg-violet-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/dashboard'>
             <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faChartArea} />
-            {/* <span>Dashboard</span> */}
           </Link>
         </li>
         <li className="relative">
           <Link className="flex items-center text-sm py-4 px-5 h-12 overflow-hidden text-gray-50 whitespace-nowrap rounded hover:text-violet-500 hover:bg-violet-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/profile'>
             <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faUserLarge} />
-            {/* <span>Profile</span> */}
           </Link>
         </li>
         {currentUser && currentUser.isAdmin &&
@@ -36,13 +34,11 @@ function Navbar() {
             <li className="relative">
               <Link className="flex items-center text-sm py-4 px-5 h-12 overflow-hidden text-gray-50 whitespace-nowrap rounded hover:text-violet-500 hover:bg-violet-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/team'>
                 <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faPeopleGroup} />
-                {/* <span>Team</span> */}
               </Link>
             </li>
             <li className="relative">
               <Link className="flex items-center text-sm py-4 px-5 h-12 overflow-hidden text-gray-50 whitespace-nowrap rounded hover:text-violet-500 hover:bg-violet-300 transition duration-300 ease-in-out" href="#!" data-mdb-ripple="true" data-mdb-ripple-color="primary" to='/player-data'>
                 <FontAwesomeIcon className="w-4 h-4 mr-3" icon={faTable} />
-                {/* <span>Player Data</span> */}
               </Link>
             </li>
           </>
@@ -58,12 +54,11 @@ function Navbar() {
         }
       </ul>
       <div className="text-center bottom-0 absolute w-full h-10 hover:bg-violet-300 transition duration-300 ease-in-out">
-        <Link to='/sign-in-sign-up' className="text-sm pl-2 h-full text-gray-50 flex hover:text-violet-500 items-center justify-center" onClick={() => {
+        <Link to='/' className="text-sm pl-2 h-full text-gray-50 flex hover:text-violet-500 items-center justify-center" onClick={() => {
           storage.removeItem('persist:root');
           auth.signOut();
         }}>
           <FontAwesomeIcon className="w-4 h-4 mr-2" icon={faArrowRightToBracket} />
-          {/* <span>Sign Out</span> */}
         </Link>
       </div>
     </div>

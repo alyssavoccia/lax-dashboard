@@ -11,6 +11,8 @@ import { setCurrentData } from './redux/data/dataActions';
 import { setCurrentLinks } from './redux/hs-links/hsLinksActions';
 import Spinner from './components/Spinner';
 import LandingPage from './pages/LandingPage';
+import Login from './pages/Login';
+import SignUpPage from './pages/SignUpPage';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
@@ -117,9 +119,11 @@ function App() {
   
   return (
     <div className='min-h-screen bg-gray-200'>
-      {location.pathname === '/sign-in-sign-up' ? <></> : location.pathname === '/' ? <></> : <Navbar />}
+      {location.pathname === '/login' ? <></> : location.pathname === '/sign-up' ? <></> : location.pathname === '/' ? <></> : <Navbar />}
       <Routes>
         <Route path='/' element={<LandingPage />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/sign-up' element={<SignUpPage />} />
         <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
         <Route path='/successful-payment' element={<SuccessfulPayment />} />
         <Route path='/dashboard' element={<PrivateRoute />}>

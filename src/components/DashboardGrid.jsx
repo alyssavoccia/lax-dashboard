@@ -19,7 +19,7 @@ function DashboardGrid({ data }) {
   const allTeamData = useSelector((state) => state.data.data);
 
   useEffect(() => {
-    allTeamData.forEach(async (person, index) => {
+    allTeamData && allTeamData.forEach(async (person, index) => {
         person.wb !== null && setWbScores(prevScores => [...prevScores, person.wb]);
         person.three !== null && setThreeScores(prevScores => [...prevScores, person.three]);
         person.broad !== null && setBroadScores(prevScores => [...prevScores, person.broad]);

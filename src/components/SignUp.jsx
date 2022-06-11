@@ -1,22 +1,8 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import 'firebase/compat/auth';
 import { db, auth, createUserProfileDocument } from '../firebase.config';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import Typography from '@mui/material/Typography';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import SignUpHS from './SignUpHS';
 
-function SignUp() {
-  const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState('error');
-  const [message, setMessage] = useState('');
+function SignUp({ handleUserChange }) {
   const [formData, setFormData] = useState({
     displayName: '',
     email: '',
@@ -41,15 +27,11 @@ function SignUp() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setSeverity('error');
-      setMessage('Passwords DO NOT match.');
-      setOpen(true);
+      alert('Passwords DO NOT match.');
     }
 
     if (password.length < 6) {
-      setSeverity('error');
-      setMessage('Password must be AT LEAST 6 characters long.');
-      setOpen(true);
+      alert('Password must be AT LEAST 6 characters long.');
       return;
     }
 
@@ -58,9 +40,7 @@ function SignUp() {
     const teamSnapshot = await teamRef.get();
 
     if (teamSnapshot.size === 0) {
-      setSeverity('error');
-      setMessage('Team DOES NOT exist.');
-      setOpen(true);
+      alert('Team DOES NOT exist.');
       return;
     }
 
@@ -72,111 +52,48 @@ function SignUp() {
 
       navigate('/');
     } catch (error) {
-      setSeverity('error');
-      setMessage('Error signing up. Please try again.');
-      setOpen(true);
+      console.log(error);
     }
   }
 
-  const handleClose = () => {
-    setOpen(false);
-  }
-
   return (
-    <Grid item xs={12} md={6}>
-      <Avatar sx={{ m: '15px auto', bgcolor: '#222' }}>
-        <PersonOutlineIcon />
-      </Avatar>
-      <Typography component="h1" variant="h5">
-        Sign Up
-      </Typography>
-      <Box component="form" noValidate sx={{ mt: 1 }}>
-        <TextField
-          inputProps={{
-            form: {
-              autocomplete: 'off'
-            }
-          }}
-          margin="normal"
-          required
-          fullWidth
-          label="Full Name"
-          name="displayName"
-          id="displayName"
-          onChange={handleChange}
-          value={displayName}
-        />
-        <TextField
-          inputProps={{
-            form: {
-              autocomplete: 'off'
-            }
-          }}
-          margin="normal"
-          required
-          fullWidth
-          label="Email Address"
-          name="email"
-          id="email"
-          onChange={handleChange}
-          type="email"
-          value={email}
-        />
-        <TextField
-          inputProps={{
-            form: {
-              autocomplete: 'off'
-            }
-          }}
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          id="password"
-          label="Password"
-          type="password"
-          onChange={handleChange}
-          value={password}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="confirmPassword"
-          id="confirmPassword"
-          label="Confirm Password"
-          type="password"
-          onChange={handleChange}
-          value={confirmPassword}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          label="Team Code"
-          name="team"
-          id="team"
-          value={team}
-          onChange={handleChange}
-        />
-        <Box sx={{display: 'flex', gap: '10px'}}>
-          <Button
-            onClick={handleSubmit}
-            type="submit"
-            sx={{mb: 1, flex: '50%'}}
-            variant="contained"
-          >
-            Sign Up
-          </Button>
-          <SignUpHS sx={{flex: '50%'}} />
-        </Box>
-      </Box>
-
-      <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>{message}</Alert>
-      </Snackbar>   
-    </Grid>
-  )
+    <>
+      <h1 tabIndex={0} aria-label="Login to your account" className="text-2xl font-extrabold leading-6 text-gray-800">Sign Up</h1>
+      <p className="text-sm my-4 font-medium leading-none text-gray-500 mb-8">
+        Highschool User?
+        <span className="text-violet-600 hover:text-violet-700 cursor-pointer" onClick={handleUserChange}> Sign up here</span>
+      </p>
+      <div>
+        <lable className="text-md font-medium leading-none text-gray-800">Full Name</lable>
+        <input aria-label="enter email adress" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='displayName' id="displayName" autoFocus value={displayName} onChange={handleChange} />
+      </div>
+      <div className="mt-6">
+        <lable className="text-md font-medium leading-none text-gray-800">Email</lable>
+        <input aria-label="enter email adress" type="email" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='email' id="email" autoComplete="email" autoFocus value={email} onChange={handleChange} />
+      </div>
+      <div className="mt-6  w-full">
+        <lable className="text-md font-medium leading-none text-gray-800">Password</lable>
+        <div className="relative flex items-center justify-center">
+          <input aria-label="enter Password" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='password' id="password" autoComplete="current-password" value={password} onChange={handleChange} />
+        </div>
+      </div>
+      <div className="mt-6  w-full">
+        <lable className="text-md font-medium leading-none text-gray-800">Confirm Password</lable>
+        <div className="relative flex items-center justify-center">
+          <input aria-label="enter Password" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='confirmPassword' id="confirmPassword" value={confirmPassword} onChange={handleChange} />
+        </div>
+      </div>
+      <div className="mt-6  w-full">
+        <lable className="text-md font-medium leading-none text-gray-800">Team Code</lable>
+        <div className="relative flex items-center justify-center">
+          <input aria-label="enter Password" type="password" className="bg-gray-200 border rounded focus:outline-none text-xs font-medium leading-none text-gray-800 py-3 w-full pl-3 mt-2" name='team' id="team" value={team} onChange={handleChange} />
+        </div>
+      </div>
+      <div className="mt-8">
+        <button className="focus:ring-2 focus:ring-offset-2 focus:ring-violet-700 text-sm font-semibold leading-none text-white focus:outline-none bg-violet-700 border rounded hover:bg-violet-600 py-4 w-full" type="submit" onClick={handleSubmit}>Sign Up</button>
+      </div>
+    </>
+  );
 }
 
 export default SignUp;

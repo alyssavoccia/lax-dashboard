@@ -2,16 +2,18 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartArea, faUser, faUserGear } from '@fortawesome/free-solid-svg-icons';
+import logo from '../assets/logo.png';
 
 function LandingPage() {
   const [show, setShow] = useState(false);
+
   return (
     <>
       <section className="bg-gray-100 overflow-y-hidden">
         <nav className="w-full bg-gray-100 fixed z-10">
           <div className="container mx-auto px-6 flex items-center justify-between">
             <div className="flex items-center" aria-label="Home" role="img">
-              <img className="cursor-pointer w-8" src="https://images.emojiterra.com/twitter/v13.1/512px/1f94d.png" alt="logo" />
+              <img className="cursor-pointer w-8" src={logo} alt="logo" />
               <p className="ml-2 lg:ml-4 text-base lg:text-2xl font-bold text-gray-800">Lax Dashboard</p>
             </div>
             <div>
@@ -30,10 +32,10 @@ function LandingPage() {
                     <a href="#in-action">In Action</a>
                   </li>
                   <li className="text-gray-600 text-lg hover:text-violet-800 cursor-pointer md:ml-10 pt-10 md:pt-0">
-                    <Link to='/sign-in-sign-up'>Login</Link>
+                    <Link to='/login'>Login</Link>
                   </li>
                   <li className="text-white text-lg cursor-pointer md:ml-10 pt-10 md:pt-0">
-                    <Link to='sign-in-sign-up' className="bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-lg">Sign Up</Link>
+                    <Link to='sign-up' className="bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded">Sign Up</Link>
                   </li>
                 </ul>
               </div>
@@ -49,7 +51,7 @@ function LandingPage() {
               </div>
               <div className="flex justify-center items-center mb-10 sm:mb-20">
                 <button className="hover:text-white hover:bg-transparent lg:text-xl hover:border-white border bg-white transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-violet-700	focus:ring-white rounded text-violet-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">Sign Up</button>
-                <button className="hover:bg-white hover:text-violet-600 lg:text-xl hover:border-violet-600 ml-3 sm:ml-6 bg-transparent transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-violet-700 focus:ring-white hover:bg-indigo-700-800 rounded border border-white text-white px-4 sm:px-8 py-1 sm:py-3 text-sm">Learn More</button>
+                <a className="hover:bg-white hover:text-violet-600 lg:text-xl hover:border-violet-600 ml-3 sm:ml-6 bg-transparent transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-violet-700 focus:ring-white hover:bg-indigo-700-800 rounded border border-white text-white px-4 sm:px-8 py-1 sm:py-3 text-sm" href='#features'>Learn More</a>
               </div>
           </div>
           <div className="container mx-auto flex justify-center md:-mt-56 -mt-20 sm:-mt-40">
@@ -61,17 +63,17 @@ function LandingPage() {
       </section>
 
       <section id="features" class="pt-12 pb-32 px-8 bg-gray-100 text-gray-700 text-center flex flex-col items-center">
-        <h2 class="text-3xl font-bold mb-20">What we Offer</h2>
-        <div class="container grid lg:gap-x-12 lg:grid-cols-3">
-          <div class="mb-12 lg:mb-0">
-            <div class="rounded-lg shadow-lg h-full block bg-white">
-              <div class="flex justify-center">
-                <div class="p-4 bg-violet-600 rounded-full shadow-lg inline-block -mt-8">
+        <h2 className="text-3xl font-bold mb-20">What we Offer</h2>
+        <div className="container grid lg:gap-x-12 lg:grid-cols-3">
+          <div className="mb-12 lg:mb-0">
+            <div className="rounded-lg shadow-lg h-full block bg-white">
+              <div className="flex justify-center">
+                <div className="p-4 bg-violet-600 rounded-full shadow-lg inline-block -mt-8">
                   <FontAwesomeIcon className="w-8 h-8 text-white self-center" icon={faChartArea} />
                 </div>
               </div>
-              <div class="p-6">
-                <h5 class="text-lg font-semibold mb-4">Dynamic Dashboard</h5>
+              <div className="p-6">
+                <h5 className="text-lg font-semibold mb-4">Dynamic Dashboard</h5>
                 <p>
                   Players will get access to a dashboard that allows them to see how their
                   scores compare to other players on their team, with multiple visuals.
@@ -79,15 +81,15 @@ function LandingPage() {
               </div>
             </div>
           </div>    
-          <div class="mb-12 lg:mb-0">
-            <div class="rounded-lg shadow-lg h-full block bg-white">
-              <div class="flex justify-center">
-                <div class="p-4 bg-violet-600 rounded-full shadow-lg inline-block -mt-8">
+          <div className="mb-12 lg:mb-0">
+            <div className="rounded-lg shadow-lg h-full block bg-white">
+              <div className="flex justify-center">
+                <div className="p-4 bg-violet-600 rounded-full shadow-lg inline-block -mt-8">
                   <FontAwesomeIcon className="w-8 h-8 text-white self-center" icon={faUser} />
                 </div>
               </div>
-              <div class="p-6">
-                <h5 class="text-lg font-semibold mb-4">User Profiles</h5>
+              <div className="p-6">
+                <h5 className="text-lg font-semibold mb-4">User Profiles</h5>
                 <p>
                   Players will have access to a profile page where they will be able
                   to see their current scores. In the future, there will be the ability
@@ -96,15 +98,15 @@ function LandingPage() {
               </div>
             </div>
           </div>    
-          <div class="">
-            <div class="rounded-lg shadow-lg h-full block bg-white">
-              <div class="flex justify-center">
-                <div class="p-4 bg-violet-600 rounded-full shadow-lg inline-block -mt-8">
+          <div className="">
+            <div className="rounded-lg shadow-lg h-full block bg-white">
+              <div className="flex justify-center">
+                <div className="p-4 bg-violet-600 rounded-full shadow-lg inline-block -mt-8">
                   <FontAwesomeIcon className="w-8 h-8 text-white self-center" icon={faUserGear} />
                 </div>
               </div>
-              <div class="p-6">
-                <h5 class="text-lg font-semibold mb-4">Admin Use</h5>
+              <div className="p-6">
+                <h5 className="text-lg font-semibold mb-4">Admin Use</h5>
                 <p>
                   Team admins are able to easily access and edit team data. There is 
                   a page that allows admins to see all team data, as well as
@@ -116,54 +118,54 @@ function LandingPage() {
         </div>
       </section>
 
-      <section class="pb-20 flex flex-col bg-gray-100 text-gray-700 items-center">
-        <h2 class="text-3xl font-bold mb-12 text-center">Feature Breakdown</h2>
+      <section className="pb-20 flex flex-col bg-gray-100 text-gray-700 items-center">
+        <h2 className="text-3xl font-bold mb-12 text-center">Feature Breakdown</h2>
 
-        <div class="container grid lg:grid-cols-3 gap-6">
-          <div class="mb-12">
-            <p class="font-bold mb-4 text-violet-600">Dashboard</p>
-            <p class="text-gray-500">
+        <div className="container grid lg:grid-cols-3 gap-6">
+          <div className="mb-12">
+            <p className="font-bold mb-4 text-violet-600">Dashboard</p>
+            <p className="text-gray-500">
               The Dashboard page shows multiple charts to show how player scores compare
               to other members on the team. Team admins are able to use a dropdown to view
               each players dashboard.
             </p>
           </div>
 
-          <div class="mb-12">
-            <p class="font-bold mb-4 text-violet-600">Profile Page</p>
-            <p class="text-gray-500">
+          <div className="mb-12">
+            <p className="font-bold mb-4 text-violet-600">Profile Page</p>
+            <p className="text-gray-500">
               For club & college players the profile page displays their individual scores for each test.
               For highschool players, they will see their current scores. They will also have
               the ability to submit video links for each test.
             </p>
           </div>
 
-          <div class="mb-12">
-            <p class="font-bold mb-4 text-violet-600">Team Page</p>
-            <p class="text-gray-500">
+          <div className="mb-12">
+            <p className="font-bold mb-4 text-violet-600">Team Page</p>
+            <p className="text-gray-500">
               The team page allows admins to see all of their players data on individual player cards.
             </p>
           </div>
 
-          <div class="col-md-12 mb-12">
-            <p class="font-bold mb-4 text-violet-600">Player Data Page</p>
-            <p class="text-gray-500">
+          <div className="col-md-12 mb-12">
+            <p className="font-bold mb-4 text-violet-600">Player Data Page</p>
+            <p className="text-gray-500">
               The player data page provides a table that team admins are able to easily update. This
               allows them to easily change player scores after each time they test.
             </p>
           </div>
 
-          <div class="mb-12">
-            <p class="font-bold mb-4 text-violet-600">Highschool Link Submisssions Page</p>
-            <p class="text-gray-500">
+          <div className="mb-12">
+            <p className="font-bold mb-4 text-violet-600">Highschool Link Submisssions Page</p>
+            <p className="text-gray-500">
               The highschool link submissions page allows highschool admins to see cards for each
               highschool user that has submitted a test video to be viewed.
             </p>
           </div>
 
-          <div class="mb-12">
-            <p class="font-bold mb-4 text-violet-600">Customer Support</p>
-            <p class="text-gray-500">
+          <div className="mb-12">
+            <p className="font-bold mb-4 text-violet-600">Customer Support</p>
+            <p className="text-gray-500">
               Customer support is extremely important and we provide continuous support for any issue
               that users are experiencing. 
             </p>
@@ -171,56 +173,56 @@ function LandingPage() {
         </div>
       </section>
 
-      <section id="in-action" class="pb-32 flex flex-col items-center bg-gray-100 text-gray-700">
-        <h2 class="text-3xl font-bold mb-12 text-center">
-          See our product <u class="text-violet-600">in action</u>
+      <section id="in-action" className="pb-32 flex flex-col items-center bg-gray-100 text-gray-700">
+        <h2 className="text-3xl font-bold mb-12 text-center">
+          See our product <u className="text-violet-600">in action</u>
         </h2>
 
-        <div class="container grid lg:grid-cols-3 gap-6">
-          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+        <div className="container grid lg:grid-cols-3 gap-6">
+          <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
             <img src="https://mdbootstrap.com/img/new/standard/city/041.jpg"
-              class="w-full transition duration-300 ease-linear align-middle" />
+              className="w-full transition duration-300 ease-linear align-middle" />
           </div>
 
-          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+          <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
             <img src="https://mdbootstrap.com/img/new/standard/city/044.jpg"
-              class="w-full transition duration-300 ease-linear align-middle" />
+              className="w-full transition duration-300 ease-linear align-middle" />
           </div>
 
-          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+          <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
             <img src="https://mdbootstrap.com/img/new/standard/city/045.jpg"
-              class="w-full transition duration-300 ease-linear align-middle" />
+              className="w-full transition duration-300 ease-linear align-middle" />
           </div>
 
-          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+          <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
             <img src="https://mdbootstrap.com/img/new/standard/city/047.jpg"
-              class="w-full transition duration-300 ease-linear align-middle" />
+              className="w-full transition duration-300 ease-linear align-middle" />
           </div>
 
-          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+          <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
             <img src="https://mdbootstrap.com/img/new/standard/city/048.jpg"
-              class="w-full transition duration-300 ease-linear align-middle" />
+              className="w-full transition duration-300 ease-linear align-middle" />
           </div>
 
-          <div class="zoom shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+          <div className="shadow-lg rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
             style={{backgroundPosition: '50%'}} data-mdb-ripple="true" data-mdb-ripple-color="dark">
             <img src="https://mdbootstrap.com/img/new/standard/city/049.jpg"
-              class="w-full transition duration-300 ease-linear align-middle" />
+              className="w-full transition duration-300 ease-linear align-middle" />
           </div>
         </div>
       </section>
 
-      <section class="py-20 bg-violet-600 rounded-lg text-center text-gray-800">
-        <div class="max-w-[700px] mx-auto px-3 lg:px-6">
-          <h2 class="text-3xl text-white font-bold mb-12">Contact us</h2>
+      <section className="py-20 bg-violet-600 rounded-lg text-center text-gray-800">
+        <div className="max-w-[700px] mx-auto px-3 lg:px-6">
+          <h2 className="text-3xl text-white font-bold mb-12">Contact us</h2>
           <form>
-            <div class="form-group mb-6">
-              <input type="text" class="form-control block
+            <div className="form-group mb-6">
+              <input type="text" className="form-control block
                 w-full
                 px-3
                 py-1.5
@@ -236,8 +238,8 @@ function LandingPage() {
                 focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none" id="exampleInput7"
                 placeholder="Name" />
             </div>
-            <div class="form-group mb-6">
-              <input type="email" class="form-control block
+            <div className="form-group mb-6">
+              <input type="email" className="form-control block
                 w-full
                 px-3
                 py-1.5
@@ -253,8 +255,8 @@ function LandingPage() {
                 focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none" id="exampleInput8"
                 placeholder="Email address" />
             </div>
-            <div class="form-group mb-6">
-              <textarea class="
+            <div className="form-group mb-6">
+              <textarea className="
                 form-control
                 block
                 w-full
@@ -269,10 +271,10 @@ function LandingPage() {
                 transition
                 ease-in-out
                 m-0
-                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+                focus:text-gray-700 focus:bg-white focus:border-gray-600 focus:outline-none
               " id="exampleFormControlTextarea13" rows="3" placeholder="Message"></textarea>
             </div>
-            <button type="submit" class="
+            <button type="submit" className="
               w-full
               px-6
               py-2.5
@@ -284,9 +286,9 @@ function LandingPage() {
               uppercase
               rounded
               shadow-md
-              hover:bg-gray-100 hover:shadow-lg
-              focus:bg-gray-100 focus:shadow-lg focus:outline-none focus:ring-0
-              active:bg-gray-100 active:shadow-lg
+              hover:bg-gray-200 hover:shadow-lg
+              focus:bg-gray-200 focus:shadow-lg focus:outline-none focus:ring-0
+              active:bg-gray-200 active:shadow-lg
               transition
               duration-150
               ease-in-out">Send</button>
