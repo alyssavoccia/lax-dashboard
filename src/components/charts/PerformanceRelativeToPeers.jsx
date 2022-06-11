@@ -1,4 +1,3 @@
-import Title from '../Title';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, ResponsiveContainer } from 'recharts';
 
 function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilityScores, currentPlayerData }) {
@@ -32,7 +31,7 @@ function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilit
 
   return (
     <>
-      <Title>Performance Relative to Peer Average</Title>
+      <div className="py-3 px-5 bg-cyan-100 rounded-t-lg mb-1">Performance Relative to Peer Average</div>
       <ResponsiveContainer width="99%" height="99%">
         <BarChart
           data={data}
@@ -48,8 +47,8 @@ function PerformanceRelativeToPeers({ wbScores, threeScores, broadScores, agilit
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <ReferenceLine y={0} stroke="#000" />
-          <Bar dataKey="player" fill="#1976D2" stackId="stack" />
+          <ReferenceLine y={0} stroke="#222" />
+          <Bar dataKey="player" fill="#06b6d4" stackId="stack" />
         </BarChart>
       </ResponsiveContainer>
     </>

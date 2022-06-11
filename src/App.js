@@ -16,7 +16,6 @@ import SignUpPage from './pages/SignUpPage';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
-import SignInSignUp from './pages/SignInSignUp';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Team from './pages/Team';
@@ -124,7 +123,6 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/sign-up' element={<SignUpPage />} />
-        <Route path='/sign-in-sign-up' element={<SignInSignUp />} />
         <Route path='/successful-payment' element={<SuccessfulPayment />} />
         <Route path='/dashboard' element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />

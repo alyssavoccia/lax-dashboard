@@ -21,7 +21,7 @@ function Dashboard() {
       {/* If current user is admin, show player search */}
       <div className='py-5'>
         {currentUser && currentUser.isAdmin &&
-          <div class="flex items-center p-3 mb-5 rounded-lg shadow-md bg-violet-500 w-full">
+          <div className="flex items-center p-3 mb-5 rounded-lg shadow-md bg-slate-600 w-full">
             <DashboardPlayerSearch onChange={handlePlayerChange} />
             {(selectedPlayer === undefined || selectedPlayer === '' || selectedPlayer === null) &&
               <p className="text-lg font-bold text-white ml-5">Please choose a player to view their dashboard.</p>

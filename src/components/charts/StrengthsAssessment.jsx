@@ -1,4 +1,3 @@
-import Title from '../Title';
 import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 
 function StrengthsAssessment({ wbScores, threeScores, broadScores, currentPlayerData }) {
@@ -56,12 +55,12 @@ function StrengthsAssessment({ wbScores, threeScores, broadScores, currentPlayer
 
   return (
     <>
-      <Title>Strengths Assessment</Title>
+      <div className="py-3 px-5 bg-cyan-100 rounded-t-lg mb-1">Strengths Assessment</div>
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius='90%' data={data}>
           <PolarGrid />
           <PolarAngleAxis dataKey="test" />
-          <Radar name="Player" dataKey="A" stroke="#1976D2" fill="#1976D2" fillOpacity={0.5} />
+          <Radar name="Player" dataKey="A" stroke="#06b6d4" fill="#06b6d4" fillOpacity={0.5} />
           <Radar name="Average" dataKey="B" stroke="#515151" fill="#515151" fillOpacity={0.2} />
           <Legend />
         </RadarChart>

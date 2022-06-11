@@ -1,5 +1,4 @@
 import Container from '@mui/material/Container';
-import Title from '../Title';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from 'recharts';
 
 function Percentiles({ title, data, currentPlayerData }) {
@@ -60,7 +59,7 @@ function Percentiles({ title, data, currentPlayerData }) {
     { name: '', value: teamPercentile },
   ];
   
-  const COLORS = ['#1976D2', '#515151'];
+  const COLORS = ['#06b6d4', '#515151'];
   
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
@@ -77,7 +76,7 @@ function Percentiles({ title, data, currentPlayerData }) {
 
   return (
     <>
-      <Title>{title}</Title>
+      <div className="py-3 px-5 bg-cyan-100 rounded-t-lg mb-1">{title}</div>
       <ResponsiveContainer width="100%" height="100%">
         {attrTested
           ? <PieChart width={400} height={400}>
@@ -99,7 +98,7 @@ function Percentiles({ title, data, currentPlayerData }) {
                 <Legend />
             </PieChart>
           : <Container sx={{ textAlign: 'center' }}>
-              <Title>No Data to Compile</Title>
+              <p>No data to compile</p>
             </Container>
         }
       </ResponsiveContainer>

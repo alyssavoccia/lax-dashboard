@@ -29,7 +29,7 @@ function DashboardPlayerSearch({ onChange }) {
           onChange={onChange}
           id='dashboard-player-search'
         >
-          <option selected value=''>Select Player</option>
+          <option defaultValue='select-player'>Select Player</option>
           {players.map((player, i) => (
             <option key={i} value={player}>{player}</option>
           ))}

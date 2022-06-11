@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase.config';
-import Title from '../Title';
 import { BarChart, Bar, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agilityScores }) {
@@ -116,10 +115,9 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
 
     return (
       <>
-        
-        <Title>TAP Score Relative to Team</Title>
+        <div className="py-3 px-5 bg-cyan-100 rounded-t-lg mb-1">Tap Score Relative to Team</div>
         {loading 
-          ? <Title>Loading Data</Title>
+          ? <div className="py-3 px-5 bg-cyan-100 rounded-t-lg mb-1">Loading Data</div>
           : <ResponsiveContainer width="100%" aspect={1}>
               <BarChart 
               width={500}
@@ -129,9 +127,9 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
               >
                 <XAxis type="number"/>
                 <YAxis type="category" dataKey="user" />
-                <Bar dataKey='tapScore' fill="#1976D2">
+                <Bar dataKey='tapScore' fill="#06b6d4">
                   { tapScores.map((entry, index) => (
-                      <Cell key={index} fill={entry.selectedUser ? '#1976D2' : '#515151'} />
+                      <Cell key={index} fill={entry.selectedUser ? '#06b6d4' : '#515151'} />
                     ))
                   }
                 </Bar>

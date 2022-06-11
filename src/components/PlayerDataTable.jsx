@@ -53,13 +53,13 @@ function PlayerDataTable({ rows }) {
   function CustomToolbar() {
     return (
       <GridToolbarContainer className={gridClasses.toolbarContainer}>
-        <GridToolbarExport />
+        <GridToolbarExport sx={{color: '#06b6d4'}} />
       </GridToolbarContainer>
     );
   }
 
   return (
-    <div style={{ backgroundColor: '#FFF', height: 500, width: '100%' }}>
+    <div className="bg-white flex flex-col h-[500px] shadow-md rounded-lg">
       <DataGrid
         exportButton={true}
         rows={rows}
