@@ -75,7 +75,7 @@ function HsLinkSubmissions() {
           </div>
       </div>
       <div className={`${showSnack ? 'opactity-100': 'opacity-0'} transition-all duration-300 ease-in absolute top-2 right-2 space-x-2 justify-center`}>
-        <div className="shadow-lg mx-auto w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block" id="static-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="false">
+        <div className="shadow-lg mx-auto w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block" role="alert">
           <div className=" bg-emerald-500 flex justify-between items-center py-2 px-3 bg-clip-padding rounded-lg">
             <p className="font-bold text-white">Link successfully deleted.</p>
             <div className="flex items-center">
