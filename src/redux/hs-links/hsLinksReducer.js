@@ -6,6 +6,7 @@ const hsLinksReducer = (state = null, action) => {
       };
     case 'update_current_links':
       return {
+        ...state,
         hsLinks: action.payload
       };
     default:

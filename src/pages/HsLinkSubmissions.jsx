@@ -5,29 +5,25 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { updateCurrentLinks } from '../redux/hs-links/hsLinksActions';
+import Spinner from '../components/Spinner';
 import HsSubmissionsPageCard from '../components/HsSubmissionsPageCard';
 
 function HsLinkSubmissions() {
   const dispatch = useDispatch();
   const updateLinks = bindActionCreators(updateCurrentLinks, dispatch);
   const currentLinks = useSelector((state) => state.hsLinks.hsLinks);
-  const [usersData, setUsersData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showSnack, setShowSnack] = useState(false);
-  const userSubmissions = [];
 
   useEffect(() => {
-    setUsersData([]);
-    currentLinks.forEach(person => {
-      if (person.agilityLink || person.broadLink || person.threeLink || person.wbLink) {
-        setUsersData((prevState) => [...prevState, {...person}]);
-      }
-    });
+    if (currentLinks) {
+      setLoading(false);
+    }
   }, [currentLinks]);
   
   const handleDelete = (e) => {
     const linkId = e.target.parentNode.id;
     const playerId = e.target.parentNode.parentNode.id;
-    // const dataState = usersData[0];
 
     const updatedValue = {
       [linkId]: null
@@ -39,14 +35,13 @@ function HsLinkSubmissions() {
     updateLinks(currentLinks, playerId, linkId);
 
     setShowSnack(true);
+    setTimeout(() => {
+      setShowSnack(false);
+    }, 3000);
   };
 
-  if (usersData.length > 0) {
-    usersData.forEach((player, i) => {
-      if (player.wbLink || player.threeLink || player.agilityLink || player.broadLink) {
-        userSubmissions.push(player);
-      }
-    })
+  if (loading) {
+    return <Spinner />
   }
 
   return (
@@ -58,8 +53,8 @@ function HsLinkSubmissions() {
           </div>
         </div>
           <div className='flex flex-wrap gap-7 justify-start'>
-            {userSubmissions.length > 0
-              ? userSubmissions.map((player, i) => {
+            {currentLinks.length > 0
+              ? currentLinks.map((player, i) => {
                 return (
                   <HsSubmissionsPageCard
                     key={i}
@@ -79,10 +74,10 @@ function HsLinkSubmissions() {
             }
           </div>
       </div>
-      <div className={`${showSnack ? 'flex': 'hidden'} absolute top-2 right-2 space-x-2 justify-center`}>
+      <div className={`${showSnack ? 'opactity-100': 'opacity-0'} transition-all duration-300 ease-in absolute top-2 right-2 space-x-2 justify-center`}>
         <div className="shadow-lg mx-auto w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block" id="static-example" role="alert" aria-live="assertive" aria-atomic="true" data-mdb-autohide="false">
-          <div className=" bg-emerald-500 flex justify-between items-center py-2 px-3 bg-clip-padding rounded-t-lg">
-            <p className="font-bold text-white">Lax Dashboard</p>
+          <div className=" bg-emerald-500 flex justify-between items-center py-2 px-3 bg-clip-padding rounded-lg">
+            <p className="font-bold text-white">Link successfully deleted.</p>
             <div className="flex items-center">
               <button type="button" className="box-content w-4 h-4 ml-2 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" onClick={() => setShowSnack(false)}>
                 <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -90,9 +85,6 @@ function HsLinkSubmissions() {
                 </svg>
               </button>
             </div>
-          </div>
-          <div className="p-3 bg-emerald-400 rounded-b-lg break-words text-white">
-            Link successfully deleted.
           </div>
         </div>
       </div>
