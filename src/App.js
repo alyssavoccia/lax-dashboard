@@ -46,8 +46,9 @@ function App() {
         const docRef = doc(db, currentUser.team, person.id, 'links', person.id);
         const docSnap = await getDoc(docRef);
         const userDataObj = docSnap.data();
-        if (userDataObj.agilityLink !== null || userDataObj.broadLink !== null || userDataObj.threeLink !== null || userDataObj.wbLink !== null) {
-          hsLinks.push({...person, ...userDataObj});
+        if (userDataObj && (userDataObj.agilityLink || userDataObj.broadLink || userDataObj.threeLink || userDataObj.wbLink)) {
+          const personLinks = {...person, ...userDataObj};
+          hsLinks.push(personLinks);
         }
 
         if (hsUsers.length === users.length) {

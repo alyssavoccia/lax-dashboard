@@ -31,7 +31,7 @@ code {
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #8b5cf6 transparent #8b5cf6 transparent;
+  border-color: #06b6d4 transparent #06b6d4 transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
