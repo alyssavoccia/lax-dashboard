@@ -2,13 +2,11 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { db } from '../firebase.config';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import HsProfileLink from './HsProfileLink';
 
 function HsProfileLinkGrid() {
   const [userLinkObj, setUserLinkObj] = useState({});
-  const [open, setOpen] = useState(false);
+  const [showSnack, setShowSnack] = useState(false);
   const currentUser = useSelector((state) => state.user.user);
 
   const {wbLink, threeLink, broadLink, agilityLink} = userLinkObj;
@@ -43,15 +41,12 @@ function HsProfileLinkGrid() {
     updateDoc(docRef, updatedValue);
 
 
-    setOpen(true);
+    setShowSnack(true);
+    setTimeout(() => {
+      setShowSnack(false);
+    }, 3000);
     input.value = '';
   }
-
-    // Handle snackbar close
-    const handleClose = () => {
-      setOpen(false);
-    };
-  
 
   return (
     <div className='md:container my-4 mx-auto'>
@@ -60,9 +55,20 @@ function HsProfileLinkGrid() {
       <HsProfileLink dataTitle="Broad Jump Link" data={broadLink} handleSubmit={handleSubmit} dataId="broadLink" />
       <HsProfileLink dataTitle="5-10-5 Link" data={agilityLink} handleSubmit={handleSubmit} dataId="agilityLink" />
 
-      <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity='success' sx={{ width: '100%' }}>Link submitted successfully!</Alert>
-      </Snackbar>      
+      <div className={`${showSnack ? 'opactity-100': 'opacity-0'} transition-all duration-300 ease-in absolute top-2 right-2 space-x-2 justify-center`}>
+        <div className="shadow-lg mx-auto w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block" role="alert">
+          <div className=" bg-emerald-500 flex justify-between items-center py-2 px-3 bg-clip-padding rounded-lg">
+            <p className="font-bold text-white">Link successfully submitted!</p>
+            <div className="flex items-center">
+              <button type="button" className="box-content w-4 h-4 ml-2 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" onClick={() => setShowSnack(false)}>
+                <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>   
     </div>
   )
 }

@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../../firebase.config';
 import { BarChart, Bar, Cell, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agilityScores }) {
   const [loading, setLoading] = useState(true);
   const [tapScores, setTapScores] = useState([]);
   const currentUser = useSelector((state) => state.user.user);
+  const currentTeam = useSelector((state) => state.team.team);
+  const currentData = useSelector((state) => state.data.data);
 
   useEffect(() => {
     const fetchAllData = async () => {
-      const users = [];
-      const allPlayersData = [];
       let wbMean = 0;
       let threeMean = 0;
       let broadMean = 0;
@@ -27,7 +25,7 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
 
       const getPlayerTapScores = () => {
         const playerTapScores = [];
-        allPlayersData.forEach((person, index) => {
+        currentData.forEach((person, index) => {
           let wbPercentile = Math.floor(person.wb / wbMean * 100);
           let threePercentile = Math.floor(person.three / threeMean * 100);
           let broadPercentile = Math.floor(person.broad / broadMean * 100);
@@ -68,7 +66,7 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
             playerTapScores.push({user: person.id, tapScore: tapScore});
           }
           
-          if (index === allPlayersData.length - 1) {
+          if (index === currentData.length - 1) {
             playerTapScores.sort((a, b) => a.tapScore < b.tapScore ? 1 : -1);
             setTapScores(playerTapScores);
             setLoading(false);
@@ -76,48 +74,23 @@ function TapScore({ currentPlayerData, wbScores, threeScores, broadScores, agili
         });
       };
 
-      const getUserData = async () => {
-        users.forEach(async (person, index) => {
-          const docRef = doc(db, currentUser.team, person.id, 'data', person.id);
-          const docSnap = await getDoc(docRef);
-          const userDataObj = docSnap.data();
-          if (userDataObj) {
-            allPlayersData.push(userDataObj);
-          }
-  
-          if (index === users.length - 1) {
-            getPlayerTapScores();
-          }
-        });
+      if (currentTeam) {
+        getDataMeans();
       }
 
-
-      // Get all users in the team
-      try {
-        const snapshot = await db.collection(currentUser.team).get();
-        snapshot.docs.forEach((doc, index, array) => {
-          if (!doc.data().isAdmin) {
-            users.push(doc.data());
-          }
-  
-          if (index === array.length - 1) {
-            getDataMeans();
-            getUserData();
-          }
-        });
-      } catch (error) {
-        console.log('error:', error);
+      if (currentData) {
+        getPlayerTapScores();
       }
     }
 
     fetchAllData();
-  }, [agilityScores, broadScores, currentPlayerData.id, currentUser.team, threeScores, wbScores]);
+  }, [agilityScores, broadScores, currentData, currentPlayerData.id, currentTeam, currentUser.team, threeScores, wbScores]);
 
     return (
       <>
         <div className="py-3 px-5 bg-cyan-100 rounded-t-lg mb-1">Tap Score Relative to Team</div>
         {loading 
-          ? <div className="py-3 px-5 bg-cyan-100 rounded-t-lg mb-1">Loading Data</div>
+          ? <p className="italic">Loading Data</p>
           : <ResponsiveContainer width="100%" aspect={1}>
               <BarChart 
               width={500}

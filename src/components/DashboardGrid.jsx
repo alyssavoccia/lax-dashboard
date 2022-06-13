@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Grid from '@mui/material/Grid';
 import Percentiles from './charts/Percentiles';
 import PerformanceRelativeToPeers from './charts/PerformanceRelativeToPeers';
 import StrengthsAssessment from './charts/StrengthsAssessment';
@@ -43,63 +42,47 @@ function DashboardGrid({ data }) {
   }
 
   return (
-    <Grid container spacing={3}>
+    <div className='grid grid-cols-2 gap-4'>
       {/* PERFORMANCE RELATIVE TO PEERS */}
-      <Grid item xs={12} md={6}>
-        <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
-          <PerformanceRelativeToPeers wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} agilityScores={agilityScores} currentPlayerData={currentPlayerData} />
-        </div>
-      </Grid>
+      <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
+        <PerformanceRelativeToPeers wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} agilityScores={agilityScores} currentPlayerData={currentPlayerData} />
+      </div>
 
       {/* STRENGTHS ASSESSMENT */}
-      <Grid item xs={12} md={6}>
-        <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
-          <StrengthsAssessment wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} currentPlayerData={currentPlayerData} />
-        </div>
-      </Grid>
+      <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
+        <StrengthsAssessment wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} currentPlayerData={currentPlayerData} />
+      </div>
 
       {/* PERCENTILE / 50'S WALL BALL */}
-      <Grid item xs={12} md={6}>
-        <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
-          <Percentiles title="50's Wall Ball" data={wbScores} currentPlayerData={currentPlayerData} />
-        </div>
-      </Grid>
+      <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
+        <Percentiles title="50's Wall Ball" data={wbScores} currentPlayerData={currentPlayerData} />
+      </div>
 
       {/* PERCENTILE / 300's */}
-      <Grid item xs={12} md={6}>
-        <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
-          <Percentiles title="300's" data={threeScores} currentPlayerData={currentPlayerData} />
-        </div>
-      </Grid>
+      <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
+        <Percentiles title="300's" data={threeScores} currentPlayerData={currentPlayerData} />
+      </div>
       
       {/* PERCENTILE / BROAD JUMP */}
-      <Grid item xs={12} md={6}>
-        <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
-          <Percentiles title="Broad Jump" data={broadScores} currentPlayerData={currentPlayerData} />
-        </div>
-      </Grid>
+      <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
+        <Percentiles title="Broad Jump" data={broadScores} currentPlayerData={currentPlayerData} />
+      </div>
 
       {/* PERCENTILE / 5-10-5 */}
-      <Grid item xs={12} md={6}>
-        <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
-          <Percentiles title="5-10-5" data={agilityScores} currentPlayerData={currentPlayerData} />
-        </div>
-      </Grid>
+      <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
+        <Percentiles title="5-10-5" data={agilityScores} currentPlayerData={currentPlayerData} />
+      </div>
 
       {/* TAP SCORE */}
-      <Grid item xs={12} md={6}>
-        <div className="bg-white flex flex-col h-full shadow-md rounded-lg">
-          <TapScore currentPlayerData={currentPlayerData} wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} agilityScores={agilityScores} />
-        </div>
-      </Grid>
+      <div className="bg-white flex flex-col h-full shadow-md rounded-lg">
+        <TapScore currentPlayerData={currentPlayerData} wbScores={wbScores} threeScores={threeScores} broadScores={broadScores} agilityScores={agilityScores} />
+      </div>
 
       {/* STRENGTHS & WEAKNESSES */}
-      <Grid item xs={12} md={6}>
-        <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
-          <div className="py-3 px-5 bg-cyan-100 rounded-t-lg mb-1">Strengths / Areas for Improvement</div>
-        </div>
-      </Grid>
-    </Grid>
+      <div className="bg-white flex flex-col h-80 shadow-md rounded-lg">
+        <div className="py-3 px-5 bg-cyan-100 rounded-t-lg mb-1">Strengths / Areas for Improvement</div>
+      </div>
+    </div>
   )
 }
 

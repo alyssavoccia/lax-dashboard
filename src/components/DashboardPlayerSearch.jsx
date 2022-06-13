@@ -1,5 +1,3 @@
-
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useSelector } from 'react-redux';
 
 function DashboardPlayerSearch({ onChange }) {

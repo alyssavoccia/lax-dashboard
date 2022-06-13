@@ -89,16 +89,13 @@ function Percentiles({ title, data, currentPlayerData }) {
                   outerRadius={80}
                   dataKey="value"
                 >
-                  {/* {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))} */}
-                    <Cell key={`cell-1`} fill={COLORS[0 % COLORS.length]} />
-                    <Cell key={`cell-2`} fill={COLORS[1 % COLORS.length]} />
+                  <Cell key={`cell-1`} fill={COLORS[0 % COLORS.length]} />
+                  <Cell key={`cell-2`} fill={COLORS[1 % COLORS.length]} />
                 </Pie>
                 <Legend />
             </PieChart>
           : <Container sx={{ textAlign: 'center' }}>
-              <p>No data to compile</p>
+              <p className='italic'>No data to compile</p>
             </Container>
         }
       </ResponsiveContainer>

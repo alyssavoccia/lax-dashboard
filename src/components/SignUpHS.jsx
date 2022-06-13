@@ -7,6 +7,8 @@ const stripePromise = loadStripe(env.PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
 function SignUpHs({ handleUserChange }) {
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [showSnack, setShowSnack] = useState(false);
   const [formData, setFormData] = useState({
     displayName: '',
     email: '',
@@ -30,18 +32,30 @@ function SignUpHs({ handleUserChange }) {
   const handleSubmit = async () => {
     if (formRef.current.reportValidity() !== null) {
       if (password !== confirmPassword) {
-        alert('Passwords DO NOT match.')
+        setMessage('Passwords DO NOT match.');
+        setShowSnack(true);
+        setTimeout(() => {
+          setShowSnack(false);
+        }, 3000);
         return;
       }
 
       if (password.length < 6) {
-        alert('Password must be AT LEAST 6 characters long.');
+        setMessage('Password must be AT LEAST 6 characters long.');
+        setShowSnack(true);
+        setTimeout(() => {
+          setShowSnack(false);
+        }, 3000);
         return;
       }
 
       if (currentUsers !== null && currentUsers.length > 0) {
         if (currentUsers.indexOf(email) >= 0) {
-          alert('The email address has already been used, please use a different one.');
+          setMessage('The email address has already been used, please use a different one.');
+          setShowSnack(true);
+          setTimeout(() => {
+            setShowSnack(false);
+          }, 3000);
           return;
         }
       }
@@ -70,7 +84,11 @@ function SignUpHs({ handleUserChange }) {
     setLoading(false);
 
     if (error) {
-      console.log(error)
+      setMessage('Error creating account. Please try again.');
+      setShowSnack(true);
+      setTimeout(() => {
+        setShowSnack(false);
+      }, 3000);
       setLoading(false);
     }
   };
@@ -163,6 +181,20 @@ function SignUpHs({ handleUserChange }) {
       </div>
       <div className="mt-8">
         <button className="focus:ring-2 focus:ring-offset-2 focus:ring-violet-700 text-sm font-semibold leading-none text-white focus:outline-none bg-cyan-500 border rounded hover:bg-cyan-600 py-4 w-full" type="submit" onClick={handleSubmit} disabled={loading}>Checkout & Sign Up</button>
+      </div>
+      <div className={`${showSnack ? 'opactity-100': 'opacity-0'} transition-all duration-300 ease-in absolute top-2 right-2 space-x-2 justify-center`}>
+        <div className="shadow-lg mx-auto w-96 max-w-full text-sm pointer-events-auto bg-clip-padding rounded-lg block" role="alert">
+          <div className=" bg-red-500 flex justify-between items-center py-2 px-3 bg-clip-padding rounded-lg">
+            <p className="font-bold text-white">{message}</p>
+            <div className="flex items-center">
+              <button type="button" className="box-content w-4 h-4 ml-2 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" onClick={() => setShowSnack(false)}>
+                <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )

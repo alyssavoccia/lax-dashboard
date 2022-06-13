@@ -1,8 +1,5 @@
 import { auth, createUserProfileDocument } from '../firebase.config';
 import { useNavigate } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 
 function SuccessfulPayment() {
   const navigate = useNavigate();
@@ -22,19 +19,10 @@ function SuccessfulPayment() {
   getHsUser();
 
   return (
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-        textAlign: 'center'
-      }}
-    >
-      <Toolbar />
-      <Typography variant="h1" gutterBottom>Payment Successful!</Typography>
-      <Typography variant="h2" gutterBottom>You will now be redirected to your dashboard.</Typography>
-    </Box>
+    <div>
+      <h1 className='mb-4'>Payment Successful!</h1>
+      <h2>You will now be redirected to your dashboard.</h2>
+    </div>
   )
 }
 
