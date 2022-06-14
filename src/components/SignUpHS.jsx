@@ -27,37 +27,35 @@ function SignUpHs({ handleUserChange }) {
   
   const {displayName, email, password, confirmPassword, grad, position} = formData;
 
-  let formRef = React.createRef();
+  // let formRef = React.createRef();
 
   const handleSubmit = async () => {
-    if (formRef.current.reportValidity() !== null) {
-      if (password !== confirmPassword) {
-        setMessage('Passwords DO NOT match.');
+    if (password !== confirmPassword) {
+      setMessage('Passwords DO NOT match.');
+      setShowSnack(true);
+      setTimeout(() => {
+        setShowSnack(false);
+      }, 3000);
+      return;
+    }
+
+    if (password.length < 6) {
+      setMessage('Password must be AT LEAST 6 characters long.');
+      setShowSnack(true);
+      setTimeout(() => {
+        setShowSnack(false);
+      }, 3000);
+      return;
+    }
+
+    if (currentUsers !== null && currentUsers.length > 0) {
+      if (currentUsers.indexOf(email) >= 0) {
+        setMessage('The email address has already been used, please use a different one.');
         setShowSnack(true);
         setTimeout(() => {
           setShowSnack(false);
         }, 3000);
         return;
-      }
-
-      if (password.length < 6) {
-        setMessage('Password must be AT LEAST 6 characters long.');
-        setShowSnack(true);
-        setTimeout(() => {
-          setShowSnack(false);
-        }, 3000);
-        return;
-      }
-
-      if (currentUsers !== null && currentUsers.length > 0) {
-        if (currentUsers.indexOf(email) >= 0) {
-          setMessage('The email address has already been used, please use a different one.');
-          setShowSnack(true);
-          setTimeout(() => {
-            setShowSnack(false);
-          }, 3000);
-          return;
-        }
       }
     }
 

@@ -13,7 +13,7 @@ function SuccessfulPayment() {
 
     localStorage.removeItem('hsUser');
 
-    navigate('/');
+    navigate('/dashboard');
   }
   
   getHsUser();
