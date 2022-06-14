@@ -12,16 +12,12 @@ function Profile() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (!currentUser.isAdmin) {
-       const result = currentData.filter(person => person.displayName === currentUser.displayName);
-       setUserData(result[0]);
-        setLoading(false);
-      } else {
-        setLoading(false);
+      const result = currentData.filter(person => person.displayName === currentUser.displayName);
+      setUserData(result[0]);
+      setLoading(false);
       }
-    }
 
-    currentUser && fetchUserData();
+    !currentUser.isAdmin ? fetchUserData() : setLoading(false);
   }, [currentData, currentUser]);
   
   if (loading) {
