@@ -111,7 +111,7 @@ function App() {
         setLinks(null);
         setLoading(false);
       }
-    })
+    });
   }, [setUser, setTeam, setData, setLinks]);
 
   if (loading) {

@@ -34,6 +34,7 @@ function SignUp({ handleUserChange }) {
       setTimeout(() => {
         setShowSnack(false);
       }, 3000);
+      return;
     }
 
     if (password.length < 6) {
@@ -42,6 +43,7 @@ function SignUp({ handleUserChange }) {
       setTimeout(() => {
         setShowSnack(false);
       }, 3000);
+      return;
     }
 
     // Check if user's team exists
@@ -54,6 +56,7 @@ function SignUp({ handleUserChange }) {
       setTimeout(() => {
         setShowSnack(false);
       }, 3000);
+      return;
     }
 
     // Try to create a new user
@@ -115,7 +118,7 @@ function SignUp({ handleUserChange }) {
             <div className="flex items-center">
               <button type="button" className="box-content w-4 h-4 ml-2 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline" onClick={() => setShowSnack(false)}>
                 <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  <path strokeLinecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartArea, faUser, faUserGear } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assets/logo.png';
@@ -13,6 +14,12 @@ import hsProfile from '../assets/hsProfile.png';
 
 function LandingPage() {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.user.user);
+
+  if (currentUser) {
+    navigate('/dashboard');
+  }
 
   return (
     <>
