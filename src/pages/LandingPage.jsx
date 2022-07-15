@@ -64,7 +64,7 @@ function LandingPage() {
                 <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center text-white font-bold leading-tight">See how you stack up against the competition</h1>
               </div>
               <div className="flex justify-center items-center mb-10 sm:mb-20">
-                <button className="hover:text-white hover:bg-transparent lg:text-xl hover:border-white border bg-white transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-cyan-700	focus:ring-white rounded text-cyan-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">Sign Up</button>
+                <Link to='/sign-up' className="hover:text-white hover:bg-transparent lg:text-xl hover:border-white border bg-white transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-cyan-700	focus:ring-white rounded text-cyan-700 px-4 sm:px-8 py-1 sm:py-3 text-sm">Sign Up</Link>
                 <a className="hover:bg-white hover:text-cyan-600 lg:text-xl hover:border-cyan-600 ml-3 sm:ml-6 bg-transparent transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ring-offset-cyan-700 focus:ring-white hover:bg-indigo-700-800 rounded border border-white text-white px-4 sm:px-8 py-1 sm:py-3 text-sm" href='#features'>Learn More</a>
               </div>
           </div>
