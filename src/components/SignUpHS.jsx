@@ -27,8 +27,6 @@ function SignUpHs({ handleUserChange }) {
   
   const {displayName, email, password, confirmPassword, grad, position} = formData;
 
-  // let formRef = React.createRef();
-
   const handleSubmit = async () => {
     if (password !== confirmPassword) {
       setMessage('Passwords DO NOT match.');
